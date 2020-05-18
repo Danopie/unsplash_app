@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/bloc/bloc.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
-import 'package:unsplash_app/photos/data/model/photo_repository.dart';
 import 'package:unsplash_app/photos/data/photo_api_provider.dart';
+import 'package:unsplash_app/photos/data/photo_db_provider.dart';
+import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 class PhotosFeed extends StatefulWidget {
   static Future<dynamic> show({BuildContext context}) {
@@ -14,7 +15,8 @@ class PhotosFeed extends StatefulWidget {
   }
 
   static Widget newInstance() => BlocProvider<PhotosBloc>(
-        create: (context) => PhotosBloc(PhotoRepository(PhotoApiProvider())),
+        create: (context) => PhotosBloc(
+            PhotoRepository(PhotoApiProvider(), PhotoDatabaseProvider())),
         child: PhotosFeed(),
       );
   @override
@@ -39,11 +41,29 @@ class _PhotosFeedState extends State<PhotosFeed> {
             loading: state is PaginationLoadingPhotosState ||
                 state is SortLoadingPhotosState,
           );
+        } else if (state is InitialErrorPhotosState) {
+          return PhotosError(message: state.message);
         } else {
           return PhotosLoading();
         }
       },
       listener: (BuildContext context, PhotosState state) {},
+    ));
+  }
+}
+
+class PhotosError extends StatelessWidget {
+  final String message;
+
+  const PhotosError({Key key, this.message}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+        child: Container(
+      child: Text(
+        message,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
     ));
   }
 }
@@ -131,11 +151,9 @@ class PhotoItem extends StatelessWidget {
       aspectRatio: photo.width / photo.height,
       child: Container(
         color: ColorUtils.fromHex(photo.color),
-        child: FadeInImage.memoryNetwork(
-          placeholder: kTransparentImage,
-          image: photo.urls.regular,
-          fadeInCurve: Curves.easeInOut,
-          fadeInDuration: Duration(milliseconds: 200),
+        child: CachedNetworkImage(
+          imageUrl: photo.urls.regular,
+          fadeInDuration: Duration(milliseconds: 700),
         ),
       ),
     );
@@ -147,11 +165,10 @@ class PhotoItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           ClipOval(
-            child: FadeInImage.memoryNetwork(
+            child: CachedNetworkImage(
               width: 32,
               height: 32,
-              placeholder: kTransparentImage,
-              image: photo.user.profile_image.small,
+              imageUrl: photo.user.profile_image.small,
               fadeInCurve: Curves.easeInOut,
               fadeInDuration: Duration(milliseconds: 200),
             ),

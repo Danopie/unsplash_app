@@ -1,26 +1,31 @@
 import 'package:hive/hive.dart';
 
 abstract class DatabaseProvider<T extends Object> {
-  Future<Box> pendingBox;
+  Box<T> box;
 
   String get dbName;
 
   DatabaseProvider() {
-    pendingBox = Hive.openBox<T>(dbName);
+    box = Hive.box<T>(dbName);
   }
 
   Future<void> add(T object) async {
-    final box = await pendingBox;
     box.add(object);
   }
 
+  Future<void> put(String key, T object) async {
+    box.put(key, object);
+  }
+
   Future<void> delete(String key) async {
-    final box = await pendingBox;
     await box.delete(key);
   }
 
   Future<T> get(String key) async {
-    final box = await pendingBox;
     return box.get(key);
+  }
+
+  Future<List<T>> getAll() async {
+    return box.values.toList();
   }
 }

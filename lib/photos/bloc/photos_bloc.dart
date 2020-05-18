@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:unsplash_app/photos/data/model/photo_repository.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
+import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 import 'bloc.dart';
 

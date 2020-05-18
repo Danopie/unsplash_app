@@ -39,7 +39,7 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   pagination_view: ^1.0.1
   rxdart: ^0.24.1
-#  hive_generator: ^0.7.0+2
+  connectivity: '>=0.4.8+6 <2.0.0'
 
 dev_dependencies:
   flutter_test:

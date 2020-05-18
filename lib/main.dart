@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:unsplash_app/photos/data/model/photo.dart';
+import 'package:unsplash_app/photos/data/photo_adapter.dart';
+import 'package:unsplash_app/photos/data/photo_db_provider.dart';
 import 'package:unsplash_app/photos/photos_feed.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
+  Hive.registerAdapter(PhotoAdapter());
+  await Hive.openBox<Photo>(PhotoDatabaseProvider.NAME);
   runApp(MyApp());
 }
 
