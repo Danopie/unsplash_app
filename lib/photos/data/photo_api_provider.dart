@@ -1,8 +1,10 @@
+import 'package:injectable/injectable.dart';
 import 'package:unsplash_app/core/network/api_path.dart';
 import 'package:unsplash_app/core/network/api_provider.dart';
 import 'package:unsplash_app/photos/data/model/get_photos_response.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 
+@singleton
 class PhotoApiProvider extends ApiProvider {
   PhotoApiProvider() : super(EndPoint.MAIN);
 

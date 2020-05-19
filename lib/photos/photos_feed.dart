@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/bloc/bloc.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
-import 'package:unsplash_app/photos/data/photo_api_provider.dart';
-import 'package:unsplash_app/photos/data/photo_db_provider.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 class PhotosFeed extends StatefulWidget {
@@ -16,8 +15,7 @@ class PhotosFeed extends StatefulWidget {
   }
 
   static Widget newInstance() => BlocProvider<PhotosBloc>(
-        create: (context) => PhotosBloc(
-            PhotoRepository(PhotoApiProvider(), PhotoDatabaseProvider())),
+        create: (context) => PhotosBloc(GetIt.I.get<PhotoRepository>()),
         child: PhotosFeed(),
       );
   @override

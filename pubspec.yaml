@@ -40,9 +40,12 @@ dependencies:
   pagination_view: ^1.0.1
   rxdart: ^0.24.1
   connectivity: '>=0.4.8+6 <2.0.0'
+  get_it: ^4.0.2
+  injectable: ^0.4.0
 
 dev_dependencies:
   freezed: ^0.10.8
+  injectable_generator:
   build_runner: ^1.9.0
   flutter_test:
     sdk: flutter

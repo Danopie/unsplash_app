@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/photo_adapter.dart';
 import 'package:unsplash_app/photos/data/photo_db_provider.dart';
 import 'package:unsplash_app/photos/photos_feed.dart';
 
+import 'main.iconfig.dart';
+
 Future<void> main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PhotoAdapter());
   await Hive.openBox<Photo>(PhotoDatabaseProvider.NAME);
+  configureDependencies();
   runApp(MyApp());
 }
+
+@injectableInit
+void configureDependencies() => $initGetIt(GetIt.I);
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

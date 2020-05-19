@@ -1,6 +1,8 @@
+import 'package:injectable/injectable.dart';
 import 'package:unsplash_app/core/database/database_provider.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 
+@singleton
 class PhotoDatabaseProvider extends DatabaseProvider<Photo> {
   static const NAME = "photos1";
 
