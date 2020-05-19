@@ -1,83 +1,32 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 
-abstract class PhotosState extends Equatable {
-  const PhotosState();
-}
+part 'photos_state.freezed.dart';
 
-class InitialPhotosState extends PhotosState {
-  @override
-  List<Object> get props => [];
-}
+@freezed
+abstract class PhotosState with _$PhotosState {
+  const factory PhotosState.initial() = InitialPhotosState;
 
-class InitialLoadingPhotosState extends PhotosState {
-  @override
-  List<Object> get props => [];
-}
+  const factory PhotosState.initialLoading() = InitialLoadingPhotosState;
 
-abstract class PhotosReadyState extends PhotosState {
-  final List<Photo> photos;
-  final List<PhotoSort> sorts;
-  final PhotoSort selectedSort;
+  const factory PhotosState.initialError({String message}) =
+      InitialErrorPhotosState;
 
-  const PhotosReadyState({this.photos, this.sorts, this.selectedSort});
-
-  @override
-  List<Object> get props => [photos, sorts, selectedSort];
-}
-
-class PaginationLoadingPhotosState extends PhotosReadyState {
-  const PaginationLoadingPhotosState({
+  const factory PhotosState.paginationLoading({
     List<Photo> photos,
     List<PhotoSort> sorts,
     PhotoSort selectedSort,
-  }) : super(
-          photos: photos,
-          sorts: sorts,
-          selectedSort: selectedSort,
-        );
-}
+  }) = PaginationLoadingPhotosState;
 
-class LoadedPhotosState extends PhotosReadyState {
-  const LoadedPhotosState({
+  const factory PhotosState.doneLoading({
     List<Photo> photos,
     List<PhotoSort> sorts,
     PhotoSort selectedSort,
-  }) : super(
-          photos: photos,
-          sorts: sorts,
-          selectedSort: selectedSort,
-        );
+  }) = LoadedPhotosState;
 
-  LoadedPhotosState copyWith({
-    List<Photo> photos,
+  const factory PhotosState.sortLoading({
     List<PhotoSort> sorts,
     PhotoSort selectedSort,
-  }) {
-    return new LoadedPhotosState(
-      photos: photos ?? this.photos,
-      sorts: sorts ?? this.sorts,
-      selectedSort: selectedSort ?? this.selectedSort,
-    );
-  }
-}
-
-class SortLoadingPhotosState extends PhotosReadyState {
-  const SortLoadingPhotosState({
-    List<PhotoSort> sorts,
-    PhotoSort selectedSort,
-  }) : super(
-          sorts: sorts,
-          selectedSort: selectedSort,
-        );
-}
-
-class InitialErrorPhotosState extends PhotosState {
-  final String message;
-
-  InitialErrorPhotosState({this.message});
-
-  @override
-  List<Object> get props => [message];
+  }) = SortLoadingPhotosState;
 }

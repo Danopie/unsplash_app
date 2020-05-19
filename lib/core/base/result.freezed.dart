@@ -7,33 +7,7 @@ part of 'result.dart';
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$Result<T> {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result success(T data),
-    @required Result failure(String message, Exception exception),
-  });
-
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result success(T data),
-    Result failure(String message, Exception exception),
-    @required Result orElse(),
-  });
-
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result success(ResultSuccess<T> value),
-    @required Result failure(ResultFailure<T> value),
-  });
-
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result success(ResultSuccess<T> value),
-    Result failure(ResultFailure<T> value),
-    @required Result orElse(),
-  });
-}
+T _$identity<T>(T value) => value;
 
 class _$ResultTearOff {
   const _$ResultTearOff();
@@ -52,7 +26,72 @@ class _$ResultTearOff {
   }
 }
 
+// ignore: unused_element
 const $Result = _$ResultTearOff();
+
+mixin _$Result<T> {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result success(T data),
+    @required Result failure(String message, Exception exception),
+  });
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result success(T data),
+    Result failure(String message, Exception exception),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result success(ResultSuccess<T> value),
+    @required Result failure(ResultFailure<T> value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result success(ResultSuccess<T> value),
+    Result failure(ResultFailure<T> value),
+    @required Result orElse(),
+  });
+}
+
+abstract class $ResultCopyWith<T, $Res> {
+  factory $ResultCopyWith(Result<T> value, $Res Function(Result<T>) then) =
+      _$ResultCopyWithImpl<T, $Res>;
+}
+
+class _$ResultCopyWithImpl<T, $Res> implements $ResultCopyWith<T, $Res> {
+  _$ResultCopyWithImpl(this._value, this._then);
+
+  final Result<T> _value;
+  // ignore: unused_field
+  final $Res Function(Result<T>) _then;
+}
+
+abstract class $ResultSuccessCopyWith<T, $Res> {
+  factory $ResultSuccessCopyWith(
+          ResultSuccess<T> value, $Res Function(ResultSuccess<T>) then) =
+      _$ResultSuccessCopyWithImpl<T, $Res>;
+  $Res call({T data});
+}
+
+class _$ResultSuccessCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
+    implements $ResultSuccessCopyWith<T, $Res> {
+  _$ResultSuccessCopyWithImpl(
+      ResultSuccess<T> _value, $Res Function(ResultSuccess<T>) _then)
+      : super(_value, (v) => _then(v as ResultSuccess<T>));
+
+  @override
+  ResultSuccess<T> get _value => super._value as ResultSuccess<T>;
+
+  @override
+  $Res call({
+    Object data = freezed,
+  }) {
+    return _then(ResultSuccess<T>(
+      data == freezed ? _value.data : data as T,
+    ));
+  }
+}
 
 class _$ResultSuccess<T> implements ResultSuccess<T> {
   const _$ResultSuccess(this.data) : assert(data != null);
@@ -78,13 +117,8 @@ class _$ResultSuccess<T> implements ResultSuccess<T> {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(data);
 
   @override
-  _$ResultSuccess<T> copyWith({
-    Object data = freezed,
-  }) {
-    return _$ResultSuccess<T>(
-      data == freezed ? this.data : data as T,
-    );
-  }
+  $ResultSuccessCopyWith<T, ResultSuccess<T>> get copyWith =>
+      _$ResultSuccessCopyWithImpl<T, ResultSuccess<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -141,8 +175,35 @@ abstract class ResultSuccess<T> implements Result<T> {
   const factory ResultSuccess(T data) = _$ResultSuccess<T>;
 
   T get data;
+  $ResultSuccessCopyWith<T, ResultSuccess<T>> get copyWith;
+}
 
-  ResultSuccess<T> copyWith({T data});
+abstract class $ResultFailureCopyWith<T, $Res> {
+  factory $ResultFailureCopyWith(
+          ResultFailure<T> value, $Res Function(ResultFailure<T>) then) =
+      _$ResultFailureCopyWithImpl<T, $Res>;
+  $Res call({String message, Exception exception});
+}
+
+class _$ResultFailureCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
+    implements $ResultFailureCopyWith<T, $Res> {
+  _$ResultFailureCopyWithImpl(
+      ResultFailure<T> _value, $Res Function(ResultFailure<T>) _then)
+      : super(_value, (v) => _then(v as ResultFailure<T>));
+
+  @override
+  ResultFailure<T> get _value => super._value as ResultFailure<T>;
+
+  @override
+  $Res call({
+    Object message = freezed,
+    Object exception = freezed,
+  }) {
+    return _then(ResultFailure<T>(
+      message == freezed ? _value.message : message as String,
+      exception == freezed ? _value.exception : exception as Exception,
+    ));
+  }
 }
 
 class _$ResultFailure<T> implements ResultFailure<T> {
@@ -177,15 +238,8 @@ class _$ResultFailure<T> implements ResultFailure<T> {
       const DeepCollectionEquality().hash(exception);
 
   @override
-  _$ResultFailure<T> copyWith({
-    Object message = freezed,
-    Object exception = freezed,
-  }) {
-    return _$ResultFailure<T>(
-      message == freezed ? this.message : message as String,
-      exception == freezed ? this.exception : exception as Exception,
-    );
-  }
+  $ResultFailureCopyWith<T, ResultFailure<T>> get copyWith =>
+      _$ResultFailureCopyWithImpl<T, ResultFailure<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -244,6 +298,5 @@ abstract class ResultFailure<T> implements Result<T> {
 
   String get message;
   Exception get exception;
-
-  ResultFailure<T> copyWith({String message, Exception exception});
+  $ResultFailureCopyWith<T, ResultFailure<T>> get copyWith;
 }

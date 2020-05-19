@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/bloc/bloc.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
+import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_api_provider.dart';
 import 'package:unsplash_app/photos/data/photo_db_provider.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
@@ -35,9 +36,15 @@ class _PhotosFeedState extends State<PhotosFeed> {
     return Scaffold(
         body: BlocConsumer<PhotosBloc, PhotosState>(
       builder: (BuildContext context, PhotosState state) {
-        if (state is PhotosReadyState) {
+        if (state is PaginationLoadingPhotosState ||
+            state is SortLoadingPhotosState ||
+            state is LoadedPhotosState) {
           return PhotoList(
-            photos: state.photos,
+            photos: state.maybeWhen<List<Photo>>(
+              orElse: () => List<Photo>(),
+              paginationLoading: (photos, sorts, selectedSort) => photos,
+              doneLoading: (photos, sorts, selectedSort) => photos,
+            ),
             loading: state is PaginationLoadingPhotosState ||
                 state is SortLoadingPhotosState,
           );
@@ -193,36 +200,48 @@ class PhotosSortBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PhotosBloc, PhotosState>(
       builder: (BuildContext context, PhotosState state) {
-        if (state is PhotosReadyState) {
-          return Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.all(12),
-              margin: EdgeInsets.only(top: 12),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: state.sorts
-                    .map(
-                      (e) => Container(
-                        margin: EdgeInsets.only(right: 12),
-                        child: ActionChip(
-                          backgroundColor: e == state.selectedSort
-                              ? Theme.of(context).accentColor
-                              : null,
-                          label: Text(
-                            e.title,
-                            style: Theme.of(context).textTheme.bodyText1,
-                          ),
-                          onPressed: () {
-                            context.bloc<PhotosBloc>().add(SortPhotos(e));
-                          },
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ));
-        } else
-          return Container();
+        return state.maybeWhen<Widget>(
+          orElse: () => Container(),
+          doneLoading: (photos, sorts, selectedSort) =>
+              _buildSortList(context, sorts, selectedSort),
+          paginationLoading: (photos, sorts, selectedSort) =>
+              _buildSortList(context, sorts, selectedSort),
+          sortLoading: (sorts, selectedSort) =>
+              _buildSortList(context, sorts, selectedSort),
+        );
       },
     );
+  }
+
+  Widget _buildSortList(
+      BuildContext context, List<PhotoSort> sorts, PhotoSort selectedSort) {
+    return Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.all(12),
+        margin: EdgeInsets.only(top: 12),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: sorts
+              .map(
+                (e) => Container(
+                  margin: EdgeInsets.only(right: 12),
+                  child: ActionChip(
+                    backgroundColor: e == selectedSort
+                        ? Theme.of(context).accentColor
+                        : null,
+                    label: Text(
+                      e.title,
+                      style: Theme.of(context).textTheme.bodyText1,
+                    ),
+                    onPressed: () {
+                      context
+                          .bloc<PhotosBloc>()
+                          .add(PhotosEvent.sortPhotos(sort: e));
+                    },
+                  ),
+                ),
+              )
+              .toList(),
+        ));
   }
 }

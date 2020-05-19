@@ -33,7 +33,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   Stream<PhotosState> _mapLoadMorePhotosToState() async* {
     final latestState = state;
     if (latestState is LoadedPhotosState) {
-      yield PaginationLoadingPhotosState(
+      yield PhotosState.paginationLoading(
           photos: latestState.photos,
           sorts: latestState.sorts,
           selectedSort: latestState.selectedSort);
@@ -43,7 +43,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
       yield photoResult.when<PhotosState>(
           success: (data) {
             page++;
-            final latestState = state as PhotosReadyState;
+            final latestState = state as PaginationLoadingPhotosState;
             return LoadedPhotosState(
                 photos: List.of(latestState.photos)..addAll(data),
                 selectedSort: latestState.selectedSort,
@@ -58,7 +58,7 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
     yield photoResult.when<PhotosState>(
         success: (data) {
           final sorts = _getPhotoSorts();
-          return LoadedPhotosState(
+          return PhotosState.doneLoading(
               photos: data, sorts: sorts, selectedSort: sorts.first);
         },
         failure: (msg, exp) => InitialErrorPhotosState(message: msg));
@@ -81,18 +81,14 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
       ];
 
   Stream<PhotosState> _mapSortPhotosToState(PhotoSort sort) async* {
-    final latestState = state;
-    if (latestState is PhotosReadyState) {
-      yield SortLoadingPhotosState(
-          sorts: latestState.sorts, selectedSort: sort);
-    }
+    yield SortLoadingPhotosState(sorts: _getPhotoSorts(), selectedSort: sort);
 
     await Future.delayed(Duration(seconds: 1));
     final photoResult = await photoRepository.getPhotos(1, sort);
     yield photoResult.when<PhotosState>(
         success: (data) {
           page = 1;
-          return LoadedPhotosState(
+          return PhotosState.doneLoading(
               photos: data, sorts: _getPhotoSorts(), selectedSort: sort);
         },
         failure: (msg, exp) => null);
