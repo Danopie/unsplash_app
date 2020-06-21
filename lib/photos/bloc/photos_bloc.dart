@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:lightweight_result/lightweight_result.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
@@ -40,28 +41,24 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
 
       final photoResult = await photoRepository.getPhotos(page + 1);
       await Future.delayed(Duration(seconds: 2));
-      yield photoResult.when<PhotosState>(
-          success: (data) {
-            page++;
-            final latestState = state as PaginationLoadingPhotosState;
-            return LoadedPhotosState(
-                photos: List.of(latestState.photos)..addAll(data),
-                selectedSort: latestState.selectedSort,
-                sorts: latestState.sorts);
-          },
-          failure: (msg, exp) => InitialErrorPhotosState(message: msg));
+      yield photoResult.fold<PhotosState>((data) {
+        page++;
+        final latestState = state as PaginationLoadingPhotosState;
+        return LoadedPhotosState(
+            photos: List.of(latestState.photos)..addAll(data),
+            selectedSort: latestState.selectedSort,
+            sorts: latestState.sorts);
+      }, (msg) => InitialErrorPhotosState(message: msg));
     }
   }
 
   Stream<PhotosState> _mapInitialLoadPhotosToState() async* {
     final photoResult = await photoRepository.getPhotos(page);
-    yield photoResult.when<PhotosState>(
-        success: (data) {
-          final sorts = _getPhotoSorts();
-          return PhotosState.doneLoading(
-              photos: data, sorts: sorts, selectedSort: sorts.first);
-        },
-        failure: (msg, exp) => InitialErrorPhotosState(message: msg));
+    yield photoResult.fold<PhotosState>((data) {
+      final sorts = _getPhotoSorts();
+      return PhotosState.doneLoading(
+          photos: data, sorts: sorts, selectedSort: sorts.first);
+    }, (msg) => InitialErrorPhotosState(message: msg));
   }
 
   @override
@@ -85,12 +82,10 @@ class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
 
     await Future.delayed(Duration(seconds: 1));
     final photoResult = await photoRepository.getPhotos(1, sort);
-    yield photoResult.when<PhotosState>(
-        success: (data) {
-          page = 1;
-          return PhotosState.doneLoading(
-              photos: data, sorts: _getPhotoSorts(), selectedSort: sort);
-        },
-        failure: (msg, exp) => null);
+    yield photoResult.fold<PhotosState>((data) {
+      page = 1;
+      return PhotosState.doneLoading(
+          photos: data, sorts: _getPhotoSorts(), selectedSort: sort);
+    }, (msg) => null);
   }
 }

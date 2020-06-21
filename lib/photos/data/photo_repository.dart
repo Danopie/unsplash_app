@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
+import 'package:lightweight_result/lightweight_result.dart';
 import 'package:unsplash_app/core/base/repository.dart';
-import 'package:unsplash_app/core/base/result.dart';
 import 'package:unsplash_app/core/constants.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
@@ -14,21 +14,22 @@ class PhotoRepository extends Repository {
 
   PhotoRepository(this.photoApiProvider, this.photoDatabaseProvider);
 
-  Future<Result<List<Photo>>> getPhotos(int page, [PhotoSort sort]) async {
+  Future<Result<List<Photo>, String>> getPhotos(int page,
+      [PhotoSort sort]) async {
     if (await hasConnectivity) {
       try {
         final photos = await photoApiProvider.getPhotos(page, sort?.query);
         await photoDatabaseProvider.savePhotos(photos);
-        return Result.success(photos);
+        return Result.ok(photos);
       } on Exception catch (e) {
-        return Result.failure(DEFAULT_ERROR_MESSAGE, e);
+        return Result.err(DEFAULT_ERROR_MESSAGE);
       }
     } else {
       final photos = await photoDatabaseProvider.getPhotos();
       if (photos != null) {
-        return Result.success(photos);
+        return Result.ok(photos);
       } else {
-        return Result.failure("Connect to the internet", null);
+        return Result.err("Connect to the internet");
       }
     }
   }
