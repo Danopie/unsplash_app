@@ -25,9 +25,8 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_bloc: ^4.0.0
   dio: ^3.0.9
-  freezed_annotation: ^0.7.1
+  freezed_annotation: ^0.11.0
   octo_image: ^0.1.0
-  provider: ^4.1.2
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
   disposable_provider: any
@@ -35,18 +34,16 @@ dependencies:
   equatable: any
   bloc_test: ^5.1.0
   cached_network_image: ^2.2.0+1
-  transparent_image: ^1.0.0
   pretty_dio_logger: ^1.1.1
-  pagination_view: ^1.0.1
   rxdart: ^0.24.1
   connectivity: '>=0.4.8+6 <2.0.0'
-  get_it: ^4.0.2
-  injectable: ^0.4.0
   lightweight_result: ^0.0.1
+  hooks_riverpod: ^0.6.1
+  state_notifier: any
+  flutter_hooks: any
 
 dev_dependencies:
-  freezed: ^0.10.8
-  injectable_generator:
+  freezed: ^0.11.0
   build_runner: ^1.9.0
   flutter_test:
     sdk: flutter

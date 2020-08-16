@@ -1,8 +1,9 @@
-import 'package:injectable/injectable.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/core/database/database_provider.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 
-@singleton
+final photoDatabaseProvider = Provider((ref) => PhotoDatabaseProvider());
+
 class PhotoDatabaseProvider extends DatabaseProvider<Photo> {
   static const NAME = "photos1";
 

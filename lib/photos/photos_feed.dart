@@ -1,23 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:unsplash_app/core/bloc/bloc_provider.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/bloc/bloc.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
-import 'package:unsplash_app/photos/data/photo_repository.dart';
 
-class PhotosFeed extends StatefulWidget {
+class PhotosFeed extends StatefulHookWidget {
   static Future<dynamic> show({BuildContext context}) {
     return Navigator.of(context).push(
         MaterialPageRoute(builder: (context) => PhotosFeed.newInstance()));
   }
 
-  static Widget newInstance() => BlocProvider<PhotosBloc>(
-        create: (context) => PhotosBloc(GetIt.I.get<PhotoRepository>()),
-        child: PhotosFeed(),
-      );
+  static Widget newInstance() => PhotosFeed();
+
   @override
   _PhotosFeedState createState() => _PhotosFeedState();
 }
@@ -25,15 +25,15 @@ class PhotosFeed extends StatefulWidget {
 class _PhotosFeedState extends State<PhotosFeed> {
   @override
   void initState() {
-    context.bloc<PhotosBloc>().add(InitialLoad());
+    context.read(photosBlocProvider).add(InitialLoad());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: BlocConsumer<PhotosBloc, PhotosState>(
-      builder: (BuildContext context, PhotosState state) {
+    final state = useProvider(photosBlocProvider.state);
+    return Scaffold(body: Builder(
+      builder: (BuildContext context) {
         if (state is PaginationLoadingPhotosState ||
             state is SortLoadingPhotosState ||
             state is LoadedPhotosState) {
@@ -52,7 +52,6 @@ class _PhotosFeedState extends State<PhotosFeed> {
           return PhotosLoading();
         }
       },
-      listener: (BuildContext context, PhotosState state) {},
     ));
   }
 }
@@ -193,21 +192,17 @@ class PhotoItem extends StatelessWidget {
   }
 }
 
-class PhotosSortBar extends StatelessWidget {
+class PhotosSortBar extends HookWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PhotosBloc, PhotosState>(
-      builder: (BuildContext context, PhotosState state) {
-        return state.maybeWhen<Widget>(
-          orElse: () => Container(),
-          doneLoading: (photos, sorts, selectedSort) =>
-              _buildSortList(context, sorts, selectedSort),
-          paginationLoading: (photos, sorts, selectedSort) =>
-              _buildSortList(context, sorts, selectedSort),
-          sortLoading: (sorts, selectedSort) =>
-              _buildSortList(context, sorts, selectedSort),
-        );
-      },
+    return useProvider(photosBlocProvider.state).maybeWhen<Widget>(
+      orElse: () => Container(),
+      doneLoading: (photos, sorts, selectedSort) =>
+          _buildSortList(context, sorts, selectedSort),
+      paginationLoading: (photos, sorts, selectedSort) =>
+          _buildSortList(context, sorts, selectedSort),
+      sortLoading: (sorts, selectedSort) =>
+          _buildSortList(context, sorts, selectedSort),
     );
   }
 
@@ -233,7 +228,7 @@ class PhotosSortBar extends StatelessWidget {
                     ),
                     onPressed: () {
                       context
-                          .bloc<PhotosBloc>()
+                          .read(photosBlocProvider)
                           .add(PhotosEvent.sortPhotos(sort: e));
                     },
                   ),

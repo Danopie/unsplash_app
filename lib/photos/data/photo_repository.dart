@@ -1,4 +1,4 @@
-import 'package:injectable/injectable.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lightweight_result/lightweight_result.dart';
 import 'package:unsplash_app/core/base/repository.dart';
 import 'package:unsplash_app/core/constants.dart';
@@ -7,7 +7,9 @@ import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_api_provider.dart';
 import 'package:unsplash_app/photos/data/photo_db_provider.dart';
 
-@singleton
+final photoRepositoryProvider = Provider((ref) => PhotoRepository(
+    ref.read(photoApiProvider), ref.read(photoDatabaseProvider)));
+
 class PhotoRepository extends Repository {
   final PhotoApiProvider photoApiProvider;
   final PhotoDatabaseProvider photoDatabaseProvider;
@@ -21,7 +23,7 @@ class PhotoRepository extends Repository {
         final photos = await photoApiProvider.getPhotos(page, sort?.query);
         await photoDatabaseProvider.savePhotos(photos);
         return Result.ok(photos);
-      } on Exception catch (e) {
+      } on Exception {
         return Result.err(DEFAULT_ERROR_MESSAGE);
       }
     } else {

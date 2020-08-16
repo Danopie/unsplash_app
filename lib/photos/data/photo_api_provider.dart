@@ -1,12 +1,14 @@
-import 'package:injectable/injectable.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/core/network/api_path.dart';
 import 'package:unsplash_app/core/network/api_provider.dart';
 import 'package:unsplash_app/photos/data/model/get_photos_response.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 
-@singleton
+final photoApiProvider = Provider((ref) => PhotoApiProvider(ref));
+
 class PhotoApiProvider extends ApiProvider {
-  PhotoApiProvider() : super(EndPoint.MAIN);
+  PhotoApiProvider(ProviderReference ref)
+      : super(ref.read(dioProvider(EndPoint.MAIN)));
 
   Future<List<Photo>> getPhotos(int page, [String query]) async {
     final params = <String, dynamic>{"page": page};

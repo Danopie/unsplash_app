@@ -3,10 +3,14 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:lightweight_result/lightweight_result.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:unsplash_app/core/bloc/bloc_provider.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 import 'bloc.dart';
+
+final photosBlocProvider =
+    BlocProvider((ref) => PhotosBloc(ref.read(photoRepositoryProvider)));
 
 class PhotosBloc extends Bloc<PhotosEvent, PhotosState> {
   final PhotoRepository photoRepository;
