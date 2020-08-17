@@ -15,18 +15,9 @@ abstract class PhotosState with _$PhotosState {
 
   const factory PhotosState.paginationLoading({
     List<Photo> photos,
-    List<PhotoSort> sorts,
-    PhotoSort selectedSort,
   }) = PaginationLoadingPhotosState;
 
   const factory PhotosState.doneLoading({
     List<Photo> photos,
-    List<PhotoSort> sorts,
-    PhotoSort selectedSort,
   }) = LoadedPhotosState;
-
-  const factory PhotosState.sortLoading({
-    List<PhotoSort> sorts,
-    PhotoSort selectedSort,
-  }) = SortLoadingPhotosState;
 }

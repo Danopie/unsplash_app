@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'photos_state.dart';
 
@@ -12,43 +12,34 @@ T _$identity<T>(T value) => value;
 class _$PhotosStateTearOff {
   const _$PhotosStateTearOff();
 
+// ignore: unused_element
   InitialPhotosState initial() {
     return const InitialPhotosState();
   }
 
+// ignore: unused_element
   InitialLoadingPhotosState initialLoading() {
     return const InitialLoadingPhotosState();
   }
 
+// ignore: unused_element
   InitialErrorPhotosState initialError({String message}) {
     return InitialErrorPhotosState(
       message: message,
     );
   }
 
-  PaginationLoadingPhotosState paginationLoading(
-      {List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort}) {
+// ignore: unused_element
+  PaginationLoadingPhotosState paginationLoading({List<Photo> photos}) {
     return PaginationLoadingPhotosState(
       photos: photos,
-      sorts: sorts,
-      selectedSort: selectedSort,
     );
   }
 
-  LoadedPhotosState doneLoading(
-      {List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort}) {
+// ignore: unused_element
+  LoadedPhotosState doneLoading({List<Photo> photos}) {
     return LoadedPhotosState(
       photos: photos,
-      sorts: sorts,
-      selectedSort: selectedSort,
-    );
-  }
-
-  SortLoadingPhotosState sortLoading(
-      {List<PhotoSort> sorts, PhotoSort selectedSort}) {
-    return SortLoadingPhotosState(
-      sorts: sorts,
-      selectedSort: selectedSort,
     );
   }
 }
@@ -62,24 +53,16 @@ mixin _$PhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -89,7 +72,6 @@ mixin _$PhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
@@ -98,7 +80,6 @@ mixin _$PhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   });
 }
@@ -156,20 +137,14 @@ class _$InitialPhotosState implements InitialPhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initial();
   }
 
@@ -179,11 +154,8 @@ class _$InitialPhotosState implements InitialPhotosState {
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -201,14 +173,12 @@ class _$InitialPhotosState implements InitialPhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initial(this);
   }
 
@@ -220,7 +190,6 @@ class _$InitialPhotosState implements InitialPhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -275,20 +244,14 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initialLoading();
   }
 
@@ -298,11 +261,8 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -320,14 +280,12 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initialLoading(this);
   }
 
@@ -339,7 +297,6 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -415,20 +372,14 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initialError(message);
   }
 
@@ -438,11 +389,8 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -460,14 +408,12 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return initialError(this);
   }
 
@@ -479,7 +425,6 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -503,8 +448,7 @@ abstract class $PaginationLoadingPhotosStateCopyWith<$Res> {
           PaginationLoadingPhotosState value,
           $Res Function(PaginationLoadingPhotosState) then) =
       _$PaginationLoadingPhotosStateCopyWithImpl<$Res>;
-  $Res call(
-      {List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort});
+  $Res call({List<Photo> photos});
 }
 
 class _$PaginationLoadingPhotosStateCopyWithImpl<$Res>
@@ -522,33 +466,22 @@ class _$PaginationLoadingPhotosStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object photos = freezed,
-    Object sorts = freezed,
-    Object selectedSort = freezed,
   }) {
     return _then(PaginationLoadingPhotosState(
       photos: photos == freezed ? _value.photos : photos as List<Photo>,
-      sorts: sorts == freezed ? _value.sorts : sorts as List<PhotoSort>,
-      selectedSort: selectedSort == freezed
-          ? _value.selectedSort
-          : selectedSort as PhotoSort,
     ));
   }
 }
 
 class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
-  const _$PaginationLoadingPhotosState(
-      {this.photos, this.sorts, this.selectedSort});
+  const _$PaginationLoadingPhotosState({this.photos});
 
   @override
   final List<Photo> photos;
-  @override
-  final List<PhotoSort> sorts;
-  @override
-  final PhotoSort selectedSort;
 
   @override
   String toString() {
-    return 'PhotosState.paginationLoading(photos: $photos, sorts: $sorts, selectedSort: $selectedSort)';
+    return 'PhotosState.paginationLoading(photos: $photos)';
   }
 
   @override
@@ -556,20 +489,12 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     return identical(this, other) ||
         (other is PaginationLoadingPhotosState &&
             (identical(other.photos, photos) ||
-                const DeepCollectionEquality().equals(other.photos, photos)) &&
-            (identical(other.sorts, sorts) ||
-                const DeepCollectionEquality().equals(other.sorts, sorts)) &&
-            (identical(other.selectedSort, selectedSort) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedSort, selectedSort)));
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(photos) ^
-      const DeepCollectionEquality().hash(sorts) ^
-      const DeepCollectionEquality().hash(selectedSort);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(photos);
 
   @override
   $PaginationLoadingPhotosStateCopyWith<PaginationLoadingPhotosState>
@@ -582,21 +507,15 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
-    return paginationLoading(photos, sorts, selectedSort);
+    return paginationLoading(photos);
   }
 
   @override
@@ -605,16 +524,13 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (paginationLoading != null) {
-      return paginationLoading(photos, sorts, selectedSort);
+      return paginationLoading(photos);
     }
     return orElse();
   }
@@ -627,14 +543,12 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return paginationLoading(this);
   }
 
@@ -646,7 +560,6 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -658,14 +571,10 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
 }
 
 abstract class PaginationLoadingPhotosState implements PhotosState {
-  const factory PaginationLoadingPhotosState(
-      {List<Photo> photos,
-      List<PhotoSort> sorts,
-      PhotoSort selectedSort}) = _$PaginationLoadingPhotosState;
+  const factory PaginationLoadingPhotosState({List<Photo> photos}) =
+      _$PaginationLoadingPhotosState;
 
   List<Photo> get photos;
-  List<PhotoSort> get sorts;
-  PhotoSort get selectedSort;
   $PaginationLoadingPhotosStateCopyWith<PaginationLoadingPhotosState>
       get copyWith;
 }
@@ -674,8 +583,7 @@ abstract class $LoadedPhotosStateCopyWith<$Res> {
   factory $LoadedPhotosStateCopyWith(
           LoadedPhotosState value, $Res Function(LoadedPhotosState) then) =
       _$LoadedPhotosStateCopyWithImpl<$Res>;
-  $Res call(
-      {List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort});
+  $Res call({List<Photo> photos});
 }
 
 class _$LoadedPhotosStateCopyWithImpl<$Res>
@@ -691,32 +599,22 @@ class _$LoadedPhotosStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object photos = freezed,
-    Object sorts = freezed,
-    Object selectedSort = freezed,
   }) {
     return _then(LoadedPhotosState(
       photos: photos == freezed ? _value.photos : photos as List<Photo>,
-      sorts: sorts == freezed ? _value.sorts : sorts as List<PhotoSort>,
-      selectedSort: selectedSort == freezed
-          ? _value.selectedSort
-          : selectedSort as PhotoSort,
     ));
   }
 }
 
 class _$LoadedPhotosState implements LoadedPhotosState {
-  const _$LoadedPhotosState({this.photos, this.sorts, this.selectedSort});
+  const _$LoadedPhotosState({this.photos});
 
   @override
   final List<Photo> photos;
-  @override
-  final List<PhotoSort> sorts;
-  @override
-  final PhotoSort selectedSort;
 
   @override
   String toString() {
-    return 'PhotosState.doneLoading(photos: $photos, sorts: $sorts, selectedSort: $selectedSort)';
+    return 'PhotosState.doneLoading(photos: $photos)';
   }
 
   @override
@@ -724,20 +622,12 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     return identical(this, other) ||
         (other is LoadedPhotosState &&
             (identical(other.photos, photos) ||
-                const DeepCollectionEquality().equals(other.photos, photos)) &&
-            (identical(other.sorts, sorts) ||
-                const DeepCollectionEquality().equals(other.sorts, sorts)) &&
-            (identical(other.selectedSort, selectedSort) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedSort, selectedSort)));
+                const DeepCollectionEquality().equals(other.photos, photos)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(photos) ^
-      const DeepCollectionEquality().hash(sorts) ^
-      const DeepCollectionEquality().hash(selectedSort);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(photos);
 
   @override
   $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith =>
@@ -749,21 +639,15 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     @required Result initial(),
     @required Result initialLoading(),
     @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    @required Result paginationLoading(List<Photo> photos),
+    @required Result doneLoading(List<Photo> photos),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
-    return doneLoading(photos, sorts, selectedSort);
+    return doneLoading(photos);
   }
 
   @override
@@ -772,16 +656,13 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     Result initial(),
     Result initialLoading(),
     Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
+    Result paginationLoading(List<Photo> photos),
+    Result doneLoading(List<Photo> photos),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (doneLoading != null) {
-      return doneLoading(photos, sorts, selectedSort);
+      return doneLoading(photos);
     }
     return orElse();
   }
@@ -794,14 +675,12 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     @required Result initialError(InitialErrorPhotosState value),
     @required Result paginationLoading(PaginationLoadingPhotosState value),
     @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
   }) {
     assert(initial != null);
     assert(initialLoading != null);
     assert(initialError != null);
     assert(paginationLoading != null);
     assert(doneLoading != null);
-    assert(sortLoading != null);
     return doneLoading(this);
   }
 
@@ -813,7 +692,6 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     Result initialError(InitialErrorPhotosState value),
     Result paginationLoading(PaginationLoadingPhotosState value),
     Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -825,170 +703,8 @@ class _$LoadedPhotosState implements LoadedPhotosState {
 }
 
 abstract class LoadedPhotosState implements PhotosState {
-  const factory LoadedPhotosState(
-      {List<Photo> photos,
-      List<PhotoSort> sorts,
-      PhotoSort selectedSort}) = _$LoadedPhotosState;
+  const factory LoadedPhotosState({List<Photo> photos}) = _$LoadedPhotosState;
 
   List<Photo> get photos;
-  List<PhotoSort> get sorts;
-  PhotoSort get selectedSort;
   $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith;
-}
-
-abstract class $SortLoadingPhotosStateCopyWith<$Res> {
-  factory $SortLoadingPhotosStateCopyWith(SortLoadingPhotosState value,
-          $Res Function(SortLoadingPhotosState) then) =
-      _$SortLoadingPhotosStateCopyWithImpl<$Res>;
-  $Res call({List<PhotoSort> sorts, PhotoSort selectedSort});
-}
-
-class _$SortLoadingPhotosStateCopyWithImpl<$Res>
-    extends _$PhotosStateCopyWithImpl<$Res>
-    implements $SortLoadingPhotosStateCopyWith<$Res> {
-  _$SortLoadingPhotosStateCopyWithImpl(SortLoadingPhotosState _value,
-      $Res Function(SortLoadingPhotosState) _then)
-      : super(_value, (v) => _then(v as SortLoadingPhotosState));
-
-  @override
-  SortLoadingPhotosState get _value => super._value as SortLoadingPhotosState;
-
-  @override
-  $Res call({
-    Object sorts = freezed,
-    Object selectedSort = freezed,
-  }) {
-    return _then(SortLoadingPhotosState(
-      sorts: sorts == freezed ? _value.sorts : sorts as List<PhotoSort>,
-      selectedSort: selectedSort == freezed
-          ? _value.selectedSort
-          : selectedSort as PhotoSort,
-    ));
-  }
-}
-
-class _$SortLoadingPhotosState implements SortLoadingPhotosState {
-  const _$SortLoadingPhotosState({this.sorts, this.selectedSort});
-
-  @override
-  final List<PhotoSort> sorts;
-  @override
-  final PhotoSort selectedSort;
-
-  @override
-  String toString() {
-    return 'PhotosState.sortLoading(sorts: $sorts, selectedSort: $selectedSort)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is SortLoadingPhotosState &&
-            (identical(other.sorts, sorts) ||
-                const DeepCollectionEquality().equals(other.sorts, sorts)) &&
-            (identical(other.selectedSort, selectedSort) ||
-                const DeepCollectionEquality()
-                    .equals(other.selectedSort, selectedSort)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(sorts) ^
-      const DeepCollectionEquality().hash(selectedSort);
-
-  @override
-  $SortLoadingPhotosStateCopyWith<SortLoadingPhotosState> get copyWith =>
-      _$SortLoadingPhotosStateCopyWithImpl<SortLoadingPhotosState>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required
-        Result paginationLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required
-        Result doneLoading(
-            List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
-  }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
-    assert(sortLoading != null);
-    return sortLoading(sorts, selectedSort);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result doneLoading(
-        List<Photo> photos, List<PhotoSort> sorts, PhotoSort selectedSort),
-    Result sortLoading(List<PhotoSort> sorts, PhotoSort selectedSort),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (sortLoading != null) {
-      return sortLoading(sorts, selectedSort);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
-    @required Result sortLoading(SortLoadingPhotosState value),
-  }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
-    assert(sortLoading != null);
-    return sortLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    Result sortLoading(SortLoadingPhotosState value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (sortLoading != null) {
-      return sortLoading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SortLoadingPhotosState implements PhotosState {
-  const factory SortLoadingPhotosState(
-      {List<PhotoSort> sorts,
-      PhotoSort selectedSort}) = _$SortLoadingPhotosState;
-
-  List<PhotoSort> get sorts;
-  PhotoSort get selectedSort;
-  $SortLoadingPhotosStateCopyWith<SortLoadingPhotosState> get copyWith;
 }
