@@ -3,26 +3,28 @@ import 'dart:async';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lightweight_result/lightweight_result.dart';
 import 'package:state_notifier/state_notifier.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/authentication/user/user_dependent_state_notifier.dart';
+import 'package:unsplash_app/authentication/user/user_state.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 import 'photos_state.dart';
 
+final photosProvider = StateNotifierProvider((ref) => PhotosController(
+    ref.read(photoRepositoryProvider), ref.read(userControllerProvider)));
 
-final photosProvider = StateNotifierProvider(
-    (ref) => PhotosController(ref.read(photoRepositoryProvider)));
+class PhotosController extends UserDependentStateNotifier<PhotosState> {
+  final PhotoRepository _photoRepository;
 
-class PhotosController extends StateNotifier<PhotosState> {
-  final PhotoRepository photoRepository;
-
-  PhotosController(this.photoRepository) : super(InitialPhotosState()) {
-    onInit();
-  }
+  PhotosController(this._photoRepository, UserController userController)
+      : super(userController, InitialPhotosState());
 
   int page = 1;
 
-  Future<void> onInit() async {
-    final photoResult = await photoRepository.getPhotos(page);
+  @override
+  Future<void> init(UserState userState) async {
+    final photoResult = await _photoRepository.getPhotos(page);
     state = photoResult.fold<PhotosState>((data) {
       return PhotosState.doneLoading(photos: data);
     }, (msg) => InitialErrorPhotosState(message: msg));
@@ -33,7 +35,7 @@ class PhotosController extends StateNotifier<PhotosState> {
     if (latestState is LoadedPhotosState) {
       state = PhotosState.paginationLoading(photos: latestState.photos);
 
-      final photoResult = await photoRepository.getPhotos(page + 1);
+      final photoResult = await _photoRepository.getPhotos(page + 1);
       await Future.delayed(Duration(seconds: 2));
       state = photoResult.fold<PhotosState>((data) {
         page++;

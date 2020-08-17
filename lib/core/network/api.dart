@@ -2,28 +2,36 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meta/meta.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/authentication/user/user_state.dart';
+import 'package:unsplash_app/core/base/configuration.dart';
 import 'package:unsplash_app/core/base/exception.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
 
 final dioProvider = Provider.family<Dio, String>(
-  (ref, url) => Dio(
-    BaseOptions(
-      baseUrl: url,
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
-    ),
-  )..interceptors.addAll(
-      [
-        HeaderInterceptor(),
-        PrettyDioLogger(),
-      ],
-    ),
+  (ref, url) {
+    return Dio(
+      BaseOptions(
+        baseUrl: url,
+        connectTimeout: 5000,
+        receiveTimeout: 3000,
+      ),
+    )..interceptors.addAll(
+        [
+          ref.read(headerInterceptorProvider),
+          PrettyDioLogger(
+            requestHeader: true,
+            responseHeader: true,
+          ),
+        ],
+      );
+  },
 );
 
-abstract class ApiProvider {
+abstract class Api {
   Dio _client = Dio();
 
-  ApiProvider(this._client);
+  Api(this._client);
 
   @protected
   Future<T> get<T>(String path, [Map<String, dynamic> params]) async {

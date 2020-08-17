@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.2"
+  build_context:
+    dependency: "direct main"
+    description:
+      name: build_context
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   build_daemon:
     dependency: transitive
     description:
@@ -432,9 +439,9 @@ packages:
   lightweight_result:
     dependency: "direct main"
     description:
-      name: lightweight_result
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "../lightweight_result"
+      relative: true
+    source: path
     version: "0.0.1"
   logging:
     dependency: transitive
@@ -840,6 +847,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.3"
+  webview_flutter:
+    dependency: "direct main"
+    description:
+      name: webview_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.22+1"
   xdg_directories:
     dependency: transitive
     description:

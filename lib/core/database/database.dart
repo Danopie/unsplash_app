@@ -1,11 +1,11 @@
 import 'package:hive/hive.dart';
 
-abstract class DatabaseProvider<T extends Object> {
+abstract class Database<T extends Object> {
   Box<T> box;
 
   String get dbName;
 
-  DatabaseProvider() {
+  Database() {
     box = Hive.box<T>(dbName);
   }
 

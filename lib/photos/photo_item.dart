@@ -1,8 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:unsplash_app/authentication/login/login_page.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/res/color.dart';
+
 import '../res/text.dart';
 
 class PhotoItem extends StatelessWidget {
@@ -70,6 +76,18 @@ class PhotoItem extends StatelessWidget {
   }
 
   _buildPhotoActions() {
+    return PhotoActions();
+  }
+}
+
+class PhotoActions extends HookWidget {
+  const PhotoActions({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final userState = useProvider(userControllerProvider.state);
     return Container(
       padding: EdgeInsets.all(12),
       child: Row(
@@ -80,6 +98,18 @@ class PhotoItem extends StatelessWidget {
               color: boulder,
               size: 16,
             ),
+            onTap: () {
+              print('PhotoActions.build');
+              userState.maybeWhen(
+                orElse: () {
+                  print('PhotoActions.build: LOGIN');
+                  Navigator.of(context).push(LoginPage.route);
+                },
+                loggedIn: (userInfo) {
+                  print('PhotoActions.build: LIKE');
+                },
+              );
+            },
           ),
           Container(
             width: 12,
@@ -111,8 +141,11 @@ class PhotoItem extends StatelessWidget {
 class UnsplashInkWell extends StatelessWidget {
   final Widget child;
   final Function onTap;
+  final bool requireLogin;
 
-  const UnsplashInkWell({Key key, this.onTap, this.child}) : super(key: key);
+  const UnsplashInkWell(
+      {Key key, this.onTap, this.child, this.requireLogin = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +153,6 @@ class UnsplashInkWell extends StatelessWidget {
       child: child,
       onTap: onTap,
       borderRadius: BorderRadius.circular(4),
-
     );
   }
 }
@@ -130,9 +162,17 @@ class UnsplashButton extends StatelessWidget {
   final double width;
   final double height;
   final Widget trailing;
+  final Function onTap;
+  final bool requireLogin;
 
   const UnsplashButton(
-      {Key key, this.width, this.height, this.child, this.trailing})
+      {Key key,
+      this.width,
+      this.height,
+      this.child,
+      this.trailing,
+      this.onTap,
+      this.requireLogin = false})
       : super(key: key);
 
   @override
@@ -141,15 +181,15 @@ class UnsplashButton extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          UnsplashInkWell(
-            onTap: () {},
-            child: Container(
-              height: height,
-              margin: EdgeInsets.symmetric(horizontal: 12),
-              alignment: Alignment.center,
-              child: child,
-            ),
-          ),
+          if (requireLogin)
+            UserStatusBuilder(
+              builder: (userState) {
+                return _buildContainer(height);
+              },
+              onTap: onTap,
+            )
+          else
+            _buildInkWell(height),
           if (trailing != null) ...[
             Container(
               height: height,
@@ -173,6 +213,22 @@ class UnsplashButton extends StatelessWidget {
         border: Border.all(color: alto, width: 1),
         borderRadius: BorderRadius.circular(4),
       ),
+    );
+  }
+
+  UnsplashInkWell _buildInkWell(double height) {
+    return UnsplashInkWell(
+      onTap: onTap,
+      child: _buildContainer(height),
+    );
+  }
+
+  Container _buildContainer(double height) {
+    return Container(
+      height: height,
+      margin: EdgeInsets.symmetric(horizontal: 12),
+      alignment: Alignment.center,
+      child: child,
     );
   }
 }

@@ -4,15 +4,15 @@ import 'package:unsplash_app/core/base/repository.dart';
 import 'package:unsplash_app/core/constants.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
-import 'package:unsplash_app/photos/data/photo_api_provider.dart';
-import 'package:unsplash_app/photos/data/photo_db_provider.dart';
+import 'package:unsplash_app/photos/data/photo_api.dart';
+import 'package:unsplash_app/photos/data/photo_db.dart';
 
 final photoRepositoryProvider = Provider((ref) => PhotoRepository(
     ref.read(photoApiProvider), ref.read(photoDatabaseProvider)));
 
 class PhotoRepository extends Repository {
-  final PhotoApiProvider photoApiProvider;
-  final PhotoDatabaseProvider photoDatabaseProvider;
+  final PhotoApi photoApiProvider;
+  final PhotoDatabase photoDatabaseProvider;
 
   PhotoRepository(this.photoApiProvider, this.photoDatabaseProvider);
 
