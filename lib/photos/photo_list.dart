@@ -1,25 +1,23 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/home/home_page.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
-import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 
 import 'domain/photos_controller.dart';
 
-class PhotoList extends StatelessWidget {
+class PhotoList extends HookWidget {
   final List<Photo> photos;
   final bool loading;
+  final ScrollController controller;
 
   const PhotoList({
     Key key,
     this.photos,
     this.loading,
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -33,6 +31,7 @@ class PhotoList extends StatelessWidget {
         return false;
       },
       child: ListView.builder(
+        controller: controller,
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
           if (index == _getListLength() - 1) {

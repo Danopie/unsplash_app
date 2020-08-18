@@ -22,10 +22,13 @@ class PhotosController extends UserDependentStateNotifier<PhotosState> {
 
   @override
   Future<void> init(UserState userState) async {
-    final photoResult = await _photoRepository.getPhotos(page);
-    state = photoResult.fold<PhotosState>((data) {
-      return PhotosState.doneLoading(photos: data);
-    }, (msg) => InitialErrorPhotosState(message: msg));
+    if (userState is NotLoggedInUserState ||
+        (userState is LoggedInUserState && state is InitialPhotosState)) {
+      final photoResult = await _photoRepository.getPhotos(page);
+      state = photoResult.fold<PhotosState>((data) {
+        return PhotosState.doneLoading(photos: data);
+      }, (msg) => InitialErrorPhotosState(message: msg));
+    }
   }
 
   Future<void> onLoadMore() async {

@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
-import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 
 part 'photos_state.freezed.dart';
 

@@ -19,9 +19,11 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(photosProvider.state);
+    final controller = useScrollController();
     return Scaffold(floatingActionButton: FloatingActionButton(
-      onPressed: () {
-        context.read(userControllerProvider).onUserLogout();
+      onPressed: () async {
+        await context.read(userControllerProvider).onUserLogout();
+        controller.jumpTo(0);
       },
     ), body: Builder(
       builder: (BuildContext context) {
@@ -34,6 +36,7 @@ class HomePage extends HookWidget {
               doneLoading: (photos) => photos,
             ),
             loading: state is PaginationLoadingPhotosState,
+            controller: controller,
           );
         } else if (state is InitialErrorPhotosState) {
           return HomeError(message: state.message);
