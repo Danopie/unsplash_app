@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:unsplash_app/core/network/api_path.dart';
 import 'package:unsplash_app/core/network/api.dart';
+import 'package:unsplash_app/core/network/api_path.dart';
 import 'package:unsplash_app/photos/data/model/get_photos_response.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 
@@ -19,6 +19,14 @@ class PhotoApi extends Api {
     final response = await get<String>(ApiPath.photo, params);
     final data = photoFromJson(response);
     return data;
+  }
+
+  Future<void> likePhoto(String id) async {
+    await post<String>("${ApiPath.photo}/$id/like");
+  }
+
+  Future<void> unlikePhoto(String id) async {
+    await delete<String>("${ApiPath.photo}/$id/like");
   }
 }
 

@@ -2,9 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meta/meta.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:unsplash_app/authentication/user/user_controller.dart';
-import 'package:unsplash_app/authentication/user/user_state.dart';
-import 'package:unsplash_app/core/base/configuration.dart';
 import 'package:unsplash_app/core/base/exception.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
 
@@ -47,6 +44,16 @@ abstract class Api {
   Future<T> post<T>(String path, [Map<String, dynamic> params]) async {
     try {
       final response = await _client.post<T>(path, data: params);
+      return response?.data;
+    } on DioError catch (e) {
+      _handleError(e);
+    }
+  }
+
+  @protected
+  Future<T> delete<T>(String path, [Map<String, dynamic> params]) async {
+    try {
+      final response = await _client.delete<T>(path, data: params);
       return response?.data;
     } on DioError catch (e) {
       _handleError(e);

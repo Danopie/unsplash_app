@@ -28,10 +28,18 @@ class UserRepository extends Repository {
     }
   }
 
-  Future<Result<UserInfo, void>> save(UserInfo userInfo) async {
+  Future<Result<UserInfo, void>> saveUser(UserInfo userInfo) async {
     try {
       final u = await _userDatabase.saveUser(userInfo);
       return Result.ok(u);
+    } on Exception {
+      return null;
+    }
+  }
+
+  Future<void> clearUser() async {
+    try {
+      await _userDatabase.clearUser();
     } on Exception {
       return null;
     }

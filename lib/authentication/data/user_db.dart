@@ -18,4 +18,8 @@ class UserDatabase extends Database<UserInfo> {
   Future<UserInfo> getUser() async {
     return await get(NAME);
   }
+
+  Future<void> clearUser() async {
+    await delete(NAME);
+  }
 }

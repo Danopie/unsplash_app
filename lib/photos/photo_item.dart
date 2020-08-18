@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:unsplash_app/authentication/login/login_page.dart';
-import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/res/color.dart';
 
 import '../res/text.dart';
+import 'domain/photos_controller.dart';
 
 class PhotoItem extends StatelessWidget {
   const PhotoItem({
@@ -28,7 +27,10 @@ class PhotoItem extends StatelessWidget {
         children: <Widget>[
           _buildPhotoHeader(context),
           _buildPhoto(),
-          _buildPhotoActions(),
+          PhotoActions(
+            id: photo.id,
+            liked: photo.liked_by_user,
+          ),
         ],
       ),
     );
@@ -74,47 +76,33 @@ class PhotoItem extends StatelessWidget {
       ),
     );
   }
-
-  _buildPhotoActions() {
-    return PhotoActions();
-  }
 }
 
 class PhotoActions extends HookWidget {
+  final String id;
+  final bool liked;
+
   const PhotoActions({
     Key key,
+    this.id,
+    this.liked,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final userState = useProvider(userControllerProvider.state);
     return Container(
       padding: EdgeInsets.all(12),
       child: Row(
         children: [
-          UnsplashButton(
-            child: Icon(
-              Icons.thumb_up,
-              color: boulder,
-              size: 16,
-            ),
-            onTap: () {
-              print('PhotoActions.build');
-              userState.maybeWhen(
-                orElse: () {
-                  print('PhotoActions.build: LOGIN');
-                  Navigator.of(context).push(LoginPage.route);
-                },
-                loggedIn: (userInfo) {
-                  print('PhotoActions.build: LIKE');
-                },
-              );
-            },
+          LikeButton(
+            id: id,
+            liked: liked,
           ),
           Container(
             width: 12,
           ),
           UnsplashButton(
+            requireLogin: true,
             child: Icon(
               Icons.add,
               color: boulder,
@@ -134,6 +122,38 @@ class PhotoActions extends HookWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  final String id;
+  final bool liked;
+
+  const LikeButton({Key key, this.id, this.liked}) : super(key: key);
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  @override
+  Widget build(BuildContext context) {
+    return UnsplashButton(
+      borderColor: widget.liked ? Colors.red : null,
+      child: Icon(
+        Icons.thumb_up,
+        color: widget.liked ? Colors.red : boulder,
+        size: 16,
+      ),
+      requireLogin: true,
+      onTap: () {
+        if (!widget.liked) {
+          context.read(photosProvider).onUserLikePhoto(widget.id);
+        } else {
+          context.read(photosProvider).onUserUnlikePhoto(widget.id);
+        }
+      },
     );
   }
 }
@@ -164,6 +184,7 @@ class UnsplashButton extends StatelessWidget {
   final Widget trailing;
   final Function onTap;
   final bool requireLogin;
+  final Color borderColor;
 
   const UnsplashButton(
       {Key key,
@@ -172,7 +193,8 @@ class UnsplashButton extends StatelessWidget {
       this.child,
       this.trailing,
       this.onTap,
-      this.requireLogin = false})
+      this.requireLogin = false,
+      this.borderColor})
       : super(key: key);
 
   @override
@@ -210,7 +232,7 @@ class UnsplashButton extends StatelessWidget {
         ],
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: alto, width: 1),
+        border: Border.all(color: borderColor ?? alto, width: 1),
         borderRadius: BorderRadius.circular(4),
       ),
     );

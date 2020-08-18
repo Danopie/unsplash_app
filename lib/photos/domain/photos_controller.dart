@@ -2,11 +2,9 @@ import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lightweight_result/lightweight_result.dart';
-import 'package:state_notifier/state_notifier.dart';
 import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/authentication/user/user_dependent_state_notifier.dart';
 import 'package:unsplash_app/authentication/user/user_state.dart';
-import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/data/photo_repository.dart';
 
 import 'photos_state.dart';
@@ -45,5 +43,32 @@ class PhotosController extends UserDependentStateNotifier<PhotosState> {
         );
       }, (msg) => InitialErrorPhotosState(message: msg));
     }
+  }
+
+  Future<void> onUserLikePhoto(String id) async {
+    _handlePhotoLikeStatus(id, true, () {
+      _photoRepository.likePhoto(id);
+    });
+  }
+
+  Future<void> onUserUnlikePhoto(String id) async {
+    _handlePhotoLikeStatus(id, false, () {
+      _photoRepository.unlikePhoto(id);
+    });
+  }
+
+  Future<void> _handlePhotoLikeStatus(
+      String id, bool like, Function after) async {
+    state.maybeWhen(
+      orElse: () {},
+      doneLoading: (photos) async {
+        final list = List.of(photos);
+        final index = list.indexWhere((element) => element.id == id);
+        final photo = list.removeAt(index);
+        list.insert(index, photo.copyWith(liked_by_user: like));
+        state = LoadedPhotosState(photos: list);
+        after?.call();
+      },
+    );
   }
 }

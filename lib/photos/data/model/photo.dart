@@ -83,4 +83,61 @@ class Photo extends Equatable {
     map['user'] = user == null ? null : user.toJson();
     return map;
   }
+
+  const Photo({
+    this.id,
+    this.created_at,
+    this.updated_at,
+    this.promoted_at,
+    this.width,
+    this.height,
+    this.color,
+    this.description,
+    this.alt_description,
+    this.urls,
+    this.links,
+    this.categories,
+    this.likes,
+    this.liked_by_user,
+    this.sponsorship,
+    this.user,
+  });
+
+  Photo copyWith({
+    String id,
+    String created_at,
+    String updated_at,
+    Object promoted_at,
+    int width,
+    int height,
+    String color,
+    String description,
+    String alt_description,
+    Urls urls,
+    Links links,
+    List<Object> categories,
+    int likes,
+    bool liked_by_user,
+    Sponsorship sponsorship,
+    User user,
+  }) {
+    return new Photo(
+      id: id ?? this.id,
+      created_at: created_at ?? this.created_at,
+      updated_at: updated_at ?? this.updated_at,
+      promoted_at: promoted_at ?? this.promoted_at,
+      width: width ?? this.width,
+      height: height ?? this.height,
+      color: color ?? this.color,
+      description: description ?? this.description,
+      alt_description: alt_description ?? this.alt_description,
+      urls: urls ?? this.urls,
+      links: links ?? this.links,
+      categories: categories ?? this.categories,
+      likes: likes ?? this.likes,
+      liked_by_user: liked_by_user ?? this.liked_by_user,
+      sponsorship: sponsorship ?? this.sponsorship,
+      user: user ?? this.user,
+    );
+  }
 }

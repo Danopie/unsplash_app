@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:build_context/build_context.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,7 +12,17 @@ import 'package:unsplash_app/res/color.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class LoginPage extends StatelessWidget {
-  static get route => MaterialPageRoute(builder: (_) => LoginPage());
+  static get route => PageRouteBuilder(
+        pageBuilder: (_, animation, secondaryAnimation) =>
+            CupertinoFullscreenDialogTransition(
+          linearTransition: true,
+          primaryRouteAnimation: animation,
+          secondaryRouteAnimation: secondaryAnimation,
+          child: LoginPage(),
+        ),
+        fullscreenDialog: true,
+        opaque: false,
+      );
 
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -24,7 +36,7 @@ class LoginPage extends StatelessWidget {
         provider: loginProvider.state,
         onChange: (state) {
           if (state is LoginDone) {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           }
         },
         child: HookBuilder(
@@ -37,10 +49,11 @@ class LoginPage extends StatelessWidget {
                     margin: EdgeInsets.only(top: 56),
                     child: WebView(
                       initialUrl:
-                          'https://unsplash.com/oauth/authorize?client_id=e1f727f5883ce60b2c90df7f0688e2a60242d6ab8c041206fd056bdb68e55613&response_type=code&scope=public+read_user+read_photos&redirect_uri=urn:ietf:wg:oauth:2.0:oob',
+                          'https://unsplash.com/oauth/authorize?client_id=e1f727f5883ce60b2c90df7f0688e2a60242d6ab8c041206fd056bdb68e55613&response_type=code&scope=public+read_user+read_photos+write_photos+write_likes+write_followers+read_collections+write_collections&redirect_uri=urn:ietf:wg:oauth:2.0:oob',
                       javascriptMode: JavascriptMode.unrestricted,
                       onWebViewCreated: (WebViewController webViewController) {
                         _controller.complete(webViewController);
+                        webViewController.clearCache();
                       },
                       navigationDelegate: (NavigationRequest request) {
                         if (request.url.contains(
@@ -65,13 +78,14 @@ class LoginPage extends StatelessWidget {
                   Align(
                     alignment: Alignment.topLeft,
                     child: Container(
-                      height: kToolbarHeight,
-                      child: AppBar(
-                        leading: BackButton(
-                          color: boulder,
-                        ),
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
+                      height: 56,
+                      margin: EdgeInsets.only(
+                          left: 12, top: context.mediaQueryPadding.top + 12),
+                      child: BackButton(
+                        color: boulder,
+                        onPressed: () {
+                          Navigator.of(context).pop(false);
+                        },
                       ),
                     ),
                   )

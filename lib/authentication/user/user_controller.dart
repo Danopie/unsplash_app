@@ -1,9 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:lightweight_result/lightweight_result.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:unsplash_app/authentication/data/model/user_info.dart';
 import 'package:unsplash_app/authentication/data/user_repository.dart';
-import 'package:lightweight_result/lightweight_result.dart';
 import 'package:unsplash_app/authentication/user/token_cache.dart';
+
 import 'user_state.dart';
 
 final userControllerProvider = StateNotifierProvider((ref) => UserController(
@@ -31,6 +32,12 @@ class UserController extends StateNotifier<UserState> {
   Future<void> onUserLogin(UserInfo userInfo) async {
     state = UserState.loggedIn(userInfo);
     _tokenCache.updateToken(userInfo.access_token);
-    await _userRepository.save(userInfo);
+    await _userRepository.saveUser(userInfo);
+  }
+
+  Future<void> onUserLogout() async {
+    state = UserState.notLoggedIn();
+    _tokenCache.updateToken(null);
+    await _userRepository.clearUser();
   }
 }

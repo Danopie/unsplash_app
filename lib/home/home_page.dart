@@ -1,15 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:unsplash_app/core/utils/color_utils.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
-import 'package:unsplash_app/photos/data/model/photo_sort.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/domain/photos_state.dart';
-import 'package:unsplash_app/photos/photo_item.dart';
 import 'package:unsplash_app/photos/photo_list.dart';
 
 class HomePage extends HookWidget {
@@ -23,7 +19,11 @@ class HomePage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(photosProvider.state);
-    return Scaffold(body: Builder(
+    return Scaffold(floatingActionButton: FloatingActionButton(
+      onPressed: () {
+        context.read(userControllerProvider).onUserLogout();
+      },
+    ), body: Builder(
       builder: (BuildContext context) {
         if (state is PaginationLoadingPhotosState ||
             state is LoadedPhotosState) {

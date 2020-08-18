@@ -11,29 +11,41 @@ final photoRepositoryProvider = Provider((ref) => PhotoRepository(
     ref.read(photoApiProvider), ref.read(photoDatabaseProvider)));
 
 class PhotoRepository extends Repository {
-  final PhotoApi photoApiProvider;
-  final PhotoDatabase photoDatabaseProvider;
+  final PhotoApi _photoApiProvider;
+  final PhotoDatabase _photoDatabaseProvider;
 
-  PhotoRepository(this.photoApiProvider, this.photoDatabaseProvider);
+  PhotoRepository(this._photoApiProvider, this._photoDatabaseProvider);
 
   Future<Result<List<Photo>, String>> getPhotos(int page,
       [PhotoSort sort]) async {
     if (await hasConnectivity) {
       try {
-        final photos = await photoApiProvider.getPhotos(page, sort?.query);
-        await photoDatabaseProvider.savePhotos(photos);
+        final photos = await _photoApiProvider.getPhotos(page, sort?.query);
+        await _photoDatabaseProvider.savePhotos(photos);
         return Result.ok(photos);
       } on Exception {
         return Result.err(DEFAULT_ERROR_MESSAGE);
       }
     } else {
-      final photos = await photoDatabaseProvider.getPhotos();
+      final photos = await _photoDatabaseProvider.getPhotos();
       if (photos != null) {
         return Result.ok(photos);
       } else {
         return Result.err("Connect to the internet");
       }
     }
+  }
+
+  Future<void> likePhoto(String id) async {
+    try {
+      await _photoApiProvider.likePhoto(id);
+    } on Exception {}
+  }
+
+  Future<void> unlikePhoto(String id) async {
+    try {
+      await _photoApiProvider.unlikePhoto(id);
+    } on Exception {}
   }
 
   @override
