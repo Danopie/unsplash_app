@@ -12,7 +12,6 @@ import 'package:unsplash_app/photos/photo_item.dart';
 
 import 'domain/photos_controller.dart';
 
-
 class PhotoList extends StatelessWidget {
   final List<Photo> photos;
   final bool loading;
@@ -27,7 +26,8 @@ class PhotoList extends StatelessWidget {
   Widget build(BuildContext context) {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
-        if (notification.metrics.pixels > notification.metrics.maxScrollExtent - 100) {
+        if (notification.metrics.pixels >
+            notification.metrics.maxScrollExtent - 100) {
           context.read(photosProvider).onLoadMore();
         }
         return false;
@@ -35,7 +35,7 @@ class PhotoList extends StatelessWidget {
       child: ListView.builder(
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
-          if (index == _getListLength()) {
+          if (index == _getListLength() - 1) {
             return Container(
                 margin: EdgeInsets.symmetric(vertical: 32),
                 child: HomeLoading());
@@ -54,4 +54,3 @@ class PhotoList extends StatelessWidget {
 
   int _getPhotosLength() => photos?.length ?? 0;
 }
-
