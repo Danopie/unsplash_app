@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/home/home_app_bar.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/domain/photos_state.dart';
@@ -18,33 +19,43 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final state = useProvider(photosProvider.state);
     final controller = useScrollController();
-    return Scaffold(floatingActionButton: FloatingActionButton(
-      onPressed: () async {
-        await context.read(userControllerProvider).onUserLogout();
-        controller.jumpTo(0);
-      },
-    ), body: Builder(
-      builder: (BuildContext context) {
-        if (state is PaginationLoadingPhotosState ||
-            state is LoadedPhotosState) {
-          return PhotoList(
-            photos: state.maybeWhen<List<Photo>>(
-              orElse: () => List<Photo>(),
-              paginationLoading: (photos) => photos,
-              doneLoading: (photos) => photos,
-            ),
-            loading: state is PaginationLoadingPhotosState,
-            controller: controller,
-          );
-        } else if (state is InitialErrorPhotosState) {
-          return HomeError(message: state.message);
-        } else {
-          return HomeLoading();
-        }
-      },
-    ));
+
+    return Scaffold(
+        backgroundColor: Colors.white,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await context.read(userControllerProvider).onUserLogout();
+            controller.jumpTo(0);
+          },
+        ),
+        body: Builder(
+          builder: (BuildContext context) {
+            if (state is PaginationLoadingPhotosState ||
+                state is LoadedPhotosState) {
+              return CustomScrollView(
+                controller: controller,
+                slivers: [
+                  UnsplashAppBar(),
+                  PhotoList(
+                    photos: state.maybeWhen<List<Photo>>(
+                      orElse: () => List<Photo>(),
+                      paginationLoading: (photos) => photos,
+                      doneLoading: (photos) => photos,
+                    ),
+                    loading: state is PaginationLoadingPhotosState,
+                  )
+                ],
+              );
+            } else if (state is InitialErrorPhotosState) {
+              return HomeError(message: state.message);
+            } else {
+              return HomeLoading();
+            }
+          },
+        ));
   }
 }
 

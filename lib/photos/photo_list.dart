@@ -11,13 +11,11 @@ import 'domain/photos_controller.dart';
 class PhotoList extends HookWidget {
   final List<Photo> photos;
   final bool loading;
-  final ScrollController controller;
 
   const PhotoList({
     Key key,
     this.photos,
     this.loading,
-    this.controller,
   }) : super(key: key);
 
   @override
@@ -30,21 +28,24 @@ class PhotoList extends HookWidget {
         }
         return false;
       },
-      child: ListView.builder(
-        controller: controller,
+      child: SliverPadding(
         padding: EdgeInsets.zero,
-        itemBuilder: (context, index) {
-          if (index == _getListLength() - 1) {
-            return Container(
-                margin: EdgeInsets.symmetric(vertical: 32),
-                child: HomeLoading());
-          } else {
-            return PhotoItem(
-              photo: photos[index],
-            );
-          }
-        },
-        itemCount: _getListLength(),
+        sliver: SliverList(
+          delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                if (index == _getListLength() - 1) {
+                  return Container(
+                      margin: EdgeInsets.symmetric(vertical: 32),
+                      child: HomeLoading());
+                } else {
+                  return PhotoItem(
+                    photo: photos[index],
+                  );
+                }
+              },
+            childCount: _getListLength(),
+          ),
+        ),
       ),
     );
   }
