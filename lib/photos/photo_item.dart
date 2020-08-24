@@ -5,9 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
+import 'package:unsplash_app/photos/photo_download_delegate.dart';
 import 'package:unsplash_app/res/color.dart';
 
 import '../res/text.dart';
+import 'data/model/urls.dart';
 import 'domain/photos_controller.dart';
 
 class PhotoItem extends StatelessWidget {
@@ -30,6 +32,7 @@ class PhotoItem extends StatelessWidget {
           PhotoActions(
             id: photo.id,
             liked: photo.liked_by_user,
+            urls: photo.urls,
           ),
         ],
       ),
@@ -81,11 +84,13 @@ class PhotoItem extends StatelessWidget {
 class PhotoActions extends HookWidget {
   final String id;
   final bool liked;
+  final Urls urls;
 
-  const PhotoActions({
+  const PhotoActions( {
     Key key,
     this.id,
     this.liked,
+    this.urls,
   }) : super(key: key);
 
   @override
@@ -119,6 +124,11 @@ class PhotoActions extends HookWidget {
               size: 20,
               color: boulder,
             ),
+            onTap: () async {
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Donwloading..."),));
+              await PhotoDownloadDelegate(url: urls.full, id: id).run();
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Photo downloaded")));
+            },
           ),
         ],
       ),
