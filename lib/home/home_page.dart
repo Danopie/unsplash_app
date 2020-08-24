@@ -8,6 +8,7 @@ import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/domain/photos_state.dart';
 import 'package:unsplash_app/photos/photo_list.dart';
+import 'package:unsplash_app/search/search_page.dart';
 
 class HomePage extends HookWidget {
   static Future<dynamic> show({BuildContext context}) {
@@ -38,7 +39,12 @@ class HomePage extends HookWidget {
               return CustomScrollView(
                 controller: controller,
                 slivers: [
-                  UnsplashAppBar(),
+                  UnsplashAppBar(
+                    onUserSearch: (text){
+                      SearchPage.show(context: context, initialQuery: text);
+                    },
+                    clearOnSearch: true,
+                  ),
                   PhotoList(
                     photos: state.maybeWhen<List<Photo>>(
                       orElse: () => List<Photo>(),

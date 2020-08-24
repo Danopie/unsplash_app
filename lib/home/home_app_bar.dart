@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:unsplash_app/res/color.dart';
+import 'package:unsplash_app/search/search_page.dart';
 
 class UnsplashLogo extends StatelessWidget {
   @override
@@ -14,10 +15,23 @@ class UnsplashLogo extends StatelessWidget {
 }
 
 class UnsplashAppBar extends StatelessWidget {
+  final String initialSearchText;
+  final Function(String) onUserSearch;
+  final bool clearOnSearch;
+
+  const UnsplashAppBar({Key key, this.initialSearchText, this.onUserSearch, this.clearOnSearch})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final isFirst = ModalRoute.of(context).isFirst;
+
     return SliverAppBar(
-      leading: UnsplashLogo(),
+      leading: isFirst
+          ? UnsplashLogo()
+          : BackButton(
+              color: boulder,
+            ),
       actions: [
         IconButton(
             icon: Icon(
@@ -31,15 +45,25 @@ class UnsplashAppBar extends StatelessWidget {
       snap: true,
       backgroundColor: Colors.white,
       elevation: 0,
-      title: SearchBar(),
+      title: SearchBar(
+        onUserSearch: onUserSearch,
+        initialSearchText: initialSearchText,
+        clearOnSearch: clearOnSearch,
+      ),
     );
   }
 }
 
 class SearchBar extends HookWidget {
+  final String initialSearchText;
+  final Function(String) onUserSearch;
+  final bool clearOnSearch;
+
+  SearchBar({this.initialSearchText, this.onUserSearch, this.clearOnSearch = false});
+
   @override
   Widget build(BuildContext context) {
-    final textController = useTextEditingController();
+    final textController = useTextEditingController(text: initialSearchText);
     final focusNode = useFocusNode();
     useListenable(focusNode);
     useListenable(textController);
@@ -68,6 +92,14 @@ class SearchBar extends HookWidget {
               child: TextField(
                 controller: textController,
                 focusNode: focusNode,
+                onSubmitted: (text){
+                  if(text != null && text.isNotEmpty){
+                    onUserSearch(text);
+                    if(clearOnSearch){
+                      textController.clear();
+                    }
+                  }
+                },
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Search photos",
@@ -76,10 +108,16 @@ class SearchBar extends HookWidget {
             ),
           ),
           if (textController.text != null && textController.text.length > 0)
-            Icon(
-              Icons.clear,
-              size: 20,
-              color: boulder,
+            GestureDetector(
+              onTap: (){
+                textController.clear();
+                FocusScope.of(context).unfocus();
+              },
+              child: Icon(
+                Icons.clear,
+                size: 20,
+                color: boulder,
+              ),
             ),
         ],
       ),

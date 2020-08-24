@@ -48,6 +48,18 @@ class PhotoRepository extends Repository {
     } on Exception {}
   }
 
+  Future<Result<List<Photo>, String>> searchPhotos(String query) async {
+    if (await hasConnectivity) {
+      try {
+        final photos = await _photoApiProvider.searchPhotos(query);
+        return Result.ok(photos);
+      } on Exception {
+        return Result.err(DEFAULT_ERROR_MESSAGE);
+      }
+    }
+  }
+
+
   @override
   void dispose() {}
 }

@@ -33,7 +33,7 @@ class PhotoList extends HookWidget {
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
                   (context, index) {
-                if (index == _getListLength() - 1) {
+                if (index == _getListLength() - 1 && loading) {
                   return Container(
                       margin: EdgeInsets.symmetric(vertical: 32),
                       child: HomeLoading());
