@@ -1,8 +1,15 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:unsplash_app/authentication/data/model/user_info.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/res/color.dart';
+import 'package:unsplash_app/res/text.dart';
 
 class ContextMenu extends StatelessWidget {
-  static Future<dynamic> show(BuildContext context, Widget child) async {
+  static Future<dynamic> show(
+      BuildContext context, WidgetBuilder builder) async {
     return await Navigator.of(context).push(
       PageRouteBuilder(
         pageBuilder: (_, animation, secondaryAnimation) {
@@ -10,26 +17,27 @@ class ContextMenu extends StatelessWidget {
           return ContextMenu(
             parentPosition: box.localToGlobal(Offset.zero),
             parentSize: box.size,
-            child: child,
+            builder: builder,
           );
         },
         opaque: false,
         fullscreenDialog: true,
-        transitionDuration: Duration(milliseconds: 200),
+        transitionDuration: Duration(milliseconds: 160),
       ),
     );
   }
 
   final Offset parentPosition;
   final Size parentSize;
-  final Widget child;
+  final WidgetBuilder builder;
 
-  const ContextMenu({Key key, this.parentPosition, this.parentSize, this.child})
+  const ContextMenu(
+      {Key key, this.parentPosition, this.parentSize, this.builder})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final itemWidth = 200.0;
+    final itemWidth = 250.0;
     final isLeft =
         parentPosition.dx + itemWidth < MediaQuery.of(context).size.width;
     return GestureDetector(
@@ -53,8 +61,7 @@ class ContextMenu extends StatelessWidget {
                     (parentSize.width * 2 / 3)
                 : null,
             left: isLeft ? parentPosition.dx + (parentSize.width / 3) : null,
-            child: SharedAxisTransition(
-              transitionType: SharedAxisTransitionType.vertical,
+            child: FadeThroughTransition(
               animation: ModalRoute.of(context).animation,
               secondaryAnimation: ModalRoute.of(context).secondaryAnimation,
               fillColor: Colors.transparent,
@@ -69,7 +76,7 @@ class ContextMenu extends StatelessWidget {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: child,
+                    child: builder(context),
                   ),
                 ),
               ),
@@ -98,5 +105,184 @@ class UpArrowPainter extends CustomPainter {
   @override
   bool shouldRepaint(UpArrowPainter oldDelegate) {
     return false;
+  }
+}
+
+class ContextMenuItem extends StatelessWidget {
+  final String text;
+  final Function onTap;
+
+  const ContextMenuItem({Key key, this.text, this.onTap}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+        child: Text(text).size(14).color(Colors.white).medium(),
+      ),
+    );
+  }
+}
+
+class ContextMenuButton extends StatelessWidget {
+  final String text;
+  final Function onTap;
+  final bool highlight;
+
+  const ContextMenuButton(
+      {Key key, this.text, this.onTap, this.highlight = false})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: highlight ? oceanGreen : mercury,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(text).color(highlight ? Colors.white : boulder).size(12),
+      padding: EdgeInsets.symmetric(vertical: 8),
+    );
+  }
+}
+
+class ContextMenuDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Divider(
+      color: mercury,
+      height: 32,
+    );
+  }
+}
+
+class AppMenu extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContextMenuItem(
+            text: "About",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Wallpapers",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Blog",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Topics",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Collections",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Community",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Explore",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "History",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Made with Unsplash",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "API/Developers",
+            onTap: () {},
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: ContextMenuButton(
+                    text: "Login",
+                    onTap: () {},
+                  ),
+                ),
+                Container(
+                  width: 16,
+                ),
+                Expanded(
+                  child: ContextMenuButton(
+                    text: "Join free",
+                    onTap: () {},
+                    highlight: true,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+            child: ContextMenuButton(
+              text: "Submit a photo",
+              onTap: () {},
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class UserMenu extends StatelessWidget {
+  final UserToken userInfo;
+
+  const UserMenu({Key key, this.userInfo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContextMenuItem(
+            text: "View profile",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Stats",
+            onTap: () {},
+          ),
+          ContextMenuItem(
+            text: "Account settings",
+            onTap: () {},
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+            child: ContextMenuButton(
+              text: "Submit a photo",
+              onTap: () {},
+            ),
+          ),
+          ContextMenuDivider(),
+          ContextMenuItem(
+            text: "Logout @${userInfo.access_token}",
+            onTap: () async {
+              await context.read(userControllerProvider).onUserLogout();
+            },
+          ),
+        ],
+      ),
+    );
   }
 }

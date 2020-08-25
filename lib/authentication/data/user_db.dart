@@ -4,18 +4,18 @@ import 'package:unsplash_app/core/database/database.dart';
 
 final userDatabaseProvider = Provider((ref) => UserDatabase());
 
-class UserDatabase extends Database<UserInfo> {
+class UserDatabase extends Database<UserToken> {
   static const NAME = "user";
 
   @override
   String get dbName => NAME;
 
-  Future<UserInfo> saveUser(UserInfo user) async {
+  Future<UserToken> saveUser(UserToken user) async {
     await put(NAME, user);
     return user;
   }
 
-  Future<UserInfo> getUser() async {
+  Future<UserToken> getUser() async {
     return await get(NAME);
   }
 

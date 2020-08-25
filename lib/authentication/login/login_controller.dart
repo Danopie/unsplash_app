@@ -28,7 +28,7 @@ class LoginController extends StateNotifier<LoginState> {
     }
   }
 
-  void _notifyUserLoggedIn(UserInfo userInfo) {
+  void _notifyUserLoggedIn(UserToken userInfo) {
     final userController = _read(userControllerProvider);
     userController.onUserLogin(userInfo);
   }

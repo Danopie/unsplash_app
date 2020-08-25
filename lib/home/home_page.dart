@@ -26,12 +26,6 @@ class HomePage extends HookWidget {
 
     return Scaffold(
         backgroundColor: Colors.white,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            await context.read(userControllerProvider).onUserLogout();
-            controller.jumpTo(0);
-          },
-        ),
         body: Builder(
           builder: (BuildContext context) {
             if (state is PaginationLoadingPhotosState ||

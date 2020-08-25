@@ -1,6 +1,9 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/authentication/user/user_state.dart';
 import 'package:unsplash_app/core/widget/context_menu.dart';
 import 'package:unsplash_app/res/color.dart';
 import 'package:unsplash_app/search/search_page.dart';
@@ -17,7 +20,7 @@ class UnsplashLogo extends StatelessWidget {
   }
 }
 
-class UnsplashAppBar extends StatefulWidget {
+class UnsplashAppBar extends StatefulHookWidget {
   final String initialSearchText;
   final Function(String) onUserSearch;
   final bool clearOnSearch;
@@ -34,7 +37,7 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
   @override
   Widget build(BuildContext context) {
     final isFirst = ModalRoute.of(context).isFirst;
-
+    final userState = useProvider(userControllerProvider.state);
     return SliverAppBar(
       leading: isFirst
           ? UnsplashLogo()
@@ -42,6 +45,25 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
               color: boulder,
             ),
       actions: [
+        if (userState is LoggedInUserState)
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: Icon(
+                  Icons.person,
+                  color: boulder,
+                ),
+                onPressed: () {
+                  ContextMenu.show(
+                    context,
+                    (_) => UserMenu(
+                      userInfo: userState.userInfo,
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         Builder(
           builder: (context) {
             return IconButton(
@@ -52,14 +74,7 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
               onPressed: () {
                 ContextMenu.show(
                   context,
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: List<Widget>.generate(5, (i) => Container(
-                      margin: EdgeInsets.all(12),
-                      child: Text("Item $i").color(Colors.white),
-                    )),
-                  ),
+                  (_) => AppMenu(),
                 );
               },
             );

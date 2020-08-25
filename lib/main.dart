@@ -22,7 +22,7 @@ Future _initHive() async {
   Hive.registerAdapter(PhotoAdapter());
   Hive.registerAdapter(UserInfoAdapter());
   await Hive.openBox<Photo>(PhotoDatabase.NAME);
-  await Hive.openBox<UserInfo>(UserDatabase.NAME);
+  await Hive.openBox<UserToken>(UserDatabase.NAME);
 }
 
 class MyApp extends StatelessWidget {
