@@ -46,6 +46,7 @@ dependencies:
   build_context: ^2.0.4
   image_gallery_saver: ^1.5.0
   permission_handler: ^5.0.1+1
+  animations: any
 
 dev_dependencies:
   freezed: ^0.11.5

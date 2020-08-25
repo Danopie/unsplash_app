@@ -1,7 +1,10 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:unsplash_app/core/widget/context_menu.dart';
 import 'package:unsplash_app/res/color.dart';
 import 'package:unsplash_app/search/search_page.dart';
+import 'package:unsplash_app/res/text.dart';
 
 class UnsplashLogo extends StatelessWidget {
   @override
@@ -14,14 +17,20 @@ class UnsplashLogo extends StatelessWidget {
   }
 }
 
-class UnsplashAppBar extends StatelessWidget {
+class UnsplashAppBar extends StatefulWidget {
   final String initialSearchText;
   final Function(String) onUserSearch;
   final bool clearOnSearch;
 
-  const UnsplashAppBar({Key key, this.initialSearchText, this.onUserSearch, this.clearOnSearch})
+  const UnsplashAppBar(
+      {Key key, this.initialSearchText, this.onUserSearch, this.clearOnSearch})
       : super(key: key);
 
+  @override
+  _UnsplashAppBarState createState() => _UnsplashAppBarState();
+}
+
+class _UnsplashAppBarState extends State<UnsplashAppBar> {
   @override
   Widget build(BuildContext context) {
     final isFirst = ModalRoute.of(context).isFirst;
@@ -33,12 +42,29 @@ class UnsplashAppBar extends StatelessWidget {
               color: boulder,
             ),
       actions: [
-        IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: boulder,
-            ),
-            onPressed: () {}),
+        Builder(
+          builder: (context) {
+            return IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: boulder,
+              ),
+              onPressed: () {
+                ContextMenu.show(
+                  context,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: List<Widget>.generate(5, (i) => Container(
+                      margin: EdgeInsets.all(12),
+                      child: Text("Item $i").color(Colors.white),
+                    )),
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ],
       floating: true,
       pinned: false,
@@ -46,9 +72,9 @@ class UnsplashAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       title: SearchBar(
-        onUserSearch: onUserSearch,
-        initialSearchText: initialSearchText,
-        clearOnSearch: clearOnSearch,
+        onUserSearch: widget.onUserSearch,
+        initialSearchText: widget.initialSearchText,
+        clearOnSearch: widget.clearOnSearch,
       ),
     );
   }
@@ -59,7 +85,8 @@ class SearchBar extends HookWidget {
   final Function(String) onUserSearch;
   final bool clearOnSearch;
 
-  SearchBar({this.initialSearchText, this.onUserSearch, this.clearOnSearch = false});
+  SearchBar(
+      {this.initialSearchText, this.onUserSearch, this.clearOnSearch = false});
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +119,10 @@ class SearchBar extends HookWidget {
               child: TextField(
                 controller: textController,
                 focusNode: focusNode,
-                onSubmitted: (text){
-                  if(text != null && text.isNotEmpty){
+                onSubmitted: (text) {
+                  if (text != null && text.isNotEmpty) {
                     onUserSearch(text);
-                    if(clearOnSearch){
+                    if (clearOnSearch) {
                       textController.clear();
                     }
                   }
@@ -109,7 +136,7 @@ class SearchBar extends HookWidget {
           ),
           if (textController.text != null && textController.text.length > 0)
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 textController.clear();
                 FocusScope.of(context).unfocus();
               },
