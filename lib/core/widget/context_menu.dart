@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/authentication/data/model/user_info.dart';
+import 'package:unsplash_app/authentication/data/model/user_profile.dart';
+import 'package:unsplash_app/authentication/login/login_page.dart';
 import 'package:unsplash_app/authentication/user/user_controller.dart';
+import 'package:unsplash_app/photos/data/model/photo.dart';
+import 'package:unsplash_app/photos/photo_download_delegate.dart';
 import 'package:unsplash_app/res/color.dart';
 import 'package:unsplash_app/res/text.dart';
 
@@ -117,8 +121,12 @@ class ContextMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () async {
+        await onTap?.call();
+        Navigator.of(context).pop();
+      },
       child: Container(
+        width: double.infinity,
         padding: EdgeInsets.only(left: 16, right: 16, top: 16),
         child: Text(text).size(14).color(Colors.white).medium(),
       ),
@@ -137,14 +145,20 @@ class ContextMenuButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: highlight ? oceanGreen : mercury,
-        borderRadius: BorderRadius.circular(4),
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pop();
+        onTap?.call();
+      },
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: highlight ? oceanGreen : mercury,
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Text(text).color(highlight ? Colors.white : boulder).size(12),
+        padding: EdgeInsets.symmetric(vertical: 8),
       ),
-      child: Text(text).color(highlight ? Colors.white : boulder).size(12),
-      padding: EdgeInsets.symmetric(vertical: 8),
     );
   }
 }
@@ -160,6 +174,10 @@ class ContextMenuDivider extends StatelessWidget {
 }
 
 class AppMenu extends StatelessWidget {
+  final bool isLoggedIn;
+
+  const AppMenu({Key key, this.isLoggedIn}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -207,29 +225,32 @@ class AppMenu extends StatelessWidget {
             text: "API/Developers",
             onTap: () {},
           ),
-          Container(
-            padding: EdgeInsets.only(left: 16, right: 16, top: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: ContextMenuButton(
-                    text: "Login",
-                    onTap: () {},
+          if (!isLoggedIn)
+            Container(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ContextMenuButton(
+                      text: "Login",
+                      onTap: () {
+                        Navigator.of(context).push(LoginPage.route);
+                      },
+                    ),
                   ),
-                ),
-                Container(
-                  width: 16,
-                ),
-                Expanded(
-                  child: ContextMenuButton(
-                    text: "Join free",
-                    onTap: () {},
-                    highlight: true,
+                  Container(
+                    width: 16,
                   ),
-                )
-              ],
+                  Expanded(
+                    child: ContextMenuButton(
+                      text: "Join free",
+                      onTap: () {},
+                      highlight: true,
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
           Container(
             padding: EdgeInsets.only(left: 16, right: 16, top: 16),
             child: ContextMenuButton(
@@ -244,7 +265,7 @@ class AppMenu extends StatelessWidget {
 }
 
 class UserMenu extends StatelessWidget {
-  final UserToken userInfo;
+  final UserProfile userInfo;
 
   const UserMenu({Key key, this.userInfo}) : super(key: key);
 
@@ -276,9 +297,63 @@ class UserMenu extends StatelessWidget {
           ),
           ContextMenuDivider(),
           ContextMenuItem(
-            text: "Logout @${userInfo.access_token}",
+            text: "Logout @${userInfo.name}",
             onTap: () async {
               await context.read(userControllerProvider).onUserLogout();
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DownloadMenu extends StatelessWidget {
+  final Photo photo;
+
+  const DownloadMenu({
+    Key key,
+    this.photo,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ContextMenuItem(
+            text: "Small",
+            onTap: () async {
+              await PhotoDownloadDelegate(
+                      context: context, id: photo.id, url: photo.urls.small)
+                  .run();
+            },
+          ),
+          ContextMenuItem(
+            text: "Medium",
+            onTap: () async {
+              await PhotoDownloadDelegate(
+                      context: context, id: photo.id, url: photo.urls.regular)
+                  .run();
+            },
+          ),
+          ContextMenuItem(
+            text: "Large",
+            onTap: () async {
+              await PhotoDownloadDelegate(
+                      context: context, id: photo.id, url: photo.urls.full)
+                  .run();
+            },
+          ),
+          ContextMenuDivider(),
+          ContextMenuItem(
+            text: "Original Size",
+            onTap: () async {
+              await PhotoDownloadDelegate(
+                      context: context, id: photo.id, url: photo.urls.raw)
+                  .run();
             },
           ),
         ],

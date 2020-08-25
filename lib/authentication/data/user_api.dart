@@ -17,10 +17,8 @@ final userApiProvider = Provider((ref) => UserApi(
 
 class UserApi extends Api {
   final Future<Configuration> _configuration;
-  final Dio _dio;
 
-  UserApi(this._configuration, this._dio)
-      : super(_dio..options.baseUrl = EndPoint.OAUTH);
+  UserApi(this._configuration, Dio _dio):super(_dio);
 
   Future<UserToken> getToken(String requestCode) async {
     final config = await _configuration;
@@ -32,12 +30,12 @@ class UserApi extends Api {
       "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
       "grant_type": "authorization_code",
     };
-    final response = await post<String>(ApiPath.token, params);
+    final response = await post<String>("${EndPoint.OAUTH}${ApiPath.token}", params);
     return UserToken.fromJson(jsonDecode(response));
   }
 
   Future<UserProfile> getPersonalProfile() async {
-    final response = await get<String>(ApiPath.profile);
+    final response = await get<String>("${EndPoint.MAIN}${ApiPath.profile}");
     return UserProfile.fromJson(jsonDecode(response));
   }
 }

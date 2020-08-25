@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
+import 'package:unsplash_app/core/widget/context_menu.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_download_delegate.dart';
 import 'package:unsplash_app/res/color.dart';
@@ -33,6 +34,7 @@ class PhotoItem extends StatelessWidget {
             id: photo.id,
             liked: photo.liked_by_user,
             urls: photo.urls,
+            photo: photo,
           ),
         ],
       ),
@@ -85,12 +87,14 @@ class PhotoActions extends HookWidget {
   final String id;
   final bool liked;
   final Urls urls;
+  final Photo photo;
 
   const PhotoActions( {
     Key key,
     this.id,
     this.liked,
     this.urls,
+    this.photo,
   }) : super(key: key);
 
   @override
@@ -125,9 +129,12 @@ class PhotoActions extends HookWidget {
               color: boulder,
             ),
             onTap: () async {
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Donwloading..."),));
-              await PhotoDownloadDelegate(url: urls.full, id: id).run();
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Photo downloaded")));
+              await PhotoDownloadDelegate(
+                      context: context, url: urls.full, id: id)
+                  .run();
+            },
+            onTrailingTap: (){
+              ContextMenu.show(context, (context) => DownloadMenu(photo: photo,));
             },
           ),
         ],
@@ -193,19 +200,21 @@ class UnsplashButton extends StatelessWidget {
   final double height;
   final Widget trailing;
   final Function onTap;
+  final Function onTrailingTap;
   final bool requireLogin;
   final Color borderColor;
 
-  const UnsplashButton(
-      {Key key,
-      this.width,
-      this.height,
-      this.child,
-      this.trailing,
-      this.onTap,
-      this.requireLogin = false,
-      this.borderColor})
-      : super(key: key);
+  const UnsplashButton({
+    Key key,
+    this.width,
+    this.height,
+    this.child,
+    this.trailing,
+    this.onTap,
+    this.requireLogin = false,
+    this.borderColor,
+    this.onTrailingTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +240,7 @@ class UnsplashButton extends StatelessWidget {
               ),
             ),
             UnsplashInkWell(
-              onTap: () {},
+              onTap: onTrailingTap,
               child: Container(
                 height: height,
                 margin: EdgeInsets.only(left: 6, right: 6),

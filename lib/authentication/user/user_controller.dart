@@ -21,9 +21,9 @@ class UserController extends StateNotifier<UserState> {
 
   Future<void> onInit() async {
     final userToken = (await _userRepository.getUserToken()).getOr(() => null);
-    final userProfile = (await _userRepository.getUserInfo()).getOr(() => null);
     if (userToken != null) {
       _tokenCache.updateToken(userToken.access_token);
+      final userProfile = (await _userRepository.getUserInfo()).getOr(() => null);
       state = UserState.loggedIn(token: userToken, profile: userProfile);
     } else {
       state = UserState.notLoggedIn();
@@ -31,9 +31,9 @@ class UserController extends StateNotifier<UserState> {
   }
 
   Future<void> onUserLogin(UserToken token) async {
+    _tokenCache.updateToken(token.access_token);
     final userProfile = (await _userRepository.getUserInfo()).getOr(() => null);
     state = UserState.loggedIn(token: token, profile: userProfile);
-    _tokenCache.updateToken(token.access_token);
     await _userRepository.saveUserToken(token);
   }
 

@@ -1,32 +1,49 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:flushbar/flushbar.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PhotoDownloadDelegate {
   final String url;
   final String id;
+  final BuildContext context;
 
-  PhotoDownloadDelegate({this.url, this.id});
+  PhotoDownloadDelegate({this.url, this.id, this.context});
 
-  Future<bool> run() async {
+  Future<void> run() async {
+    showMessage(
+      message: "Downloading photo",
+    );
+
     if (await Permission.storage.request().isGranted) {
-      return await _save();
+      await _save();
+
+      showMessage(
+        message: "Photo downloaded",
+      );
     } else {
-      return false;
+      showMessage(
+        message: "Please grant Unsplash photo download permission",
+      );
     }
   }
 
+  void showMessage({String message}) {
+    Flushbar(
+      message: message,
+      duration: Duration(seconds: 1),
+    )..show(context);
+  }
+
   Future<bool> _save() async {
-    var response = await Dio().get(
-        url,
-        options: Options(responseType: ResponseType.bytes));
-    final result = await ImageGallerySaver.saveImage(
-        Uint8List.fromList(response.data),
-        quality: 60,
-        name: id);
-    print(result);
+    var response = await Dio()
+        .get(url, options: Options(responseType: ResponseType.bytes));
+    await ImageGallerySaver.saveImage(Uint8List.fromList(response.data),
+        quality: 60, name: id);
     return true;
   }
 }

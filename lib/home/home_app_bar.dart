@@ -48,19 +48,24 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
         if (userState is LoggedInUserState)
           Builder(
             builder: (context) {
-              return IconButton(
-                icon: Icon(
-                  Icons.person,
-                  color: boulder,
-                ),
-                onPressed: () {
-                  ContextMenu.show(
-                    context,
-                    (_) => UserMenu(
-                      userInfo: userState.userInfo,
+              return UnconstrainedBox(
+                child: GestureDetector(
+                  child: CircleAvatar(
+                    radius: 12,
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                      userState.profile.profile_image.small,
                     ),
-                  );
-                },
+                  ),
+                  onTap: () {
+                    ContextMenu.show(
+                      context,
+                      (_) => UserMenu(
+                        userInfo: userState.profile,
+                      ),
+                    );
+                  },
+                ),
               );
             },
           ),
@@ -74,7 +79,9 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
               onPressed: () {
                 ContextMenu.show(
                   context,
-                  (_) => AppMenu(),
+                  (_) => AppMenu(
+                    isLoggedIn: userState is LoggedInUserState,
+                  ),
                 );
               },
             );

@@ -9,7 +9,6 @@ final dioProvider = Provider.family<Dio, String>(
   (ref, url) {
     return Dio(
       BaseOptions(
-        baseUrl: url,
         connectTimeout: 5000,
         receiveTimeout: 3000,
       ),
