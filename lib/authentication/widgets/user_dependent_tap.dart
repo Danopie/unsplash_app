@@ -24,7 +24,7 @@ class UserStatusBuilder extends HookWidget {
         child: builder(userState),
         onTap: () async {
           if (userState is LoggedInUserState) {
-            onTap();
+            onTap?.call();
           } else {
             final result = await Navigator.of(context).push(LoginPage.route);
             if (result == true) {

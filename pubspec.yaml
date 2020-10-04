@@ -14,7 +14,7 @@ description: A Flutter project that uses TDD, flutter_bloc, freezed, hive, repos
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.8.0 <3.0.0"
+  sdk: ">=2.10.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -42,12 +42,13 @@ dependencies:
   hooks_riverpod: ^0.6.1
   state_notifier: any
   flutter_hooks: any
-  webview_flutter: ^0.3.22+1
+  webview_flutter: ^1.0.0
   build_context: ^2.0.4
   image_gallery_saver: ^1.5.0
   permission_handler: ^5.0.1+1
   animations: any
   flushbar: ^1.10.4
+  device_preview: ^0.4.8
 
 dev_dependencies:
   freezed: ^0.11.5

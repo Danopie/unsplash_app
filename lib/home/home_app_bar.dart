@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,8 +5,6 @@ import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/authentication/user/user_state.dart';
 import 'package:unsplash_app/core/widget/context_menu.dart';
 import 'package:unsplash_app/res/color.dart';
-import 'package:unsplash_app/search/search_page.dart';
-import 'package:unsplash_app/res/text.dart';
 
 class UnsplashLogo extends StatelessWidget {
   @override
@@ -88,9 +85,9 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
           },
         ),
       ],
-      floating: true,
-      pinned: false,
-      snap: true,
+      floating: false,
+      pinned: true,
+      snap: false,
       backgroundColor: Colors.white,
       elevation: 0,
       title: SearchBar(

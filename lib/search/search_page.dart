@@ -1,12 +1,13 @@
+import 'package:build_context/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/home/home_app_bar.dart';
 import 'package:unsplash_app/photos/photo_list.dart';
 import 'package:unsplash_app/res/color.dart';
+import 'package:unsplash_app/res/text.dart';
 import 'package:unsplash_app/search/search_controller.dart';
 import 'package:unsplash_app/search/search_state.dart';
-import 'package:unsplash_app/res/text.dart';
 
 class SearchPage extends HookWidget {
   const SearchPage({Key key, this.initialQuery}) : super(key: key);
@@ -28,31 +29,34 @@ class SearchPage extends HookWidget {
     final state = useProvider(searchControllerProvider(initialQuery).state);
     return Scaffold(
         backgroundColor: Colors.white,
-        body: CustomScrollView(
-          slivers: [
-            UnsplashAppBar(
-              initialSearchText: initialQuery,
-              onUserSearch: (text) {
-                context
-                    .read(searchControllerProvider(initialQuery))
-                    .onUserSearch(text);
-              },
-            ),
-            SliverToBoxAdapter(
-              child: QueryDisplay(
-                query: state.query,
+        body: Padding(
+          padding: EdgeInsets.only(top: context.mediaQueryPadding.top),
+          child: CustomScrollView(
+            slivers: [
+              UnsplashAppBar(
+                initialSearchText: initialQuery,
+                onUserSearch: (text) {
+                  context
+                      .read(searchControllerProvider(initialQuery))
+                      .onUserSearch(text);
+                },
               ),
-            ),
-            if (state is SearchSuccessState)
-              PhotoList(
-                photos: state.photos,
-                loading: false,
-              )
-            else if (state is SearchErrorState)
-              SearchError(error: state.message)
-            else
-              SearchLoading()
-          ],
+              SliverToBoxAdapter(
+                child: QueryDisplay(
+                  query: state.query,
+                ),
+              ),
+              if (state is SearchSuccessState)
+                PhotoList(
+                  photos: state.photos,
+                  loading: false,
+                )
+              else if (state is SearchErrorState)
+                SearchError(error: state.message)
+              else
+                SearchLoading()
+            ],
+          ),
         ));
   }
 }
@@ -84,7 +88,6 @@ class SearchLoading extends StatelessWidget {
     );
   }
 }
-
 
 class QueryDisplay extends StatelessWidget {
   final String query;

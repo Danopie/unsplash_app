@@ -1,8 +1,8 @@
+import 'package:build_context/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/home/home_app_bar.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
@@ -20,7 +20,6 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final state = useProvider(photosProvider.state);
     final controller = useScrollController();
 
@@ -30,24 +29,27 @@ class HomePage extends HookWidget {
           builder: (BuildContext context) {
             if (state is PaginationLoadingPhotosState ||
                 state is LoadedPhotosState) {
-              return CustomScrollView(
-                controller: controller,
-                slivers: [
-                  UnsplashAppBar(
-                    onUserSearch: (text){
-                      SearchPage.show(context: context, initialQuery: text);
-                    },
-                    clearOnSearch: true,
-                  ),
-                  PhotoList(
-                    photos: state.maybeWhen<List<Photo>>(
-                      orElse: () => List<Photo>(),
-                      paginationLoading: (photos) => photos,
-                      doneLoading: (photos) => photos,
+              return Padding(
+                padding: EdgeInsets.only(top: context.mediaQueryPadding.top),
+                child: CustomScrollView(
+                  controller: controller,
+                  slivers: [
+                    UnsplashAppBar(
+                      onUserSearch: (text) {
+                        SearchPage.show(context: context, initialQuery: text);
+                      },
+                      clearOnSearch: true,
                     ),
-                    loading: state is PaginationLoadingPhotosState,
-                  )
-                ],
+                    PhotoList(
+                      photos: state.maybeWhen<List<Photo>>(
+                        orElse: () => List<Photo>(),
+                        paginationLoading: (photos) => photos,
+                        doneLoading: (photos) => photos,
+                      ),
+                      loading: state is PaginationLoadingPhotosState,
+                    ),
+                  ],
+                ),
               );
             } else if (state is InitialErrorPhotosState) {
               return HomeError(message: state.message);
