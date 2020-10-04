@@ -17,26 +17,31 @@ class PhotoItem extends StatelessWidget {
   const PhotoItem({
     Key key,
     this.photo,
+    this.onTap,
   }) : super(key: key);
 
   final Photo photo;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 32),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _buildPhotoHeader(context),
-          _buildPhoto(),
-          PhotoActions(
-            id: photo.id,
-            liked: photo.liked_by_user,
-            urls: photo.urls,
-            photo: photo,
-          ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            _buildPhotoHeader(context),
+            _buildPhoto(),
+            PhotoActions(
+              id: photo.id,
+              liked: photo.liked_by_user,
+              urls: photo.urls,
+              photo: photo,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +94,7 @@ class PhotoActions extends HookWidget {
   final Urls urls;
   final Photo photo;
 
-  const PhotoActions( {
+  const PhotoActions({
     Key key,
     this.id,
     this.liked,
@@ -133,8 +138,12 @@ class PhotoActions extends HookWidget {
                       context: context, url: urls.full, id: id)
                   .run();
             },
-            onTrailingTap: (){
-              ContextMenu.show(context, (context) => DownloadMenu(photo: photo,));
+            onTrailingTap: () {
+              ContextMenu.show(
+                  context,
+                  (context) => DownloadMenu(
+                        photo: photo,
+                      ));
             },
           ),
         ],

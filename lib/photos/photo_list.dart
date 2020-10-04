@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/home/home_page.dart';
+import 'package:unsplash_app/photo_detail/photo_detail_screen.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 
@@ -32,17 +33,19 @@ class PhotoList extends HookWidget {
         padding: EdgeInsets.zero,
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                if (index == _getListLength() - 1 && loading) {
-                  return Container(
-                      margin: EdgeInsets.symmetric(vertical: 32),
-                      child: HomeLoading());
-                } else {
-                  return PhotoItem(
-                    photo: photos[index],
-                  );
-                }
-              },
+            (context, index) {
+              if (index == _getListLength() - 1 && loading) {
+                return Container(
+                    margin: EdgeInsets.symmetric(vertical: 32),
+                    child: HomeLoading());
+              } else {
+                return PhotoItem(
+                  photo: photos[index],
+                  onTap: () => PhotoDetailScreen.show(
+                      context: context, id: photos[index].id),
+                );
+              }
+            },
             childCount: _getListLength(),
           ),
         ),

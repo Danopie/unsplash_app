@@ -34,7 +34,7 @@ class LoginPage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: ProviderListener<LoginState>(
         provider: loginProvider.state,
-        onChange: (state) {
+        onChange: (_, state) {
           if (state is LoginDone) {
             Navigator.of(context).pop(true);
           }
