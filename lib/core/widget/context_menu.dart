@@ -10,6 +10,7 @@ import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_download_delegate.dart';
 import 'package:unsplash_app/res/color.dart';
 import 'package:unsplash_app/res/text.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ContextMenu extends StatelessWidget {
   static Future<dynamic> show(
@@ -324,7 +325,7 @@ class DownloadMenu extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ContextMenuItem(
-            text: "Small",
+            text: AppLocalizations.of(context).downloadSmall,
             onTap: () async {
               await PhotoDownloadDelegate(
                       context: context, id: photo.id, url: photo.urls.small)
@@ -332,7 +333,7 @@ class DownloadMenu extends StatelessWidget {
             },
           ),
           ContextMenuItem(
-            text: "Medium",
+            text: AppLocalizations.of(context).downloadMedium,
             onTap: () async {
               await PhotoDownloadDelegate(
                       context: context, id: photo.id, url: photo.urls.regular)
@@ -340,7 +341,7 @@ class DownloadMenu extends StatelessWidget {
             },
           ),
           ContextMenuItem(
-            text: "Large",
+            text: AppLocalizations.of(context).downloadLarge,
             onTap: () async {
               await PhotoDownloadDelegate(
                       context: context, id: photo.id, url: photo.urls.full)
@@ -349,7 +350,7 @@ class DownloadMenu extends StatelessWidget {
           ),
           ContextMenuDivider(),
           ContextMenuItem(
-            text: "Original Size",
+            text: AppLocalizations.of(context).downloadOriginalSize,
             onTap: () async {
               await PhotoDownloadDelegate(
                       context: context, id: photo.id, url: photo.urls.raw)

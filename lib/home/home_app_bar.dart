@@ -5,6 +5,7 @@ import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/authentication/user/user_state.dart';
 import 'package:unsplash_app/core/widget/context_menu.dart';
 import 'package:unsplash_app/res/color.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UnsplashLogo extends StatelessWidget {
   @override
@@ -148,7 +149,7 @@ class SearchBar extends HookWidget {
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Search photos",
+                  hintText: AppLocalizations.of(context).searchPrompt,
                 ),
               ),
             ),

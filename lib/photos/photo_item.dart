@@ -12,6 +12,7 @@ import 'package:unsplash_app/res/color.dart';
 import '../res/text.dart';
 import 'data/model/urls.dart';
 import 'domain/photos_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhotoItem extends StatelessWidget {
   const PhotoItem({
@@ -126,7 +127,7 @@ class PhotoActions extends HookWidget {
           Spacer(),
           UnsplashButton(
             child: Text(
-              "Download",
+              AppLocalizations.of(context).download,
             ).bold().size(12).color(boulder),
             trailing: Icon(
               Icons.keyboard_arrow_down,

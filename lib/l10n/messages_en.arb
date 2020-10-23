@@ -1,0 +1,31 @@
+{
+  "searchPrompt": "Search",
+  "@searchPrompt": {
+    "type": "text"
+  },
+
+  "download": "Download",
+  "@download": {
+    "type": "text"
+  },
+
+  "downloadSmall": "Small",
+  "@downloadSmall": {
+    "type": "text"
+  },
+
+  "downloadMedium": "Medium",
+  "@downloadMedium": {
+    "type": "text"
+  },
+
+  "downloadLarge": "Large",
+  "@downloadLarge": {
+    "type": "text"
+  },
+
+  "downloadOriginalSize": "Original Size",
+  "@downloadOriginalSize": {
+    "type": "text"
+  }
+}
