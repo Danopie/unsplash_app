@@ -7,8 +7,7 @@ final userDatabaseProvider = Provider((ref) => UserDatabase());
 class UserDatabase extends Database<UserToken> {
   static const NAME = "user";
 
-  @override
-  String get dbName => NAME;
+  UserDatabase() : super(NAME);
 
   Future<UserToken> saveUser(UserToken user) async {
     await put(NAME, user);

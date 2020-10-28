@@ -7,8 +7,7 @@ final photoDatabaseProvider = Provider((ref) => PhotoDatabase());
 class PhotoDatabase extends Database<Photo> {
   static const NAME = "photos1";
 
-  @override
-  String get dbName => NAME;
+  PhotoDatabase() : super(NAME);
 
   Future<List<Photo>> getPhotos() async {
     return await getAll();

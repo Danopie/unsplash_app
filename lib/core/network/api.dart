@@ -25,7 +25,7 @@ final dioProvider = Provider.family<Dio, String>(
 );
 
 abstract class Api {
-  Dio _client = Dio();
+  final Dio _client;
 
   Api(this._client);
 

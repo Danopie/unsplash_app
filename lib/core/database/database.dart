@@ -1,13 +1,9 @@
 import 'package:hive/hive.dart';
 
 abstract class Database<T extends Object> {
-  Box<T> box;
+  final Box<T> box;
 
-  String get dbName;
-
-  Database() {
-    box = Hive.box<T>(dbName);
-  }
+  Database(String name) : box = Hive.box<T>(name);
 
   Future<void> add(T object) async {
     box.add(object);
