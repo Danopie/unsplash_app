@@ -1,4 +1,3 @@
-import 'package:build_context/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,34 +28,31 @@ class SearchPage extends HookWidget {
     final state = useProvider(searchControllerProvider(initialQuery).state);
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: EdgeInsets.only(top: context.mediaQueryPadding.top),
-          child: CustomScrollView(
-            slivers: [
-              UnsplashAppBar(
-                initialSearchText: initialQuery,
-                onUserSearch: (text) {
-                  context
-                      .read(searchControllerProvider(initialQuery))
-                      .onUserSearch(text);
-                },
+        body: CustomScrollView(
+          slivers: [
+            UnsplashAppBar(
+              initialSearchText: initialQuery,
+              onUserSearch: (text) {
+                context
+                    .read(searchControllerProvider(initialQuery))
+                    .onUserSearch(text);
+              },
+            ),
+            SliverToBoxAdapter(
+              child: QueryDisplay(
+                query: state.query,
               ),
-              SliverToBoxAdapter(
-                child: QueryDisplay(
-                  query: state.query,
-                ),
-              ),
-              if (state is SearchSuccessState)
-                PhotoList(
-                  photos: state.photos,
-                  loading: false,
-                )
-              else if (state is SearchErrorState)
-                SearchError(error: state.message)
-              else
-                SearchLoading()
-            ],
-          ),
+            ),
+            if (state is SearchSuccessState)
+              PhotoList(
+                photos: state.photos,
+                loading: false,
+              )
+            else if (state is SearchErrorState)
+              SearchError(error: state.message)
+            else
+              SearchLoading()
+          ],
         ));
   }
 }

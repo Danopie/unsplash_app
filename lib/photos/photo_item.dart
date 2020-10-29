@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
@@ -12,9 +13,11 @@ import 'package:unsplash_app/res/color.dart';
 import '../res/text.dart';
 import 'data/model/urls.dart';
 import 'domain/photos_controller.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PhotoItem extends StatelessWidget {
+  static double height(BuildContext context) =>
+      MediaQuery.of(context).size.width + 220;
+
   const PhotoItem({
     Key key,
     this.photo,
@@ -29,17 +32,22 @@ class PhotoItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.only(bottom: 32),
+        height: height(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             _buildPhotoHeader(context),
-            _buildPhoto(),
+            Expanded(
+              child: _buildPhoto(),
+            ),
             PhotoActions(
               id: photo.id,
               liked: photo.liked_by_user,
               urls: photo.urls,
               photo: photo,
+            ),
+            Container(
+              height: 12,
             ),
           ],
         ),
@@ -49,11 +57,12 @@ class PhotoItem extends StatelessWidget {
 
   AspectRatio _buildPhoto() {
     return AspectRatio(
-      aspectRatio: photo.width / photo.height,
+      aspectRatio: 1.0,
       child: Container(
         color: ColorUtils.fromHex(photo.color),
         child: CachedNetworkImage(
           imageUrl: photo.urls.regular,
+          fit: BoxFit.cover,
           fadeInDuration: Duration(milliseconds: 700),
         ),
       ),
@@ -113,17 +122,17 @@ class PhotoActions extends HookWidget {
             id: id,
             liked: liked,
           ),
-          Container(
-            width: 12,
-          ),
-          UnsplashButton(
-            requireLogin: true,
-            child: Icon(
-              Icons.add,
-              color: boulder,
-              size: 18,
-            ),
-          ),
+          // Container(
+          //   width: 12,
+          // ),
+          // UnsplashButton(
+          //   requireLogin: true,
+          //   child: Icon(
+          //     Icons.add,
+          //     color: boulder,
+          //     size: 18,
+          //   ),
+          // ),
           Spacer(),
           UnsplashButton(
             child: Text(

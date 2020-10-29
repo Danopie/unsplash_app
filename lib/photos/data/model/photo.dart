@@ -10,6 +10,7 @@ class Photo extends Equatable {
   final String created_at;
   final String updated_at;
   final Object promoted_at;
+  final Object blur_hash;
   final int width;
   final int height;
   final String color;
@@ -40,7 +41,8 @@ class Photo extends Equatable {
         likes,
         liked_by_user,
         sponsorship,
-        user
+        user,
+        blur_hash,
       ];
 
   Photo.fromJson(Map<String, dynamic> map)
@@ -58,6 +60,7 @@ class Photo extends Equatable {
         categories = map["categories"],
         likes = parseInt(map["likes"]),
         liked_by_user = parseBool(map["liked_by_user"]),
+        blur_hash = parseString(map["blur_hash"]),
         sponsorship = map["sponsorship"] == null
             ? null
             : Sponsorship.fromJson(map["sponsorship"]),
@@ -101,6 +104,7 @@ class Photo extends Equatable {
     this.liked_by_user,
     this.sponsorship,
     this.user,
+    this.blur_hash,
   });
 
   Photo copyWith({
@@ -108,6 +112,7 @@ class Photo extends Equatable {
     String created_at,
     String updated_at,
     Object promoted_at,
+    Object blur_hash,
     int width,
     int height,
     String color,
@@ -121,11 +126,34 @@ class Photo extends Equatable {
     Sponsorship sponsorship,
     User user,
   }) {
+    if ((id == null || identical(id, this.id)) &&
+        (created_at == null || identical(created_at, this.created_at)) &&
+        (updated_at == null || identical(updated_at, this.updated_at)) &&
+        (promoted_at == null || identical(promoted_at, this.promoted_at)) &&
+        (blur_hash == null || identical(blur_hash, this.blur_hash)) &&
+        (width == null || identical(width, this.width)) &&
+        (height == null || identical(height, this.height)) &&
+        (color == null || identical(color, this.color)) &&
+        (description == null || identical(description, this.description)) &&
+        (alt_description == null ||
+            identical(alt_description, this.alt_description)) &&
+        (urls == null || identical(urls, this.urls)) &&
+        (links == null || identical(links, this.links)) &&
+        (categories == null || identical(categories, this.categories)) &&
+        (likes == null || identical(likes, this.likes)) &&
+        (liked_by_user == null ||
+            identical(liked_by_user, this.liked_by_user)) &&
+        (sponsorship == null || identical(sponsorship, this.sponsorship)) &&
+        (user == null || identical(user, this.user))) {
+      return this;
+    }
+
     return new Photo(
       id: id ?? this.id,
       created_at: created_at ?? this.created_at,
       updated_at: updated_at ?? this.updated_at,
       promoted_at: promoted_at ?? this.promoted_at,
+      blur_hash: blur_hash ?? this.blur_hash,
       width: width ?? this.width,
       height: height ?? this.height,
       color: color ?? this.color,

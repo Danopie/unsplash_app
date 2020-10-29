@@ -1,4 +1,3 @@
-import 'package:build_context/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -43,23 +42,20 @@ class _PhotoDetailScreenState extends State<PhotoDetailScreen> {
   Widget build(BuildContext context) {
     final photo = useProvider(photoProvider(widget.id));
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.only(top: context.mediaQueryPadding.top),
-        child: CustomScrollView(
-          slivers: [
-            UnsplashAppBar(
-              onUserSearch: (text) {
-                SearchPage.show(context: context, initialQuery: text);
-              },
-              clearOnSearch: true,
+      body: CustomScrollView(
+        slivers: [
+          UnsplashAppBar(
+            onUserSearch: (text) {
+              SearchPage.show(context: context, initialQuery: text);
+            },
+            clearOnSearch: true,
+          ),
+          SliverToBoxAdapter(
+            child: PhotoItem(
+              photo: photo,
             ),
-            SliverToBoxAdapter(
-              child: PhotoItem(
-                photo: photo,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

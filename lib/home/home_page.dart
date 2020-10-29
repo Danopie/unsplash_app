@@ -1,6 +1,6 @@
-import 'package:build_context/build_context.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -8,6 +8,7 @@ import 'package:unsplash_app/home/home_app_bar.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/domain/photos_state.dart';
+import 'package:unsplash_app/photos/photo_item.dart';
 import 'package:unsplash_app/photos/photo_list.dart';
 import 'package:unsplash_app/search/search_page.dart';
 
@@ -30,9 +31,17 @@ class HomePage extends HookWidget {
           builder: (BuildContext context) {
             if (state is PaginationLoadingPhotosState ||
                 state is LoadedPhotosState) {
-              return Padding(
-                padding: EdgeInsets.only(top: context.mediaQueryPadding.top),
+              return NotificationListener<ScrollUpdateNotification>(
+                onNotification: (notification) {
+                  if (notification.metrics.pixels >
+                      notification.metrics.maxScrollExtent - 300) {
+                    context.read(photosProvider).onLoadMore();
+                  }
+                  return false;
+                },
                 child: CustomScrollView(
+                  physics: SnappingScrollPhysics(
+                      itemHeight: PhotoItem.height(context)),
                   controller: controller,
                   slivers: [
                     UnsplashAppBar(
@@ -66,6 +75,53 @@ class HomePage extends HookWidget {
             }
           },
         ));
+  }
+}
+
+class SnappingScrollPhysics extends BouncingScrollPhysics {
+  final double itemHeight;
+
+  SnappingScrollPhysics({ScrollPhysics scrollPhysics, this.itemHeight})
+      : super(parent: scrollPhysics);
+
+  @override
+  BouncingScrollPhysics applyTo(ScrollPhysics ancestor) {
+    return SnappingScrollPhysics(
+      scrollPhysics: ancestor,
+      itemHeight: itemHeight,
+    );
+  }
+
+  @override
+  Simulation createBallisticSimulation(
+      ScrollMetrics position, double velocity) {
+    // If we're out of range and not headed back in range, defer to the parent
+    // ballistics, which should put us back in range at a page boundary.
+    if ((velocity <= 0.0 && position.pixels <= position.minScrollExtent) ||
+        (velocity >= 0.0 && position.pixels >= position.maxScrollExtent))
+      return super.createBallisticSimulation(position, velocity);
+
+    final currentItemIndex = position.pixels ~/ itemHeight;
+    final currentItemOffset = itemHeight * currentItemIndex;
+    final nextItemOffset = itemHeight * (currentItemIndex + 1);
+    final previousItemOffset =
+        currentItemIndex >= 0 ? itemHeight * (currentItemIndex - 1) : 0.0;
+
+    final targetOffset = velocity >= 0 ? nextItemOffset : currentItemOffset;
+
+    if (position.pixels - currentItemOffset > 50) {
+      HapticFeedback.lightImpact();
+
+      return ScrollSpringSimulation(
+        spring,
+        position.pixels,
+        targetOffset,
+        velocity,
+        tolerance: tolerance,
+      );
+    }
+
+    return super.createBallisticSimulation(position, velocity);
   }
 }
 
