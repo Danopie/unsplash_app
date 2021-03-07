@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meta/meta.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:unsplash_app/core/base/exception.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
 
@@ -15,10 +14,6 @@ final dioProvider = Provider.family<Dio, String>(
     )..interceptors.addAll(
         [
           ref.read(headerInterceptorProvider),
-          PrettyDioLogger(
-            requestHeader: true,
-            responseHeader: true,
-          ),
         ],
       );
   },
@@ -60,9 +55,9 @@ abstract class Api {
   }
 
   void _handleError(DioError e) {
-    if (e.type == DioErrorType.CONNECT_TIMEOUT ||
-        e.type == DioErrorType.SEND_TIMEOUT ||
-        e.type == DioErrorType.RECEIVE_TIMEOUT) {
+    if (e.type == DioErrorType.connectTimeout ||
+        e.type == DioErrorType.sendTimeout ||
+        e.type == DioErrorType.receiveTimeout) {
       throw TimeoutException();
     }
   }

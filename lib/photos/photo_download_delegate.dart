@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -33,10 +32,10 @@ class PhotoDownloadDelegate {
   }
 
   void showMessage({String message}) {
-    Flushbar(
-      message: message,
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
       duration: Duration(seconds: 1),
-    )..show(context);
+    ));
   }
 
   Future<bool> _save() async {

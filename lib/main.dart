@@ -15,8 +15,8 @@ import 'package:unsplash_app/photos/data/photo_db.dart';
 Future<void> main() async {
   await _initHive();
   runApp(DevicePreview(
-    enabled: false,
-    builder: (_) => ProviderScope(
+    enabled: true,
+    builder: (context) => ProviderScope(
       child: MyApp(),
     ),
   ));
@@ -38,6 +38,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: HomePage(),
