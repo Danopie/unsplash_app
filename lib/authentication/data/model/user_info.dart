@@ -1,11 +1,11 @@
 import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class UserToken {
-  final String access_token;
-  final String token_type;
-  final String refresh_token;
-  final String scope;
-  final int created_at;
+  final String? access_token;
+  final String? token_type;
+  final String? refresh_token;
+  final String? scope;
+  final int? created_at;
 
 	UserToken.fromJson(Map<String, dynamic> map):
 		access_token = parseString(map["access_token"]),

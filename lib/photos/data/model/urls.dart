@@ -2,11 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class Urls extends Equatable {
-  final String raw;
-  final String full;
-  final String regular;
-  final String small;
-  final String thumb;
+  final String? raw;
+  final String? full;
+  final String? regular;
+  final String? small;
+  final String? thumb;
 
   Urls.fromJson(Map<String, dynamic> map)
       : raw = parseString(map["raw"]),
@@ -26,7 +26,7 @@ class Urls extends Equatable {
   }
 
   @override
-  List<Object> get props => [raw, full, regular, small, thumb];
+  List<Object?> get props => [raw, full, regular, small, thumb];
 
   @override
   bool get stringify => true;

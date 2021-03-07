@@ -30,13 +30,14 @@ class _$PhotosStateTearOff {
     );
   }
 
-  PaginationLoadingPhotosState paginationLoading({List<Photo>? photos}) {
+  PaginationLoadingPhotosState paginationLoading(
+      {required List<Photo> photos}) {
     return PaginationLoadingPhotosState(
       photos: photos,
     );
   }
 
-  LoadedPhotosState doneLoading({List<Photo>? photos}) {
+  LoadedPhotosState doneLoading({required List<Photo> photos}) {
     return LoadedPhotosState(
       photos: photos,
     );
@@ -53,8 +54,8 @@ mixin _$PhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,8 +63,8 @@ mixin _$PhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,8 +148,8 @@ class _$InitialPhotosState implements InitialPhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) {
     return initial();
   }
@@ -159,8 +160,8 @@ class _$InitialPhotosState implements InitialPhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -246,8 +247,8 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) {
     return initialLoading();
   }
@@ -258,8 +259,8 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) {
     if (initialLoading != null) {
@@ -370,8 +371,8 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) {
     return initialError(message);
   }
@@ -382,8 +383,8 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) {
     if (initialError != null) {
@@ -438,7 +439,7 @@ abstract class $PaginationLoadingPhotosStateCopyWith<$Res> {
           PaginationLoadingPhotosState value,
           $Res Function(PaginationLoadingPhotosState) then) =
       _$PaginationLoadingPhotosStateCopyWithImpl<$Res>;
-  $Res call({List<Photo>? photos});
+  $Res call({List<Photo> photos});
 }
 
 /// @nodoc
@@ -462,17 +463,17 @@ class _$PaginationLoadingPhotosStateCopyWithImpl<$Res>
       photos: photos == freezed
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
-              as List<Photo>?,
+              as List<Photo>,
     ));
   }
 }
 
 /// @nodoc
 class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
-  const _$PaginationLoadingPhotosState({this.photos});
+  const _$PaginationLoadingPhotosState({required this.photos});
 
   @override
-  final List<Photo>? photos;
+  final List<Photo> photos;
 
   @override
   String toString() {
@@ -503,8 +504,8 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) {
     return paginationLoading(photos);
   }
@@ -515,8 +516,8 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) {
     if (paginationLoading != null) {
@@ -556,10 +557,10 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
 }
 
 abstract class PaginationLoadingPhotosState implements PhotosState {
-  const factory PaginationLoadingPhotosState({List<Photo>? photos}) =
+  const factory PaginationLoadingPhotosState({required List<Photo> photos}) =
       _$PaginationLoadingPhotosState;
 
-  List<Photo>? get photos => throw _privateConstructorUsedError;
+  List<Photo> get photos => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $PaginationLoadingPhotosStateCopyWith<PaginationLoadingPhotosState>
       get copyWith => throw _privateConstructorUsedError;
@@ -570,7 +571,7 @@ abstract class $LoadedPhotosStateCopyWith<$Res> {
   factory $LoadedPhotosStateCopyWith(
           LoadedPhotosState value, $Res Function(LoadedPhotosState) then) =
       _$LoadedPhotosStateCopyWithImpl<$Res>;
-  $Res call({List<Photo>? photos});
+  $Res call({List<Photo> photos});
 }
 
 /// @nodoc
@@ -592,17 +593,17 @@ class _$LoadedPhotosStateCopyWithImpl<$Res>
       photos: photos == freezed
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
-              as List<Photo>?,
+              as List<Photo>,
     ));
   }
 }
 
 /// @nodoc
 class _$LoadedPhotosState implements LoadedPhotosState {
-  const _$LoadedPhotosState({this.photos});
+  const _$LoadedPhotosState({required this.photos});
 
   @override
-  final List<Photo>? photos;
+  final List<Photo> photos;
 
   @override
   String toString() {
@@ -632,8 +633,8 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     required TResult Function() initial,
     required TResult Function() initialLoading,
     required TResult Function(String? message) initialError,
-    required TResult Function(List<Photo>? photos) paginationLoading,
-    required TResult Function(List<Photo>? photos) doneLoading,
+    required TResult Function(List<Photo> photos) paginationLoading,
+    required TResult Function(List<Photo> photos) doneLoading,
   }) {
     return doneLoading(photos);
   }
@@ -644,8 +645,8 @@ class _$LoadedPhotosState implements LoadedPhotosState {
     TResult Function()? initial,
     TResult Function()? initialLoading,
     TResult Function(String? message)? initialError,
-    TResult Function(List<Photo>? photos)? paginationLoading,
-    TResult Function(List<Photo>? photos)? doneLoading,
+    TResult Function(List<Photo> photos)? paginationLoading,
+    TResult Function(List<Photo> photos)? doneLoading,
     required TResult orElse(),
   }) {
     if (doneLoading != null) {
@@ -685,9 +686,10 @@ class _$LoadedPhotosState implements LoadedPhotosState {
 }
 
 abstract class LoadedPhotosState implements PhotosState {
-  const factory LoadedPhotosState({List<Photo>? photos}) = _$LoadedPhotosState;
+  const factory LoadedPhotosState({required List<Photo> photos}) =
+      _$LoadedPhotosState;
 
-  List<Photo>? get photos => throw _privateConstructorUsedError;
+  List<Photo> get photos => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith =>
       throw _privateConstructorUsedError;

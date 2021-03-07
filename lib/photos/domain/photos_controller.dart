@@ -47,7 +47,7 @@ class PhotosController extends UserDependentStateNotifier<PhotosState> {
         page++;
         final latestState = state as PaginationLoadingPhotosState;
         return LoadedPhotosState(
-          photos: List.of(latestState.photos!)..addAll(data),
+          photos: List.of(latestState.photos)..addAll(data),
         );
       }, (msg) => InitialErrorPhotosState(message: msg));
     }
@@ -70,7 +70,7 @@ class PhotosController extends UserDependentStateNotifier<PhotosState> {
     state.maybeWhen(
       orElse: () {},
       doneLoading: (photos) async {
-        final list = List<Photo>.of(photos!);
+        final list = List<Photo>.of(photos);
         final index = list.indexWhere((element) => element.id == id);
         final photo = list.removeAt(index);
         list.insert(index, photo.copyWith(liked_by_user: like));

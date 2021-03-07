@@ -2,10 +2,10 @@ import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class Badge {
 
-  final String title;
-  final bool primary;
-  final String slug;
-  final String link;
+  final String? title;
+  final bool? primary;
+  final String? slug;
+  final String? link;
 
 	Badge.fromJson(Map<String, dynamic> map): 
 		title = parseString(map["title"]),

@@ -3,8 +3,8 @@ import 'package:unsplash_app/photos/data/model/photo.dart';
 
 class SearchPhotoResponse {
 
-  final int total;
-  final int total_pages;
+  final int? total;
+  final int? total_pages;
   final List<Photo>? results;
 
 	SearchPhotoResponse.fromJson(Map<String, dynamic> map): 

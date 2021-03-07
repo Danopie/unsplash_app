@@ -39,34 +39,35 @@ class HomePage extends HookWidget {
                   }
                   return false;
                 },
-                child: CustomScrollView(
-                  physics: SnappingScrollPhysics(
-                      itemHeight: PhotoItem.height(context)),
+                child: Scrollbar(
                   controller: controller,
-                  slivers: [
-                    UnsplashAppBar(
-                      onUserSearch: (text) {
-                        SearchPage.show(context: context, initialQuery: text);
-                      },
-                      clearOnSearch: true,
-                      initialSearchText: '',
-                    ),
-                    CupertinoSliverRefreshControl(
-                      onRefresh: () async {
-                        await context
-                            .read<PhotosController>(photosProvider)
-                            .onUserRefresh();
-                      },
-                    ),
-                    PhotoList(
-                      photos: state.maybeWhen<List<Photo>>(
-                        orElse: () => <Photo>[],
-                        paginationLoading: (photos) => photos!,
-                        doneLoading: (photos) => photos!,
+                  child: CustomScrollView(
+                    controller: controller,
+                    slivers: [
+                      UnsplashAppBar(
+                        onUserSearch: (text) {
+                          SearchPage.show(context: context, initialQuery: text);
+                        },
+                        clearOnSearch: true,
+                        initialSearchText: '',
                       ),
-                      loading: state is PaginationLoadingPhotosState,
-                    ),
-                  ],
+                      CupertinoSliverRefreshControl(
+                        onRefresh: () async {
+                          await context
+                              .read<PhotosController>(photosProvider)
+                              .onUserRefresh();
+                        },
+                      ),
+                      PhotoList(
+                        photos: state.maybeWhen<List<Photo>>(
+                          orElse: () => <Photo>[],
+                          paginationLoading: (photos) => photos,
+                          doneLoading: (photos) => photos,
+                        ),
+                        loading: state is PaginationLoadingPhotosState,
+                      ),
+                    ],
+                  ),
                 ),
               );
             } else if (state is InitialErrorPhotosState) {

@@ -3,7 +3,7 @@ import 'package:unsplash_app/photos/data/model/sponsor.dart';
 
 class Sponsorship {
   final List<Object>? impression_urls;
-  final String tagline;
+  final String? tagline;
   final Object? tagline_url;
   final Sponsor? sponsor;
 

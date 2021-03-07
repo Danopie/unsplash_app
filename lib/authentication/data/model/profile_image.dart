@@ -2,9 +2,9 @@ import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class Profile_image {
 
-  final String small;
-  final String medium;
-  final String large;
+  final String? small;
+  final String? medium;
+  final String? large;
 
 	Profile_image.fromJson(Map<String, dynamic> map): 
 		small = parseString(map["small"]),

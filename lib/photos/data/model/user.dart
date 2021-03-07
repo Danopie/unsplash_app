@@ -3,23 +3,23 @@ import 'package:unsplash_app/photos/data/model/links.dart';
 import 'package:unsplash_app/photos/data/model/profile_image.dart';
 
 class User {
-  final String id;
-  final String updated_at;
-  final String username;
-  final String name;
-  final String first_name;
-  final String last_name;
-  final String twitter_username;
-  final String portfolio_url;
-  final String bio;
+  final String? id;
+  final String? updated_at;
+  final String? username;
+  final String? name;
+  final String? first_name;
+  final String? last_name;
+  final String? twitter_username;
+  final String? portfolio_url;
+  final String? bio;
   final Object? location;
   final Links? links;
   final Profile_image? profile_image;
-  final String instagram_username;
-  final int total_collections;
-  final int total_likes;
-  final int total_photos;
-  final bool accepted_tos;
+  final String? instagram_username;
+  final int? total_collections;
+  final int? total_likes;
+  final int? total_photos;
+  final bool? accepted_tos;
 
   User.fromJson(Map<String, dynamic> map)
       : id = parseString(map["id"]),

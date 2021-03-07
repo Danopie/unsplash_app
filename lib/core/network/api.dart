@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meta/meta.dart';
 import 'package:unsplash_app/core/base/exception.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
+import 'package:unsplash_app/core/network/interceptors/log_interceptor.dart';
 
 final ProviderFamily<Dio, String> dioProvider = Provider.family<Dio, String>(
   (ref, url) {
@@ -14,6 +15,7 @@ final ProviderFamily<Dio, String> dioProvider = Provider.family<Dio, String>(
     )..interceptors.addAll(
         [
           ref.read(headerInterceptorProvider),
+          ref.read(logInterceptorProvider),
         ],
       );
   },

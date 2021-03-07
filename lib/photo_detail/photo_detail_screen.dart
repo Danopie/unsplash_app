@@ -7,16 +7,14 @@ import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 import 'package:unsplash_app/search/search_page.dart';
 
-final ProviderFamily<Photo, String>? photoProvider =
-    Provider.family<Photo, String>(
+final photoProvider = Provider.family<Photo, String>(
   (ref, id) {
     final photos = ref.watch(photosProvider.state);
     return photos.maybeWhen(
       orElse: (() => null) as Photo Function(),
-      doneLoading: (photosState) =>
-          photosState.firstWhere((element) => element.id == id),
+      doneLoading: (photos) => photos.firstWhere((element) => element.id == id),
     );
-  } as Photo Function(ProviderReference, String),
+  },
 );
 
 class PhotoDetailScreen extends StatefulHookWidget {
@@ -41,7 +39,7 @@ class PhotoDetailScreen extends StatefulHookWidget {
 class _PhotoDetailScreenState extends State<PhotoDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final photo = useProvider(photoProvider!(widget.id!));
+    final photo = useProvider(photoProvider(widget.id!));
     return Scaffold(
       body: CustomScrollView(
         slivers: [

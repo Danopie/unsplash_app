@@ -2,11 +2,11 @@ import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class Links {
 
-  final String self;
-  final String html;
-  final String photos;
-  final String likes;
-  final String portfolio;
+  final String? self;
+  final String? html;
+  final String? photos;
+  final String? likes;
+  final String? portfolio;
 
 	Links.fromJson(Map<String, dynamic> map): 
 		self = parseString(map["self"]),

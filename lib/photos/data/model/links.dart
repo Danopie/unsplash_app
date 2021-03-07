@@ -2,10 +2,10 @@ import 'package:equatable/equatable.dart';
 import 'package:primitive_type_parser/primitive_type_parser.dart';
 
 class Links extends Equatable {
-  final String self;
-  final String html;
-  final String download;
-  final String download_location;
+  final String? self;
+  final String? html;
+  final String? download;
+  final String? download_location;
 
   Links.fromJson(Map<String, dynamic> map)
       : self = parseString(map["self"]),
@@ -23,7 +23,7 @@ class Links extends Equatable {
   }
 
   @override
-  List<Object> get props => [self, html, download, download_location];
+  List<Object?> get props => [self, html, download, download_location];
 
   @override
   bool get stringify => true;

@@ -27,8 +27,8 @@ dependencies:
   dio: ^4.0.0-beta6
   hive: ^2.0.0
   hive_flutter: ^1.0.0
-  primitive_type_parser: 0.0.2
-  equatable: any
+  primitive_type_parser: ^1.0.0
+  equatable: ^2.0.0
   cached_network_image: ^3.0.0-nullsafety
   rxdart: ^0.26.0
   connectivity: ^3.0.2
@@ -50,6 +50,7 @@ dependencies:
       url: https://github.com/FluentChange/flutter_device_preview.git
       path: device_preview
       ref: nnbd_git_dependency_ci
+  pretty_json: ^1.1.0
 
 dependency_overrides:
   freezed_annotation: ^0.14.0

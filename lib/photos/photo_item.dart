@@ -61,7 +61,7 @@ class PhotoItem extends StatelessWidget {
       child: Container(
         color: ColorUtils.fromHex(photo!.color!),
         child: CachedNetworkImage(
-          imageUrl: photo!.urls!.regular,
+          imageUrl: photo!.urls!.regular ?? "",
           fit: BoxFit.cover,
           fadeInDuration: Duration(milliseconds: 700),
         ),
@@ -78,7 +78,7 @@ class PhotoItem extends StatelessWidget {
             child: CachedNetworkImage(
               width: 32,
               height: 32,
-              imageUrl: photo!.user!.profile_image!.small,
+              imageUrl: photo!.user!.profile_image!.small ?? "",
               fadeInCurve: Curves.easeInOut,
               fadeInDuration: Duration(milliseconds: 200),
             ),
@@ -88,7 +88,7 @@ class PhotoItem extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(photo!.user!.name,
+              Text(photo!.user!.name ?? "",
                   style: Theme.of(context).textTheme.bodyText1),
             ],
           ),

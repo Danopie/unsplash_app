@@ -13,10 +13,10 @@ abstract class PhotosState with _$PhotosState {
       InitialErrorPhotosState;
 
   const factory PhotosState.paginationLoading({
-    List<Photo>? photos,
+    required List<Photo> photos,
   }) = PaginationLoadingPhotosState;
 
   const factory PhotosState.doneLoading({
-    List<Photo>? photos,
+    required List<Photo> photos,
   }) = LoadedPhotosState;
 }

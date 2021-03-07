@@ -13,8 +13,8 @@ final configurationProvider = FutureProvider<Configuration>((ref) async {
 });
 
 class Configuration {
-  final String publicKey;
-  final String secretKey;
+  final String? publicKey;
+  final String? secretKey;
 
   Configuration.fromJson(Map<String, dynamic> map)
       : publicKey = parseString(map["publicKey"]),

@@ -55,7 +55,7 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
                     radius: 12,
                     backgroundColor: Colors.white,
                     backgroundImage: NetworkImage(
-                      userState.profile!.profile_image!.small,
+                      userState.profile?.profile_image?.small ?? "",
                     ),
                   ),
                   onTap: () {
@@ -141,6 +141,7 @@ class SearchBar extends HookWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.only(bottom: 8),
               child: TextField(
                 controller: textController,
                 focusNode: focusNode,
@@ -159,7 +160,7 @@ class SearchBar extends HookWidget {
               ),
             ),
           ),
-          if (textController.text != null && textController.text.length > 0)
+          if (textController.text.length > 0)
             GestureDetector(
               onTap: () {
                 textController.clear();
