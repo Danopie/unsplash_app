@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'photos_state.dart';
 
@@ -9,87 +9,94 @@ part of 'photos_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
 class _$PhotosStateTearOff {
   const _$PhotosStateTearOff();
 
-// ignore: unused_element
   InitialPhotosState initial() {
     return const InitialPhotosState();
   }
 
-// ignore: unused_element
   InitialLoadingPhotosState initialLoading() {
     return const InitialLoadingPhotosState();
   }
 
-// ignore: unused_element
-  InitialErrorPhotosState initialError({String message}) {
+  InitialErrorPhotosState initialError({String? message}) {
     return InitialErrorPhotosState(
       message: message,
     );
   }
 
-// ignore: unused_element
-  PaginationLoadingPhotosState paginationLoading({List<Photo> photos}) {
+  PaginationLoadingPhotosState paginationLoading({List<Photo>? photos}) {
     return PaginationLoadingPhotosState(
       photos: photos,
     );
   }
 
-// ignore: unused_element
-  LoadedPhotosState doneLoading({List<Photo> photos}) {
+  LoadedPhotosState doneLoading({List<Photo>? photos}) {
     return LoadedPhotosState(
       photos: photos,
     );
   }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $PhotosState = _$PhotosStateTearOff();
 
+/// @nodoc
 mixin _$PhotosState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $PhotosStateCopyWith<$Res> {
   factory $PhotosStateCopyWith(
           PhotosState value, $Res Function(PhotosState) then) =
       _$PhotosStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$PhotosStateCopyWithImpl<$Res> implements $PhotosStateCopyWith<$Res> {
   _$PhotosStateCopyWithImpl(this._value, this._then);
 
@@ -98,12 +105,14 @@ class _$PhotosStateCopyWithImpl<$Res> implements $PhotosStateCopyWith<$Res> {
   final $Res Function(PhotosState) _then;
 }
 
+/// @nodoc
 abstract class $InitialPhotosStateCopyWith<$Res> {
   factory $InitialPhotosStateCopyWith(
           InitialPhotosState value, $Res Function(InitialPhotosState) then) =
       _$InitialPhotosStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitialPhotosStateCopyWithImpl<$Res>
     extends _$PhotosStateCopyWithImpl<$Res>
     implements $InitialPhotosStateCopyWith<$Res> {
@@ -115,6 +124,7 @@ class _$InitialPhotosStateCopyWithImpl<$Res>
   InitialPhotosState get _value => super._value as InitialPhotosState;
 }
 
+/// @nodoc
 class _$InitialPhotosState implements InitialPhotosState {
   const _$InitialPhotosState();
 
@@ -133,32 +143,26 @@ class _$InitialPhotosState implements InitialPhotosState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -167,32 +171,27 @@ class _$InitialPhotosState implements InitialPhotosState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -204,12 +203,14 @@ abstract class InitialPhotosState implements PhotosState {
   const factory InitialPhotosState() = _$InitialPhotosState;
 }
 
+/// @nodoc
 abstract class $InitialLoadingPhotosStateCopyWith<$Res> {
   factory $InitialLoadingPhotosStateCopyWith(InitialLoadingPhotosState value,
           $Res Function(InitialLoadingPhotosState) then) =
       _$InitialLoadingPhotosStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitialLoadingPhotosStateCopyWithImpl<$Res>
     extends _$PhotosStateCopyWithImpl<$Res>
     implements $InitialLoadingPhotosStateCopyWith<$Res> {
@@ -222,6 +223,7 @@ class _$InitialLoadingPhotosStateCopyWithImpl<$Res>
       super._value as InitialLoadingPhotosState;
 }
 
+/// @nodoc
 class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
   const _$InitialLoadingPhotosState();
 
@@ -240,32 +242,26 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initialLoading();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialLoading != null) {
       return initialLoading();
     }
@@ -274,32 +270,27 @@ class _$InitialLoadingPhotosState implements InitialLoadingPhotosState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initialLoading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialLoading != null) {
       return initialLoading(this);
     }
@@ -311,13 +302,15 @@ abstract class InitialLoadingPhotosState implements PhotosState {
   const factory InitialLoadingPhotosState() = _$InitialLoadingPhotosState;
 }
 
+/// @nodoc
 abstract class $InitialErrorPhotosStateCopyWith<$Res> {
   factory $InitialErrorPhotosStateCopyWith(InitialErrorPhotosState value,
           $Res Function(InitialErrorPhotosState) then) =
       _$InitialErrorPhotosStateCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({String? message});
 }
 
+/// @nodoc
 class _$InitialErrorPhotosStateCopyWithImpl<$Res>
     extends _$PhotosStateCopyWithImpl<$Res>
     implements $InitialErrorPhotosStateCopyWith<$Res> {
@@ -330,19 +323,23 @@ class _$InitialErrorPhotosStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object message = freezed,
+    Object? message = freezed,
   }) {
     return _then(InitialErrorPhotosState(
-      message: message == freezed ? _value.message : message as String,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
+/// @nodoc
 class _$InitialErrorPhotosState implements InitialErrorPhotosState {
   const _$InitialErrorPhotosState({this.message});
 
   @override
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -361,6 +358,7 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
+  @JsonKey(ignore: true)
   @override
   $InitialErrorPhotosStateCopyWith<InitialErrorPhotosState> get copyWith =>
       _$InitialErrorPhotosStateCopyWithImpl<InitialErrorPhotosState>(
@@ -368,32 +366,26 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initialError(message);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialError != null) {
       return initialError(message);
     }
@@ -402,32 +394,27 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return initialError(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialError != null) {
       return initialError(this);
     }
@@ -436,21 +423,25 @@ class _$InitialErrorPhotosState implements InitialErrorPhotosState {
 }
 
 abstract class InitialErrorPhotosState implements PhotosState {
-  const factory InitialErrorPhotosState({String message}) =
+  const factory InitialErrorPhotosState({String? message}) =
       _$InitialErrorPhotosState;
 
-  String get message;
-  $InitialErrorPhotosStateCopyWith<InitialErrorPhotosState> get copyWith;
+  String? get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InitialErrorPhotosStateCopyWith<InitialErrorPhotosState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $PaginationLoadingPhotosStateCopyWith<$Res> {
   factory $PaginationLoadingPhotosStateCopyWith(
           PaginationLoadingPhotosState value,
           $Res Function(PaginationLoadingPhotosState) then) =
       _$PaginationLoadingPhotosStateCopyWithImpl<$Res>;
-  $Res call({List<Photo> photos});
+  $Res call({List<Photo>? photos});
 }
 
+/// @nodoc
 class _$PaginationLoadingPhotosStateCopyWithImpl<$Res>
     extends _$PhotosStateCopyWithImpl<$Res>
     implements $PaginationLoadingPhotosStateCopyWith<$Res> {
@@ -465,19 +456,23 @@ class _$PaginationLoadingPhotosStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object photos = freezed,
+    Object? photos = freezed,
   }) {
     return _then(PaginationLoadingPhotosState(
-      photos: photos == freezed ? _value.photos : photos as List<Photo>,
+      photos: photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>?,
     ));
   }
 }
 
+/// @nodoc
 class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
   const _$PaginationLoadingPhotosState({this.photos});
 
   @override
-  final List<Photo> photos;
+  final List<Photo>? photos;
 
   @override
   String toString() {
@@ -496,6 +491,7 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(photos);
 
+  @JsonKey(ignore: true)
   @override
   $PaginationLoadingPhotosStateCopyWith<PaginationLoadingPhotosState>
       get copyWith => _$PaginationLoadingPhotosStateCopyWithImpl<
@@ -503,32 +499,26 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return paginationLoading(photos);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (paginationLoading != null) {
       return paginationLoading(photos);
     }
@@ -537,32 +527,27 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return paginationLoading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (paginationLoading != null) {
       return paginationLoading(this);
     }
@@ -571,21 +556,24 @@ class _$PaginationLoadingPhotosState implements PaginationLoadingPhotosState {
 }
 
 abstract class PaginationLoadingPhotosState implements PhotosState {
-  const factory PaginationLoadingPhotosState({List<Photo> photos}) =
+  const factory PaginationLoadingPhotosState({List<Photo>? photos}) =
       _$PaginationLoadingPhotosState;
 
-  List<Photo> get photos;
+  List<Photo>? get photos => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
   $PaginationLoadingPhotosStateCopyWith<PaginationLoadingPhotosState>
-      get copyWith;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $LoadedPhotosStateCopyWith<$Res> {
   factory $LoadedPhotosStateCopyWith(
           LoadedPhotosState value, $Res Function(LoadedPhotosState) then) =
       _$LoadedPhotosStateCopyWithImpl<$Res>;
-  $Res call({List<Photo> photos});
+  $Res call({List<Photo>? photos});
 }
 
+/// @nodoc
 class _$LoadedPhotosStateCopyWithImpl<$Res>
     extends _$PhotosStateCopyWithImpl<$Res>
     implements $LoadedPhotosStateCopyWith<$Res> {
@@ -598,19 +586,23 @@ class _$LoadedPhotosStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object photos = freezed,
+    Object? photos = freezed,
   }) {
     return _then(LoadedPhotosState(
-      photos: photos == freezed ? _value.photos : photos as List<Photo>,
+      photos: photos == freezed
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>?,
     ));
   }
 }
 
+/// @nodoc
 class _$LoadedPhotosState implements LoadedPhotosState {
   const _$LoadedPhotosState({this.photos});
 
   @override
-  final List<Photo> photos;
+  final List<Photo>? photos;
 
   @override
   String toString() {
@@ -629,38 +621,33 @@ class _$LoadedPhotosState implements LoadedPhotosState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(photos);
 
+  @JsonKey(ignore: true)
   @override
   $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith =>
       _$LoadedPhotosStateCopyWithImpl<LoadedPhotosState>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result initialLoading(),
-    @required Result initialError(String message),
-    @required Result paginationLoading(List<Photo> photos),
-    @required Result doneLoading(List<Photo> photos),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialLoading,
+    required TResult Function(String? message) initialError,
+    required TResult Function(List<Photo>? photos) paginationLoading,
+    required TResult Function(List<Photo>? photos) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return doneLoading(photos);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result initialLoading(),
-    Result initialError(String message),
-    Result paginationLoading(List<Photo> photos),
-    Result doneLoading(List<Photo> photos),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialLoading,
+    TResult Function(String? message)? initialError,
+    TResult Function(List<Photo>? photos)? paginationLoading,
+    TResult Function(List<Photo>? photos)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (doneLoading != null) {
       return doneLoading(photos);
     }
@@ -669,32 +656,27 @@ class _$LoadedPhotosState implements LoadedPhotosState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialPhotosState value),
-    @required Result initialLoading(InitialLoadingPhotosState value),
-    @required Result initialError(InitialErrorPhotosState value),
-    @required Result paginationLoading(PaginationLoadingPhotosState value),
-    @required Result doneLoading(LoadedPhotosState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialPhotosState value) initial,
+    required TResult Function(InitialLoadingPhotosState value) initialLoading,
+    required TResult Function(InitialErrorPhotosState value) initialError,
+    required TResult Function(PaginationLoadingPhotosState value)
+        paginationLoading,
+    required TResult Function(LoadedPhotosState value) doneLoading,
   }) {
-    assert(initial != null);
-    assert(initialLoading != null);
-    assert(initialError != null);
-    assert(paginationLoading != null);
-    assert(doneLoading != null);
     return doneLoading(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialPhotosState value),
-    Result initialLoading(InitialLoadingPhotosState value),
-    Result initialError(InitialErrorPhotosState value),
-    Result paginationLoading(PaginationLoadingPhotosState value),
-    Result doneLoading(LoadedPhotosState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialPhotosState value)? initial,
+    TResult Function(InitialLoadingPhotosState value)? initialLoading,
+    TResult Function(InitialErrorPhotosState value)? initialError,
+    TResult Function(PaginationLoadingPhotosState value)? paginationLoading,
+    TResult Function(LoadedPhotosState value)? doneLoading,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (doneLoading != null) {
       return doneLoading(this);
     }
@@ -703,8 +685,10 @@ class _$LoadedPhotosState implements LoadedPhotosState {
 }
 
 abstract class LoadedPhotosState implements PhotosState {
-  const factory LoadedPhotosState({List<Photo> photos}) = _$LoadedPhotosState;
+  const factory LoadedPhotosState({List<Photo>? photos}) = _$LoadedPhotosState;
 
-  List<Photo> get photos;
-  $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith;
+  List<Photo>? get photos => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoadedPhotosStateCopyWith<LoadedPhotosState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

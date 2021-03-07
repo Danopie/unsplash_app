@@ -6,26 +6,26 @@ import 'package:unsplash_app/photos/data/model/urls.dart';
 import 'package:unsplash_app/photos/data/model/user.dart';
 
 class Photo extends Equatable {
-  final String id;
-  final String created_at;
-  final String updated_at;
-  final Object promoted_at;
-  final Object blur_hash;
-  final int width;
-  final int height;
-  final String color;
-  final String description;
-  final String alt_description;
-  final Urls urls;
-  final Links links;
-  final List<Object> categories;
-  final int likes;
-  final bool liked_by_user;
-  final Sponsorship sponsorship;
-  final User user;
+  final String? id;
+  final String? created_at;
+  final String? updated_at;
+  final Object? promoted_at;
+  final Object? blur_hash;
+  final int? width;
+  final int? height;
+  final String? color;
+  final String? description;
+  final String? alt_description;
+  final Urls? urls;
+  final Links? links;
+  final List<Object>? categories;
+  final int? likes;
+  final bool? liked_by_user;
+  final Sponsorship? sponsorship;
+  final User? user;
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         id,
         created_at,
         updated_at,
@@ -77,13 +77,13 @@ class Photo extends Equatable {
     map['color'] = color;
     map['description'] = description;
     map['alt_description'] = alt_description;
-    map['urls'] = urls == null ? null : urls.toJson();
-    map['links'] = links == null ? null : links.toJson();
+    map['urls'] = urls == null ? null : urls!.toJson();
+    map['links'] = links == null ? null : links!.toJson();
     map['categories'] = categories;
     map['likes'] = likes;
     map['liked_by_user'] = liked_by_user;
-    map['sponsorship'] = sponsorship == null ? null : sponsorship.toJson();
-    map['user'] = user == null ? null : user.toJson();
+    map['sponsorship'] = sponsorship == null ? null : sponsorship!.toJson();
+    map['user'] = user == null ? null : user!.toJson();
     return map;
   }
 
@@ -108,23 +108,23 @@ class Photo extends Equatable {
   });
 
   Photo copyWith({
-    String id,
-    String created_at,
-    String updated_at,
-    Object promoted_at,
-    Object blur_hash,
-    int width,
-    int height,
-    String color,
-    String description,
-    String alt_description,
-    Urls urls,
-    Links links,
-    List<Object> categories,
-    int likes,
-    bool liked_by_user,
-    Sponsorship sponsorship,
-    User user,
+    String? id,
+    String? created_at,
+    String? updated_at,
+    Object? promoted_at,
+    Object? blur_hash,
+    int? width,
+    int? height,
+    String? color,
+    String? description,
+    String? alt_description,
+    Urls? urls,
+    Links? links,
+    List<Object>? categories,
+    int? likes,
+    bool? liked_by_user,
+    Sponsorship? sponsorship,
+    User? user,
   }) {
     if ((id == null || identical(id, this.id)) &&
         (created_at == null || identical(created_at, this.created_at)) &&

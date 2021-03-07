@@ -9,14 +9,14 @@ abstract class PhotosState with _$PhotosState {
 
   const factory PhotosState.initialLoading() = InitialLoadingPhotosState;
 
-  const factory PhotosState.initialError({String message}) =
+  const factory PhotosState.initialError({String? message}) =
       InitialErrorPhotosState;
 
   const factory PhotosState.paginationLoading({
-    List<Photo> photos,
+    List<Photo>? photos,
   }) = PaginationLoadingPhotosState;
 
   const factory PhotosState.doneLoading({
-    List<Photo> photos,
+    List<Photo>? photos,
   }) = LoadedPhotosState;
 }

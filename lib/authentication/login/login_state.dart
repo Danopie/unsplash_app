@@ -11,7 +11,7 @@ abstract class LoginState with _$LoginState {
 
   const factory LoginState.requestingToken() = RequestingToken;
 
-  const factory LoginState.error({String message}) = LoginError;
+  const factory LoginState.error({String? message}) = LoginError;
 
   const factory LoginState.done() = LoginDone;
 }

@@ -9,15 +9,15 @@ import 'package:unsplash_app/search/search_controller.dart';
 import 'package:unsplash_app/search/search_state.dart';
 
 class SearchPage extends HookWidget {
-  const SearchPage({Key key, this.initialQuery}) : super(key: key);
+  const SearchPage({Key? key, required this.initialQuery}) : super(key: key);
 
-  static Future<dynamic> show({BuildContext context, String initialQuery}) {
+  static Future<dynamic> show({required BuildContext context, required String initialQuery}) {
     return Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
             SearchPage.newInstance(initialQuery: initialQuery)));
   }
 
-  static Widget newInstance({String initialQuery}) => SearchPage(
+  static Widget newInstance({required String initialQuery}) => SearchPage(
         initialQuery: initialQuery,
       );
 
@@ -25,7 +25,8 @@ class SearchPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = useProvider(searchControllerProvider(initialQuery).state);
+    final state =
+        useProvider<SearchState>(searchControllerProvider(initialQuery).state);
     return Scaffold(
         backgroundColor: Colors.white,
         body: CustomScrollView(
@@ -34,7 +35,7 @@ class SearchPage extends HookWidget {
               initialSearchText: initialQuery,
               onUserSearch: (text) {
                 context
-                    .read(searchControllerProvider(initialQuery))
+                    .read<SearchController>(searchControllerProvider(initialQuery))
                     .onUserSearch(text);
               },
             ),
@@ -58,16 +59,16 @@ class SearchPage extends HookWidget {
 }
 
 class SearchError extends StatelessWidget {
-  final String error;
+  final String? error;
 
-  const SearchError({Key key, this.error}) : super(key: key);
+  const SearchError({Key? key, this.error}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Center(
-        child: Text(error).medium().size(16).color(boulder),
+        child: Text(error!).medium().size(16).color(boulder),
       ),
     );
   }
@@ -86,14 +87,14 @@ class SearchLoading extends StatelessWidget {
 }
 
 class QueryDisplay extends StatelessWidget {
-  final String query;
+  final String? query;
 
-  const QueryDisplay({Key key, this.query}) : super(key: key);
+  const QueryDisplay({Key? key, this.query}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 16, top: 24, bottom: 24),
-      child: Text(query).bold().size(32).color(black),
+      child: Text(query!).bold().size(32).color(black),
     );
   }
 }

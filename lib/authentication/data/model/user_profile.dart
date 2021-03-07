@@ -12,7 +12,7 @@ class UserProfile {
   final String last_name;
   final String instagram_username;
   final String twitter_username;
-  final Object portfolio_url;
+  final Object? portfolio_url;
   final String bio;
   final String location;
   final int total_likes;
@@ -22,9 +22,9 @@ class UserProfile {
   final int followers_count;
   final int following_count;
   final int downloads;
-  final Profile_image profile_image;
-  final Badge badge;
-  final Links links;
+  final Profile_image?/*!*//*?*//*!*//*?*//*?*//*?*//*?*/ profile_image;
+  final Badge? badge;
+  final Links? links;
 
 	UserProfile.fromJson(Map<String, dynamic> map): 
 		id = parseString(map["id"]),
@@ -69,9 +69,9 @@ class UserProfile {
 		map['followers_count'] = followers_count;
 		map['following_count'] = following_count;
 		map['downloads'] = downloads;
-		map['profile_image'] = profile_image == null ? null : profile_image.toJson();
-		map['badge'] = badge == null ? null : badge.toJson();
-		map['links'] = links == null ? null : links.toJson();
+		map['profile_image'] = profile_image == null ? null : profile_image!/*!*/.toJson();
+		map['badge'] = badge == null ? null : badge!.toJson();
+		map['links'] = links == null ? null : links!.toJson();
 		return map;
 	}
 }

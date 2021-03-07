@@ -12,9 +12,9 @@ class User {
   final String twitter_username;
   final String portfolio_url;
   final String bio;
-  final Object location;
-  final Links links;
-  final Profile_image profile_image;
+  final Object? location;
+  final Links? links;
+  final Profile_image? profile_image;
   final String instagram_username;
   final int total_collections;
   final int total_likes;
@@ -54,9 +54,9 @@ class User {
     map['portfolio_url'] = portfolio_url;
     map['bio'] = bio;
     map['location'] = location;
-    map['links'] = links == null ? null : links.toJson();
+    map['links'] = links == null ? null : links!.toJson();
     map['profile_image'] =
-        profile_image == null ? null : profile_image.toJson();
+        profile_image == null ? null : profile_image!.toJson();
     map['instagram_username'] = instagram_username;
     map['total_collections'] = total_collections;
     map['total_likes'] = total_likes;

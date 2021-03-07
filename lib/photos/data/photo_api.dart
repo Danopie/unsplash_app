@@ -15,28 +15,28 @@ final photoApiProvider =
 class PhotoApi extends Api {
   PhotoApi(Dio dio) : super(dio..options.baseUrl = EndPoint.MAIN);
 
-  Future<List<Photo>> getPhotos(int page, [String query]) async {
+  Future<List<Photo>> getPhotos(int page, [String? query]) async {
     final params = <String, dynamic>{"page": page};
     if (query != null) {
       params["order_by"] = query;
     }
-    final response = await get<String>(ApiPath.photo, params);
-    final data = photoFromJson(response);
+    final response = await (get<String>(ApiPath.photo, params));
+    final data = photoFromJson(response!);
     return data;
   }
 
-  Future<void> likePhoto(String id) async {
+  Future<void> likePhoto(String? id) async {
     await post<String>("${ApiPath.photo}/$id/like");
   }
 
-  Future<void> unlikePhoto(String id) async {
+  Future<void> unlikePhoto(String? id) async {
     await delete<String>("${ApiPath.photo}/$id/like");
   }
 
-  Future<List<Photo>> searchPhotos(String query) async {
-    final response = await get<String>(
-        ApiPath.searchPhoto, <String, String>{"query": query});
-    final data = SearchPhotoResponse.fromJson(json.decode(response));
+  Future<List<Photo>?> searchPhotos(String query) async {
+    final response = await (get<String>(
+        ApiPath.searchPhoto, <String, String>{"query": query}));
+    final data = SearchPhotoResponse.fromJson(json.decode(response!));
     return data.results;
   }
 }

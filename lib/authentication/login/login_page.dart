@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
               ),
               requestingToken: () => HomeLoading(),
               error: (message) => Center(
-                child: Text(message),
+                child: Text(message ?? ""),
               ),
               done: () => Center(
                 child: Text("Login successful"),
@@ -106,7 +106,7 @@ class LoginPage extends StatelessWidget {
   }
 
   void _handleUrlWithCode(BuildContext context, String url) {
-    final uri = Uri.tryParse(url);
+    final uri = Uri.tryParse(url)!;
     context.read(loginProvider).onCodeRequested(uri.queryParameters["code"]);
   }
 }

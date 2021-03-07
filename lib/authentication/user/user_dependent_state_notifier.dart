@@ -4,7 +4,7 @@ import 'package:unsplash_app/authentication/user/user_state.dart';
 
 abstract class UserDependentStateNotifier<T> extends StateNotifier<T> {
   final UserController _userController;
-  Function removeListener;
+  late Function removeListener;
 
   UserDependentStateNotifier(this._userController, T state) : super(state) {
     _waitForUserStatus();

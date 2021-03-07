@@ -13,7 +13,7 @@ import 'package:unsplash_app/photos/photo_list.dart';
 import 'package:unsplash_app/search/search_page.dart';
 
 class HomePage extends HookWidget {
-  static Future<dynamic> show({BuildContext context}) {
+  static Future<dynamic> show({required BuildContext context}) {
     return Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => HomePage.newInstance()));
   }
@@ -49,6 +49,7 @@ class HomePage extends HookWidget {
                         SearchPage.show(context: context, initialQuery: text);
                       },
                       clearOnSearch: true,
+                      initialSearchText: '',
                     ),
                     CupertinoSliverRefreshControl(
                       onRefresh: () async {
@@ -59,9 +60,9 @@ class HomePage extends HookWidget {
                     ),
                     PhotoList(
                       photos: state.maybeWhen<List<Photo>>(
-                        orElse: () => List<Photo>(),
-                        paginationLoading: (photos) => photos,
-                        doneLoading: (photos) => photos,
+                        orElse: () => <Photo>[],
+                        paginationLoading: (photos) => photos!,
+                        doneLoading: (photos) => photos!,
                       ),
                       loading: state is PaginationLoadingPhotosState,
                     ),
@@ -79,13 +80,13 @@ class HomePage extends HookWidget {
 }
 
 class SnappingScrollPhysics extends BouncingScrollPhysics {
-  final double itemHeight;
+  final double? itemHeight;
 
-  SnappingScrollPhysics({ScrollPhysics scrollPhysics, this.itemHeight})
+  SnappingScrollPhysics({ScrollPhysics? scrollPhysics, this.itemHeight})
       : super(parent: scrollPhysics);
 
   @override
-  BouncingScrollPhysics applyTo(ScrollPhysics ancestor) {
+  BouncingScrollPhysics applyTo(ScrollPhysics? ancestor) {
     return SnappingScrollPhysics(
       scrollPhysics: ancestor,
       itemHeight: itemHeight,
@@ -93,7 +94,7 @@ class SnappingScrollPhysics extends BouncingScrollPhysics {
   }
 
   @override
-  Simulation createBallisticSimulation(
+  Simulation? createBallisticSimulation(
       ScrollMetrics position, double velocity) {
     // If we're out of range and not headed back in range, defer to the parent
     // ballistics, which should put us back in range at a page boundary.
@@ -101,11 +102,11 @@ class SnappingScrollPhysics extends BouncingScrollPhysics {
         (velocity >= 0.0 && position.pixels >= position.maxScrollExtent))
       return super.createBallisticSimulation(position, velocity);
 
-    final currentItemIndex = position.pixels ~/ itemHeight;
-    final currentItemOffset = itemHeight * currentItemIndex;
-    final nextItemOffset = itemHeight * (currentItemIndex + 1);
+    final currentItemIndex = position.pixels ~/ itemHeight!;
+    final currentItemOffset = itemHeight! * currentItemIndex;
+    final nextItemOffset = itemHeight! * (currentItemIndex + 1);
     final previousItemOffset =
-        currentItemIndex >= 0 ? itemHeight * (currentItemIndex - 1) : 0.0;
+        currentItemIndex >= 0 ? itemHeight! * (currentItemIndex - 1) : 0.0;
 
     final targetOffset = velocity >= 0 ? nextItemOffset : currentItemOffset;
 
@@ -126,15 +127,15 @@ class SnappingScrollPhysics extends BouncingScrollPhysics {
 }
 
 class HomeError extends StatelessWidget {
-  final String message;
+  final String? message;
 
-  const HomeError({Key key, this.message}) : super(key: key);
+  const HomeError({Key? key, this.message}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
         child: Container(
       child: Text(
-        message,
+        message!,
         style: Theme.of(context).textTheme.bodyText1,
       ),
     ));
@@ -143,7 +144,7 @@ class HomeError extends StatelessWidget {
 
 class HomeLoading extends StatelessWidget {
   const HomeLoading({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

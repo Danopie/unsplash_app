@@ -17,7 +17,7 @@ abstract class Database<T extends Object> {
     await box.delete(key);
   }
 
-  Future<T> get(String key) async {
+  Future<T?> get(String key) async {
     return box.get(key);
   }
 

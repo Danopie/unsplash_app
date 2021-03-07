@@ -17,7 +17,7 @@ class PhotoRepository extends Repository {
   PhotoRepository(this._photoApiProvider, this._photoDatabaseProvider);
 
   Future<Result<List<Photo>, String>> getPhotos(int page,
-      [PhotoSort sort]) async {
+      [PhotoSort? sort]) async {
     if (await hasConnectivity) {
       try {
         final photos = await _photoApiProvider.getPhotos(page, sort?.query);
@@ -36,13 +36,13 @@ class PhotoRepository extends Repository {
     }
   }
 
-  Future<void> likePhoto(String id) async {
+  Future<void> likePhoto(String? id) async {
     try {
       await _photoApiProvider.likePhoto(id);
     } on Exception {}
   }
 
-  Future<void> unlikePhoto(String id) async {
+  Future<void> unlikePhoto(String? id) async {
     try {
       await _photoApiProvider.unlikePhoto(id);
     } on Exception {}
@@ -57,8 +57,8 @@ class PhotoRepository extends Repository {
         return Result.err(DEFAULT_ERROR_MESSAGE);
       }
     }
+    return Result.err(DEFAULT_ERROR_MESSAGE);
   }
-
 
   @override
   void dispose() {}

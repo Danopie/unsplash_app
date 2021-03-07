@@ -1,3 +1,5 @@
+// @dart=2.9
+
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,6 +13,7 @@ import 'package:unsplash_app/home/home_page.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/photo_adapter.dart';
 import 'package:unsplash_app/photos/data/photo_db.dart';
+
 
 Future<void> main() async {
   await _initHive();

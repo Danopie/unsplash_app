@@ -24,7 +24,10 @@ class UnsplashAppBar extends StatefulHookWidget {
   final bool clearOnSearch;
 
   const UnsplashAppBar(
-      {Key key, this.initialSearchText, this.onUserSearch, this.clearOnSearch})
+      {Key? key,
+      required this.initialSearchText,
+      required this.onUserSearch,
+      this.clearOnSearch = false})
       : super(key: key);
 
   @override
@@ -34,7 +37,7 @@ class UnsplashAppBar extends StatefulHookWidget {
 class _UnsplashAppBarState extends State<UnsplashAppBar> {
   @override
   Widget build(BuildContext context) {
-    final isFirst = ModalRoute.of(context).isFirst;
+    final isFirst = ModalRoute.of(context)!.isFirst;
     final userState = useProvider(userControllerProvider.state);
     return SliverAppBar(
       leading: isFirst
@@ -52,7 +55,7 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
                     radius: 12,
                     backgroundColor: Colors.white,
                     backgroundImage: NetworkImage(
-                      userState.profile.profile_image.small,
+                      userState.profile!.profile_image!.small,
                     ),
                   ),
                   onTap: () {
@@ -102,11 +105,13 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
 
 class SearchBar extends HookWidget {
   final String initialSearchText;
-  final Function(String) onUserSearch;
+  final Function(String)? onUserSearch;
   final bool clearOnSearch;
 
   SearchBar(
-      {this.initialSearchText, this.onUserSearch, this.clearOnSearch = false});
+      {required this.initialSearchText,
+      required this.onUserSearch,
+      this.clearOnSearch = false});
 
   @override
   Widget build(BuildContext context) {
@@ -140,8 +145,8 @@ class SearchBar extends HookWidget {
                 controller: textController,
                 focusNode: focusNode,
                 onSubmitted: (text) {
-                  if (text != null && text.isNotEmpty) {
-                    onUserSearch(text);
+                  if (text.isNotEmpty) {
+                    onUserSearch!(text);
                     if (clearOnSearch) {
                       textController.clear();
                     }
@@ -149,7 +154,7 @@ class SearchBar extends HookWidget {
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: AppLocalizations.of(context).searchPrompt,
+                  hintText: AppLocalizations.of(context)!.searchPrompt,
                 ),
               ),
             ),

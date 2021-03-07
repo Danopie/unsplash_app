@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'user_state.dart';
 
@@ -9,65 +9,73 @@ part of 'user_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
 class _$UserStateTearOff {
   const _$UserStateTearOff();
 
-// ignore: unused_element
   InitialUserState initial() {
     return const InitialUserState();
   }
 
-// ignore: unused_element
-  LoggedInUserState loggedIn({UserToken token, UserProfile profile}) {
+  LoggedInUserState loggedIn({UserToken? token, UserProfile? profile}) {
     return LoggedInUserState(
       token: token,
       profile: profile,
     );
   }
 
-// ignore: unused_element
   NotLoggedInUserState notLoggedIn() {
     return const NotLoggedInUserState();
   }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $UserState = _$UserStateTearOff();
 
+/// @nodoc
 mixin _$UserState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loggedIn(UserToken token, UserProfile profile),
-    @required Result notLoggedIn(),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(UserToken? token, UserProfile? profile) loggedIn,
+    required TResult Function() notLoggedIn,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loggedIn(UserToken token, UserProfile profile),
-    Result notLoggedIn(),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(UserToken? token, UserProfile? profile)? loggedIn,
+    TResult Function()? notLoggedIn,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialUserState value),
-    @required Result loggedIn(LoggedInUserState value),
-    @required Result notLoggedIn(NotLoggedInUserState value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialUserState value) initial,
+    required TResult Function(LoggedInUserState value) loggedIn,
+    required TResult Function(NotLoggedInUserState value) notLoggedIn,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialUserState value),
-    Result loggedIn(LoggedInUserState value),
-    Result notLoggedIn(NotLoggedInUserState value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialUserState value)? initial,
+    TResult Function(LoggedInUserState value)? loggedIn,
+    TResult Function(NotLoggedInUserState value)? notLoggedIn,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
       _$UserStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
@@ -76,12 +84,14 @@ class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
   final $Res Function(UserState) _then;
 }
 
+/// @nodoc
 abstract class $InitialUserStateCopyWith<$Res> {
   factory $InitialUserStateCopyWith(
           InitialUserState value, $Res Function(InitialUserState) then) =
       _$InitialUserStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitialUserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
     implements $InitialUserStateCopyWith<$Res> {
   _$InitialUserStateCopyWithImpl(
@@ -92,6 +102,7 @@ class _$InitialUserStateCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   InitialUserState get _value => super._value as InitialUserState;
 }
 
+/// @nodoc
 class _$InitialUserState implements InitialUserState {
   const _$InitialUserState();
 
@@ -110,26 +121,22 @@ class _$InitialUserState implements InitialUserState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loggedIn(UserToken token, UserProfile profile),
-    @required Result notLoggedIn(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(UserToken? token, UserProfile? profile) loggedIn,
+    required TResult Function() notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loggedIn(UserToken token, UserProfile profile),
-    Result notLoggedIn(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(UserToken? token, UserProfile? profile)? loggedIn,
+    TResult Function()? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -138,26 +145,22 @@ class _$InitialUserState implements InitialUserState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialUserState value),
-    @required Result loggedIn(LoggedInUserState value),
-    @required Result notLoggedIn(NotLoggedInUserState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialUserState value) initial,
+    required TResult Function(LoggedInUserState value) loggedIn,
+    required TResult Function(NotLoggedInUserState value) notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialUserState value),
-    Result loggedIn(LoggedInUserState value),
-    Result notLoggedIn(NotLoggedInUserState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialUserState value)? initial,
+    TResult Function(LoggedInUserState value)? loggedIn,
+    TResult Function(NotLoggedInUserState value)? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -169,13 +172,15 @@ abstract class InitialUserState implements UserState {
   const factory InitialUserState() = _$InitialUserState;
 }
 
+/// @nodoc
 abstract class $LoggedInUserStateCopyWith<$Res> {
   factory $LoggedInUserStateCopyWith(
           LoggedInUserState value, $Res Function(LoggedInUserState) then) =
       _$LoggedInUserStateCopyWithImpl<$Res>;
-  $Res call({UserToken token, UserProfile profile});
+  $Res call({UserToken? token, UserProfile? profile});
 }
 
+/// @nodoc
 class _$LoggedInUserStateCopyWithImpl<$Res>
     extends _$UserStateCopyWithImpl<$Res>
     implements $LoggedInUserStateCopyWith<$Res> {
@@ -188,23 +193,30 @@ class _$LoggedInUserStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object token = freezed,
-    Object profile = freezed,
+    Object? token = freezed,
+    Object? profile = freezed,
   }) {
     return _then(LoggedInUserState(
-      token: token == freezed ? _value.token : token as UserToken,
-      profile: profile == freezed ? _value.profile : profile as UserProfile,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as UserToken?,
+      profile: profile == freezed
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as UserProfile?,
     ));
   }
 }
 
+/// @nodoc
 class _$LoggedInUserState implements LoggedInUserState {
   const _$LoggedInUserState({this.token, this.profile});
 
   @override
-  final UserToken token;
+  final UserToken? token;
   @override
-  final UserProfile profile;
+  final UserProfile? profile;
 
   @override
   String toString() {
@@ -227,32 +239,29 @@ class _$LoggedInUserState implements LoggedInUserState {
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(profile);
 
+  @JsonKey(ignore: true)
   @override
   $LoggedInUserStateCopyWith<LoggedInUserState> get copyWith =>
       _$LoggedInUserStateCopyWithImpl<LoggedInUserState>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loggedIn(UserToken token, UserProfile profile),
-    @required Result notLoggedIn(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(UserToken? token, UserProfile? profile) loggedIn,
+    required TResult Function() notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return loggedIn(token, profile);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loggedIn(UserToken token, UserProfile profile),
-    Result notLoggedIn(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(UserToken? token, UserProfile? profile)? loggedIn,
+    TResult Function()? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loggedIn != null) {
       return loggedIn(token, profile);
     }
@@ -261,26 +270,22 @@ class _$LoggedInUserState implements LoggedInUserState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialUserState value),
-    @required Result loggedIn(LoggedInUserState value),
-    @required Result notLoggedIn(NotLoggedInUserState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialUserState value) initial,
+    required TResult Function(LoggedInUserState value) loggedIn,
+    required TResult Function(NotLoggedInUserState value) notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return loggedIn(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialUserState value),
-    Result loggedIn(LoggedInUserState value),
-    Result notLoggedIn(NotLoggedInUserState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialUserState value)? initial,
+    TResult Function(LoggedInUserState value)? loggedIn,
+    TResult Function(NotLoggedInUserState value)? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (loggedIn != null) {
       return loggedIn(this);
     }
@@ -289,20 +294,24 @@ class _$LoggedInUserState implements LoggedInUserState {
 }
 
 abstract class LoggedInUserState implements UserState {
-  const factory LoggedInUserState({UserToken token, UserProfile profile}) =
+  const factory LoggedInUserState({UserToken? token, UserProfile? profile}) =
       _$LoggedInUserState;
 
-  UserToken get token;
-  UserProfile get profile;
-  $LoggedInUserStateCopyWith<LoggedInUserState> get copyWith;
+  UserToken? get token => throw _privateConstructorUsedError;
+  UserProfile? get profile => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoggedInUserStateCopyWith<LoggedInUserState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $NotLoggedInUserStateCopyWith<$Res> {
   factory $NotLoggedInUserStateCopyWith(NotLoggedInUserState value,
           $Res Function(NotLoggedInUserState) then) =
       _$NotLoggedInUserStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$NotLoggedInUserStateCopyWithImpl<$Res>
     extends _$UserStateCopyWithImpl<$Res>
     implements $NotLoggedInUserStateCopyWith<$Res> {
@@ -314,6 +323,7 @@ class _$NotLoggedInUserStateCopyWithImpl<$Res>
   NotLoggedInUserState get _value => super._value as NotLoggedInUserState;
 }
 
+/// @nodoc
 class _$NotLoggedInUserState implements NotLoggedInUserState {
   const _$NotLoggedInUserState();
 
@@ -332,26 +342,22 @@ class _$NotLoggedInUserState implements NotLoggedInUserState {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result loggedIn(UserToken token, UserProfile profile),
-    @required Result notLoggedIn(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(UserToken? token, UserProfile? profile) loggedIn,
+    required TResult Function() notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return notLoggedIn();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result loggedIn(UserToken token, UserProfile profile),
-    Result notLoggedIn(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(UserToken? token, UserProfile? profile)? loggedIn,
+    TResult Function()? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (notLoggedIn != null) {
       return notLoggedIn();
     }
@@ -360,26 +366,22 @@ class _$NotLoggedInUserState implements NotLoggedInUserState {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(InitialUserState value),
-    @required Result loggedIn(LoggedInUserState value),
-    @required Result notLoggedIn(NotLoggedInUserState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialUserState value) initial,
+    required TResult Function(LoggedInUserState value) loggedIn,
+    required TResult Function(NotLoggedInUserState value) notLoggedIn,
   }) {
-    assert(initial != null);
-    assert(loggedIn != null);
-    assert(notLoggedIn != null);
     return notLoggedIn(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(InitialUserState value),
-    Result loggedIn(LoggedInUserState value),
-    Result notLoggedIn(NotLoggedInUserState value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialUserState value)? initial,
+    TResult Function(LoggedInUserState value)? loggedIn,
+    TResult Function(NotLoggedInUserState value)? notLoggedIn,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (notLoggedIn != null) {
       return notLoggedIn(this);
     }

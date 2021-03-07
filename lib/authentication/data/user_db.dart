@@ -14,7 +14,7 @@ class UserDatabase extends Database<UserToken> {
     return user;
   }
 
-  Future<UserToken> getUser() async {
+  Future<UserToken?> getUser() async {
     return await get(NAME);
   }
 

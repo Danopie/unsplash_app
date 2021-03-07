@@ -6,7 +6,7 @@ import 'package:unsplash_app/authentication/data/user_repository.dart';
 import 'package:unsplash_app/authentication/login/login_state.dart';
 import 'package:unsplash_app/authentication/user/user_controller.dart';
 
-final loginProvider = StateNotifierProvider.autoDispose((ref) => LoginController(ref.read));
+final AutoDisposeStateNotifierProvider<LoginController> loginProvider = StateNotifierProvider.autoDispose((ref) => LoginController(ref.read));
 
 class LoginController extends StateNotifier<LoginState> {
   final Reader _read;
@@ -16,12 +16,12 @@ class LoginController extends StateNotifier<LoginState> {
       : _userRepository = _read(userRepositoryProvider),
         super(RequestingCode());
 
-  Future<void> onCodeRequested(String code) async {
+  Future<void> onCodeRequested(String? code) async {
     state = LoginState.requestingToken();
 
     final userInfoResult = await _userRepository.login(code);
     if (userInfoResult.isSuccess) {
-      _notifyUserLoggedIn(userInfoResult.get());
+      _notifyUserLoggedIn(userInfoResult.get()!);
       state = LoginState.done();
     } else {
       state = LoginState.error(message: userInfoResult.getError());

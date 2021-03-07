@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:unsplash_app/core/base/exception.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
 
-final dioProvider = Provider.family<Dio, String>(
+final ProviderFamily<Dio, String> dioProvider = Provider.family<Dio, String>(
   (ref, url) {
     return Dio(
       BaseOptions(
@@ -25,30 +25,30 @@ abstract class Api {
   Api(this._client);
 
   @protected
-  Future<T> get<T>(String path, [Map<String, dynamic> params]) async {
+  Future<T?> get<T>(String path, [Map<String, dynamic>? params]) async {
     try {
       final response = await _client.get<T>(path, queryParameters: params);
-      return response?.data;
+      return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }
   }
 
   @protected
-  Future<T> post<T>(String path, [Map<String, dynamic> params]) async {
+  Future<T?> post<T>(String path, [Map<String, dynamic>? params]) async {
     try {
       final response = await _client.post<T>(path, data: params);
-      return response?.data;
+      return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }
   }
 
   @protected
-  Future<T> delete<T>(String path, [Map<String, dynamic> params]) async {
+  Future<T?> delete<T>(String path, [Map<String, dynamic>? params]) async {
     try {
       final response = await _client.delete<T>(path, data: params);
-      return response?.data;
+      return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }

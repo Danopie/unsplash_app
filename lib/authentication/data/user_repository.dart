@@ -16,7 +16,7 @@ class UserRepository extends Repository {
 
   UserRepository(this._userApi, this._userDatabase);
 
-  Future<Result<UserToken, String>> login(String requestCode) async {
+  Future<Result<UserToken?, String>> login(String? requestCode) async {
     if (await hasConnectivity) {
       try {
         final userToken = await _userApi.getToken(requestCode);
@@ -29,7 +29,7 @@ class UserRepository extends Repository {
     }
   }
 
-  Future<Result<UserToken, void>> saveUserToken(UserToken userInfo) async {
+  Future<Result<UserToken?, void>?> saveUserToken(UserToken userInfo) async {
     try {
       final u = await _userDatabase.saveUser(userInfo);
       return Result.ok(u);
@@ -46,12 +46,12 @@ class UserRepository extends Repository {
     }
   }
 
-  Future<Result<UserToken, String>> getUserToken() async {
-    return (await runCatchingAsync<UserToken>(_userDatabase.getUser))
+  Future<Result<UserToken?, String>> getUserToken() async {
+    return (await runCatchingAsync<UserToken?>(_userDatabase.getUser))
         .mapError((e) => e.toString());
   }
 
-  Future<Result<UserProfile, String>> getUserInfo() async {
+  Future<Result<UserProfile?, String>> getUserInfo() async {
     if (await hasConnectivity) {
       try {
         final userProfile = await _userApi.getPersonalProfile();

@@ -6,9 +6,9 @@ import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/authentication/user/user_state.dart';
 
 class UserStatusBuilder extends HookWidget {
-  final Widget Function(UserState) builder;
+  final Widget Function(UserState)? builder;
   final bool loginToTap;
-  final Function onTap;
+  final Function? onTap;
 
   UserStatusBuilder({
     this.builder,
@@ -21,7 +21,7 @@ class UserStatusBuilder extends HookWidget {
     final userState = useProvider(userControllerProvider.state);
     if (loginToTap) {
       return InkWell(
-        child: builder(userState),
+        child: builder!(userState),
         onTap: () async {
           if (userState is LoggedInUserState) {
             onTap?.call();
@@ -29,13 +29,13 @@ class UserStatusBuilder extends HookWidget {
             final result = await Navigator.of(context).push(LoginPage.route);
             if (result == true) {
               await Future.delayed(Duration(milliseconds: 200));
-              onTap();
+              onTap!();
             }
           }
         },
       );
     } else {
-      return builder(userState);
+      return builder!(userState);
     }
   }
 }

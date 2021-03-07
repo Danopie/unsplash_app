@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'login_state.dart';
 
@@ -9,74 +9,81 @@ part of 'login_state.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
+/// @nodoc
 class _$LoginStateTearOff {
   const _$LoginStateTearOff();
 
-// ignore: unused_element
   RequestingCode requestingCode() {
     return const RequestingCode();
   }
 
-// ignore: unused_element
   RequestingToken requestingToken() {
     return const RequestingToken();
   }
 
-// ignore: unused_element
-  LoginError error({String message}) {
+  LoginError error({String? message}) {
     return LoginError(
       message: message,
     );
   }
 
-// ignore: unused_element
   LoginDone done() {
     return const LoginDone();
   }
 }
 
-// ignore: unused_element
+/// @nodoc
 const $LoginState = _$LoginStateTearOff();
 
+/// @nodoc
 mixin _$LoginState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestingCode(),
-    @required Result requestingToken(),
-    @required Result error(String message),
-    @required Result done(),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestingCode,
+    required TResult Function() requestingToken,
+    required TResult Function(String? message) error,
+    required TResult Function() done,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestingCode(),
-    Result requestingToken(),
-    Result error(String message),
-    Result done(),
-    @required Result orElse(),
-  });
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestingCode,
+    TResult Function()? requestingToken,
+    TResult Function(String? message)? error,
+    TResult Function()? done,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestingCode(RequestingCode value),
-    @required Result requestingToken(RequestingToken value),
-    @required Result error(LoginError value),
-    @required Result done(LoginDone value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestingCode value) requestingCode,
+    required TResult Function(RequestingToken value) requestingToken,
+    required TResult Function(LoginError value) error,
+    required TResult Function(LoginDone value) done,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestingCode(RequestingCode value),
-    Result requestingToken(RequestingToken value),
-    Result error(LoginError value),
-    Result done(LoginDone value),
-    @required Result orElse(),
-  });
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestingCode value)? requestingCode,
+    TResult Function(RequestingToken value)? requestingToken,
+    TResult Function(LoginError value)? error,
+    TResult Function(LoginDone value)? done,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   _$LoginStateCopyWithImpl(this._value, this._then);
 
@@ -85,12 +92,14 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   final $Res Function(LoginState) _then;
 }
 
+/// @nodoc
 abstract class $RequestingCodeCopyWith<$Res> {
   factory $RequestingCodeCopyWith(
           RequestingCode value, $Res Function(RequestingCode) then) =
       _$RequestingCodeCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RequestingCodeCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     implements $RequestingCodeCopyWith<$Res> {
   _$RequestingCodeCopyWithImpl(
@@ -101,6 +110,7 @@ class _$RequestingCodeCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   RequestingCode get _value => super._value as RequestingCode;
 }
 
+/// @nodoc
 class _$RequestingCode implements RequestingCode {
   const _$RequestingCode();
 
@@ -119,29 +129,24 @@ class _$RequestingCode implements RequestingCode {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestingCode(),
-    @required Result requestingToken(),
-    @required Result error(String message),
-    @required Result done(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestingCode,
+    required TResult Function() requestingToken,
+    required TResult Function(String? message) error,
+    required TResult Function() done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return requestingCode();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestingCode(),
-    Result requestingToken(),
-    Result error(String message),
-    Result done(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestingCode,
+    TResult Function()? requestingToken,
+    TResult Function(String? message)? error,
+    TResult Function()? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requestingCode != null) {
       return requestingCode();
     }
@@ -150,29 +155,24 @@ class _$RequestingCode implements RequestingCode {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestingCode(RequestingCode value),
-    @required Result requestingToken(RequestingToken value),
-    @required Result error(LoginError value),
-    @required Result done(LoginDone value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestingCode value) requestingCode,
+    required TResult Function(RequestingToken value) requestingToken,
+    required TResult Function(LoginError value) error,
+    required TResult Function(LoginDone value) done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return requestingCode(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestingCode(RequestingCode value),
-    Result requestingToken(RequestingToken value),
-    Result error(LoginError value),
-    Result done(LoginDone value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestingCode value)? requestingCode,
+    TResult Function(RequestingToken value)? requestingToken,
+    TResult Function(LoginError value)? error,
+    TResult Function(LoginDone value)? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requestingCode != null) {
       return requestingCode(this);
     }
@@ -184,12 +184,14 @@ abstract class RequestingCode implements LoginState {
   const factory RequestingCode() = _$RequestingCode;
 }
 
+/// @nodoc
 abstract class $RequestingTokenCopyWith<$Res> {
   factory $RequestingTokenCopyWith(
           RequestingToken value, $Res Function(RequestingToken) then) =
       _$RequestingTokenCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$RequestingTokenCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     implements $RequestingTokenCopyWith<$Res> {
   _$RequestingTokenCopyWithImpl(
@@ -200,6 +202,7 @@ class _$RequestingTokenCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   RequestingToken get _value => super._value as RequestingToken;
 }
 
+/// @nodoc
 class _$RequestingToken implements RequestingToken {
   const _$RequestingToken();
 
@@ -218,29 +221,24 @@ class _$RequestingToken implements RequestingToken {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestingCode(),
-    @required Result requestingToken(),
-    @required Result error(String message),
-    @required Result done(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestingCode,
+    required TResult Function() requestingToken,
+    required TResult Function(String? message) error,
+    required TResult Function() done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return requestingToken();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestingCode(),
-    Result requestingToken(),
-    Result error(String message),
-    Result done(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestingCode,
+    TResult Function()? requestingToken,
+    TResult Function(String? message)? error,
+    TResult Function()? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requestingToken != null) {
       return requestingToken();
     }
@@ -249,29 +247,24 @@ class _$RequestingToken implements RequestingToken {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestingCode(RequestingCode value),
-    @required Result requestingToken(RequestingToken value),
-    @required Result error(LoginError value),
-    @required Result done(LoginDone value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestingCode value) requestingCode,
+    required TResult Function(RequestingToken value) requestingToken,
+    required TResult Function(LoginError value) error,
+    required TResult Function(LoginDone value) done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return requestingToken(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestingCode(RequestingCode value),
-    Result requestingToken(RequestingToken value),
-    Result error(LoginError value),
-    Result done(LoginDone value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestingCode value)? requestingCode,
+    TResult Function(RequestingToken value)? requestingToken,
+    TResult Function(LoginError value)? error,
+    TResult Function(LoginDone value)? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requestingToken != null) {
       return requestingToken(this);
     }
@@ -283,13 +276,15 @@ abstract class RequestingToken implements LoginState {
   const factory RequestingToken() = _$RequestingToken;
 }
 
+/// @nodoc
 abstract class $LoginErrorCopyWith<$Res> {
   factory $LoginErrorCopyWith(
           LoginError value, $Res Function(LoginError) then) =
       _$LoginErrorCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({String? message});
 }
 
+/// @nodoc
 class _$LoginErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     implements $LoginErrorCopyWith<$Res> {
   _$LoginErrorCopyWithImpl(LoginError _value, $Res Function(LoginError) _then)
@@ -300,19 +295,23 @@ class _$LoginErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object message = freezed,
+    Object? message = freezed,
   }) {
     return _then(LoginError(
-      message: message == freezed ? _value.message : message as String,
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
+/// @nodoc
 class _$LoginError implements LoginError {
   const _$LoginError({this.message});
 
   @override
-  final String message;
+  final String? message;
 
   @override
   String toString() {
@@ -331,35 +330,31 @@ class _$LoginError implements LoginError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
+  @JsonKey(ignore: true)
   @override
   $LoginErrorCopyWith<LoginError> get copyWith =>
       _$LoginErrorCopyWithImpl<LoginError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestingCode(),
-    @required Result requestingToken(),
-    @required Result error(String message),
-    @required Result done(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestingCode,
+    required TResult Function() requestingToken,
+    required TResult Function(String? message) error,
+    required TResult Function() done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return error(message);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestingCode(),
-    Result requestingToken(),
-    Result error(String message),
-    Result done(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestingCode,
+    TResult Function()? requestingToken,
+    TResult Function(String? message)? error,
+    TResult Function()? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(message);
     }
@@ -368,29 +363,24 @@ class _$LoginError implements LoginError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestingCode(RequestingCode value),
-    @required Result requestingToken(RequestingToken value),
-    @required Result error(LoginError value),
-    @required Result done(LoginDone value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestingCode value) requestingCode,
+    required TResult Function(RequestingToken value) requestingToken,
+    required TResult Function(LoginError value) error,
+    required TResult Function(LoginDone value) done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return error(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestingCode(RequestingCode value),
-    Result requestingToken(RequestingToken value),
-    Result error(LoginError value),
-    Result done(LoginDone value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestingCode value)? requestingCode,
+    TResult Function(RequestingToken value)? requestingToken,
+    TResult Function(LoginError value)? error,
+    TResult Function(LoginDone value)? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (error != null) {
       return error(this);
     }
@@ -399,17 +389,21 @@ class _$LoginError implements LoginError {
 }
 
 abstract class LoginError implements LoginState {
-  const factory LoginError({String message}) = _$LoginError;
+  const factory LoginError({String? message}) = _$LoginError;
 
-  String get message;
-  $LoginErrorCopyWith<LoginError> get copyWith;
+  String? get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LoginErrorCopyWith<LoginError> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
+/// @nodoc
 abstract class $LoginDoneCopyWith<$Res> {
   factory $LoginDoneCopyWith(LoginDone value, $Res Function(LoginDone) then) =
       _$LoginDoneCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$LoginDoneCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
     implements $LoginDoneCopyWith<$Res> {
   _$LoginDoneCopyWithImpl(LoginDone _value, $Res Function(LoginDone) _then)
@@ -419,6 +413,7 @@ class _$LoginDoneCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
   LoginDone get _value => super._value as LoginDone;
 }
 
+/// @nodoc
 class _$LoginDone implements LoginDone {
   const _$LoginDone();
 
@@ -437,29 +432,24 @@ class _$LoginDone implements LoginDone {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestingCode(),
-    @required Result requestingToken(),
-    @required Result error(String message),
-    @required Result done(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() requestingCode,
+    required TResult Function() requestingToken,
+    required TResult Function(String? message) error,
+    required TResult Function() done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return done();
   }
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestingCode(),
-    Result requestingToken(),
-    Result error(String message),
-    Result done(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? requestingCode,
+    TResult Function()? requestingToken,
+    TResult Function(String? message)? error,
+    TResult Function()? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (done != null) {
       return done();
     }
@@ -468,29 +458,24 @@ class _$LoginDone implements LoginDone {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestingCode(RequestingCode value),
-    @required Result requestingToken(RequestingToken value),
-    @required Result error(LoginError value),
-    @required Result done(LoginDone value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(RequestingCode value) requestingCode,
+    required TResult Function(RequestingToken value) requestingToken,
+    required TResult Function(LoginError value) error,
+    required TResult Function(LoginDone value) done,
   }) {
-    assert(requestingCode != null);
-    assert(requestingToken != null);
-    assert(error != null);
-    assert(done != null);
     return done(this);
   }
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestingCode(RequestingCode value),
-    Result requestingToken(RequestingToken value),
-    Result error(LoginError value),
-    Result done(LoginDone value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RequestingCode value)? requestingCode,
+    TResult Function(RequestingToken value)? requestingToken,
+    TResult Function(LoginError value)? error,
+    TResult Function(LoginDone value)? done,
+    required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (done != null) {
       return done(this);
     }

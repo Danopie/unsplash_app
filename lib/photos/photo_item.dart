@@ -19,13 +19,13 @@ class PhotoItem extends StatelessWidget {
       MediaQuery.of(context).size.width + 220;
 
   const PhotoItem({
-    Key key,
+    Key? key,
     this.photo,
     this.onTap,
   }) : super(key: key);
 
-  final Photo photo;
-  final VoidCallback onTap;
+  final Photo? photo;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,9 @@ class PhotoItem extends StatelessWidget {
               child: _buildPhoto(),
             ),
             PhotoActions(
-              id: photo.id,
-              liked: photo.liked_by_user,
-              urls: photo.urls,
+              id: photo!.id,
+              liked: photo!.liked_by_user,
+              urls: photo!.urls,
               photo: photo,
             ),
             Container(
@@ -59,9 +59,9 @@ class PhotoItem extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1.0,
       child: Container(
-        color: ColorUtils.fromHex(photo.color),
+        color: ColorUtils.fromHex(photo!.color!),
         child: CachedNetworkImage(
-          imageUrl: photo.urls.regular,
+          imageUrl: photo!.urls!.regular,
           fit: BoxFit.cover,
           fadeInDuration: Duration(milliseconds: 700),
         ),
@@ -78,7 +78,7 @@ class PhotoItem extends StatelessWidget {
             child: CachedNetworkImage(
               width: 32,
               height: 32,
-              imageUrl: photo.user.profile_image.small,
+              imageUrl: photo!.user!.profile_image!.small,
               fadeInCurve: Curves.easeInOut,
               fadeInDuration: Duration(milliseconds: 200),
             ),
@@ -88,7 +88,7 @@ class PhotoItem extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(photo.user.name,
+              Text(photo!.user!.name,
                   style: Theme.of(context).textTheme.bodyText1),
             ],
           ),
@@ -99,13 +99,13 @@ class PhotoItem extends StatelessWidget {
 }
 
 class PhotoActions extends HookWidget {
-  final String id;
-  final bool liked;
-  final Urls urls;
-  final Photo photo;
+  final String? id;
+  final bool? liked;
+  final Urls? urls;
+  final Photo? photo;
 
   const PhotoActions({
-    Key key,
+    Key? key,
     this.id,
     this.liked,
     this.urls,
@@ -136,7 +136,7 @@ class PhotoActions extends HookWidget {
           Spacer(),
           UnsplashButton(
             child: Text(
-              AppLocalizations.of(context).download,
+              AppLocalizations.of(context)!.download,
             ).bold().size(12).color(boulder),
             trailing: Icon(
               Icons.keyboard_arrow_down,
@@ -145,7 +145,7 @@ class PhotoActions extends HookWidget {
             ),
             onTap: () async {
               await PhotoDownloadDelegate(
-                      context: context, url: urls.full, id: id)
+                      context: context, url: urls!.full, id: id)
                   .run();
             },
             onTrailingTap: () {
@@ -163,10 +163,10 @@ class PhotoActions extends HookWidget {
 }
 
 class LikeButton extends StatefulWidget {
-  final String id;
-  final bool liked;
+  final String? id;
+  final bool? liked;
 
-  const LikeButton({Key key, this.id, this.liked}) : super(key: key);
+  const LikeButton({Key? key, this.id, this.liked}) : super(key: key);
 
   @override
   _LikeButtonState createState() => _LikeButtonState();
@@ -176,15 +176,15 @@ class _LikeButtonState extends State<LikeButton> {
   @override
   Widget build(BuildContext context) {
     return UnsplashButton(
-      borderColor: widget.liked ? Colors.red : null,
+      borderColor: widget.liked! ? Colors.red : null,
       child: Icon(
         Icons.thumb_up,
-        color: widget.liked ? Colors.red : boulder,
+        color: widget.liked! ? Colors.red : boulder,
         size: 16,
       ),
       requireLogin: true,
       onTap: () {
-        if (!widget.liked) {
+        if (!widget.liked!) {
           context.read(photosProvider).onUserLikePhoto(widget.id);
         } else {
           context.read(photosProvider).onUserUnlikePhoto(widget.id);
@@ -195,36 +195,36 @@ class _LikeButtonState extends State<LikeButton> {
 }
 
 class UnsplashInkWell extends StatelessWidget {
-  final Widget child;
-  final Function onTap;
+  final Widget? child;
+  final Function? onTap;
   final bool requireLogin;
 
   const UnsplashInkWell(
-      {Key key, this.onTap, this.child, this.requireLogin = false})
+      {Key? key, this.onTap, this.child, this.requireLogin = false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: child,
-      onTap: onTap,
+      onTap: onTap as void Function()?,
       borderRadius: BorderRadius.circular(4),
     );
   }
 }
 
 class UnsplashButton extends StatelessWidget {
-  final Widget child;
-  final double width;
-  final double height;
-  final Widget trailing;
-  final Function onTap;
-  final Function onTrailingTap;
+  final Widget? child;
+  final double? width;
+  final double? height;
+  final Widget? trailing;
+  final Function? onTap;
+  final Function? onTrailingTap;
   final bool requireLogin;
-  final Color borderColor;
+  final Color? borderColor;
 
   const UnsplashButton({
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.child,

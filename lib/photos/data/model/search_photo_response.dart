@@ -5,7 +5,7 @@ class SearchPhotoResponse {
 
   final int total;
   final int total_pages;
-  final List<Photo> results;
+  final List<Photo>? results;
 
 	SearchPhotoResponse.fromJson(Map<String, dynamic> map): 
 		total = parseInt(map["total"]),
@@ -17,7 +17,7 @@ class SearchPhotoResponse {
 		map['total'] = total;
 		map['total_pages'] = total_pages;
 		map['results'] = results != null ? 
-			this.results.map((v) => v.toJson()).toList()
+			this.results!.map((v) => v.toJson()).toList()
 			: null;
 		return map;
 	}

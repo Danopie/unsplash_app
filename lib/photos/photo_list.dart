@@ -6,11 +6,11 @@ import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 
 class PhotoList extends HookWidget {
-  final List<Photo> photos;
-  final bool loading;
+  final List<Photo>? photos;
+  final bool? loading;
 
   const PhotoList({
-    Key key,
+    Key? key,
     this.photos,
     this.loading,
   }) : super(key: key);
@@ -22,15 +22,15 @@ class PhotoList extends HookWidget {
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            if (index == _getListLength() - 1 && loading) {
+            if (index == _getListLength() - 1 && loading!) {
               return Container(
                   margin: EdgeInsets.symmetric(vertical: 32),
                   child: HomeLoading());
             } else {
               return PhotoItem(
-                photo: photos[index],
+                photo: photos![index],
                 onTap: () => PhotoDetailScreen.show(
-                    context: context, id: photos[index].id),
+                    context: context, id: photos![index].id),
               );
             }
           },
@@ -40,7 +40,7 @@ class PhotoList extends HookWidget {
     );
   }
 
-  int _getListLength() => loading ? _getPhotosLength() + 1 : _getPhotosLength();
+  int _getListLength() => loading! ? _getPhotosLength() + 1 : _getPhotosLength();
 
   int _getPhotosLength() => photos?.length ?? 0;
 }

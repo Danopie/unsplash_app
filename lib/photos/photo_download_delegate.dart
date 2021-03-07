@@ -7,9 +7,9 @@ import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PhotoDownloadDelegate {
-  final String url;
-  final String id;
-  final BuildContext context;
+  final String? url;
+  final String? id;
+  final BuildContext? context;
 
   PhotoDownloadDelegate({this.url, this.id, this.context});
 
@@ -31,8 +31,8 @@ class PhotoDownloadDelegate {
     }
   }
 
-  void showMessage({String message}) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  void showMessage({required String message}) {
+    ScaffoldMessenger.of(context!).showSnackBar(SnackBar(
       content: Text(message),
       duration: Duration(seconds: 1),
     ));
@@ -40,9 +40,9 @@ class PhotoDownloadDelegate {
 
   Future<bool> _save() async {
     var response = await Dio()
-        .get(url, options: Options(responseType: ResponseType.bytes));
+        .get(url!, options: Options(responseType: ResponseType.bytes));
     await ImageGallerySaver.saveImage(Uint8List.fromList(response.data),
-        quality: 60, name: id);
+        quality: 60, name: id!);
     return true;
   }
 }

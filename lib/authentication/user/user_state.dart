@@ -9,7 +9,7 @@ abstract class UserState with _$UserState {
 
   const factory UserState.initial() = InitialUserState;
 
-  const factory UserState.loggedIn({UserToken token, UserProfile profile}) = LoggedInUserState;
+  const factory UserState.loggedIn({UserToken? token, UserProfile? profile}) = LoggedInUserState;
 
   const factory UserState.notLoggedIn() = NotLoggedInUserState;
 
