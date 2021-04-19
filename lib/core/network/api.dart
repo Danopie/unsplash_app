@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:meta/meta.dart';
-import 'package:unsplash_app/core/base/exception.dart';
+import 'package:unsplash_app/core/network/api_error.dart';
 import 'package:unsplash_app/core/network/interceptors/header_interceptor.dart';
 import 'package:unsplash_app/core/network/interceptors/log_interceptor.dart';
 
@@ -27,40 +29,48 @@ abstract class Api {
   Api(this._client);
 
   @protected
-  Future<T?> get<T>(String path, [Map<String, dynamic>? params]) async {
+  Future<dynamic> get(String path, [Map<String, dynamic>? params]) async {
     try {
-      final response = await _client.get<T>(path, queryParameters: params);
+      final response = await _client.get<String>(path, queryParameters: params);
       return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }
+    throw ApiUnknownError();
   }
 
   @protected
-  Future<T?> post<T>(String path, [Map<String, dynamic>? params]) async {
+  Future<dynamic> post(String path,
+      [Map<String, dynamic>? params]) async {
     try {
-      final response = await _client.post<T>(path, data: params);
+      final response = await _client.post(path, data: params);
       return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }
+    throw ApiUnknownError();
   }
 
   @protected
-  Future<T?> delete<T>(String path, [Map<String, dynamic>? params]) async {
+  Future<dynamic> delete(String path, [Map<String, dynamic>? params]) async {
     try {
-      final response = await _client.delete<T>(path, data: params);
+      final response = await _client.delete(path, data: params);
       return response.data;
     } on DioError catch (e) {
       _handleError(e);
     }
+    throw ApiUnknownError();
   }
 
   void _handleError(DioError e) {
     if (e.type == DioErrorType.connectTimeout ||
         e.type == DioErrorType.sendTimeout ||
         e.type == DioErrorType.receiveTimeout) {
-      throw TimeoutException();
+      throw ApiTimeoutError();
+    } else if (e.type == DioErrorType.response) {
+      throw ApiHttpError(httpCode: e.response?.statusCode);
+    } else {
+      throw ApiUnknownError();
     }
   }
 }

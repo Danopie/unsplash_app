@@ -141,7 +141,6 @@ class SearchBar extends HookWidget {
           Expanded(
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 8),
-              padding: EdgeInsets.only(bottom: 8),
               child: TextField(
                 controller: textController,
                 focusNode: focusNode,
@@ -155,7 +154,7 @@ class SearchBar extends HookWidget {
                 },
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: AppLocalizations.of(context)!.searchPrompt,
+                  hintText: AppLocalizations.of(context)?.searchPrompt,
                 ),
               ),
             ),

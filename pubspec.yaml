@@ -32,32 +32,25 @@ dependencies:
   cached_network_image: ^3.0.0-nullsafety
   rxdart: ^0.26.0
   connectivity: ^3.0.2
-  lightweight_result:
-    path: ../lightweight_result
   hooks_riverpod: ^0.13.1
   flutter_hooks: ^0.16.0
   webview_flutter: ^2.0.2
-  build_context: ^2.0.4
-  image_gallery_saver: ^1.5.0
+  build_context: ^3.0.0
+  image_gallery_saver: ^1.6.9
   permission_handler: ^6.0.1
   animations: ^2.0.0
   flutter_localizations:
     sdk: flutter
   intl: ^0.17.0
-  freezed_annotation: ^0.14.0
-  device_preview:
-    git:
-      url: https://github.com/FluentChange/flutter_device_preview.git
-      path: device_preview
-      ref: nnbd_git_dependency_ci
-  pretty_json: ^1.1.0
-
-dependency_overrides:
-  freezed_annotation: ^0.14.0
+  freezed_annotation: ^0.14.1
+  device_preview: ^0.7.1
+  pretty_json: ^2.0.0
 
 dev_dependencies:
+  mocktail: ^0.1.1
   freezed: ^0.14.0+1
   build_runner: ^1.10.1
+  test: ^1.16.5
   flutter_test:
     sdk: flutter
 

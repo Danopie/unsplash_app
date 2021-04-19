@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lightweight_result/lightweight_result.dart';
 import 'package:unsplash_app/authentication/user/user_controller.dart';
 import 'package:unsplash_app/authentication/user/user_dependent_state_notifier.dart';
 import 'package:unsplash_app/authentication/user/user_state.dart';
@@ -29,27 +28,33 @@ class PhotosController extends UserDependentStateNotifier<PhotosState> {
     }
   }
 
-  Future _loadInitialPhotos() async {
-    final photoResult = await _photoRepository.getPhotos(page);
-    state = photoResult.fold<PhotosState>((data) {
-      return PhotosState.doneLoading(photos: data);
-    }, (msg) => InitialErrorPhotosState(message: msg));
+  Future<void> _loadInitialPhotos() async {
+    try {
+      final photos = await _photoRepository.getPhotos(page);
+      page++;
+      state = LoadedPhotosState(
+        photos: photos,
+      );
+    } catch (e) {
+      state = InitialErrorPhotosState(message: e.toString());
+    }
   }
 
   Future<void> onLoadMore() async {
     final PhotosState latestState = state;
-    if (latestState is LoadedPhotosState) {
-      state = PhotosState.paginationLoading(photos: latestState.photos);
 
-      final photoResult = await _photoRepository.getPhotos(page + 1);
-      await Future.delayed(Duration(seconds: 2));
-      state = photoResult.fold<PhotosState>((data) {
-        page++;
-        final latestState = state as PaginationLoadingPhotosState;
-        return LoadedPhotosState(
-          photos: List.of(latestState.photos)..addAll(data),
+    try {
+      if (latestState is LoadedPhotosState) {
+        state = PhotosState.paginationLoading(photos: latestState.photos);
+
+        final photos = await _photoRepository.getPhotos(page + 1);
+        await Future.delayed(Duration(seconds: 2));
+        state = LoadedPhotosState(
+          photos: List.of(latestState.photos)..addAll(photos),
         );
-      }, (msg) => InitialErrorPhotosState(message: msg));
+      }
+    } catch (e) {
+      state = latestState;
     }
   }
 

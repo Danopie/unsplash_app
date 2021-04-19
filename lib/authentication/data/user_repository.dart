@@ -1,11 +1,9 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lightweight_result/lightweight_result.dart';
 import 'package:unsplash_app/authentication/data/model/user_info.dart';
 import 'package:unsplash_app/authentication/data/model/user_profile.dart';
 import 'package:unsplash_app/authentication/data/user_api.dart';
 import 'package:unsplash_app/authentication/data/user_db.dart';
-import 'package:unsplash_app/core/base/repository.dart';
-import 'package:unsplash_app/core/constants.dart';
+import 'package:unsplash_app/core/repository/repository.dart';
 
 final userRepositoryProvider = Provider((ref) =>
     UserRepository(ref.read(userApiProvider), ref.read(userDatabaseProvider)));
@@ -16,52 +14,26 @@ class UserRepository extends Repository {
 
   UserRepository(this._userApi, this._userDatabase);
 
-  Future<Result<UserToken?, String>> login(String? requestCode) async {
-    if (await hasConnectivity) {
-      try {
-        final userToken = await _userApi.getToken(requestCode);
-        return Result.ok(userToken);
-      } on Exception {
-        return Result.err(DEFAULT_ERROR_MESSAGE);
-      }
-    } else {
-      return Result.err(DEFAULT_ERROR_MESSAGE);
-    }
+  Future<UserToken> login(String? requestCode) async {
+    final userToken = await _userApi.getToken(requestCode);
+    return userToken;
   }
 
-  Future<Result<UserToken?, void>?> saveUserToken(UserToken userInfo) async {
-    try {
-      final u = await _userDatabase.saveUser(userInfo);
-      return Result.ok(u);
-    } on Exception {
-      return null;
-    }
+  Future<void> saveUserToken(UserToken userInfo) async {
+    await _userDatabase.saveUser(userInfo);
   }
 
   Future<void> clearUserToken() async {
-    try {
-      await _userDatabase.clearUser();
-    } on Exception {
-      return null;
-    }
+    await _userDatabase.clearUser();
   }
 
-  Future<Result<UserToken?, String>> getUserToken() async {
-    return (await runCatchingAsync<UserToken?>(_userDatabase.getUser))
-        .mapError((e) => e.toString());
+  Future<UserToken?> getUserToken() async {
+    return _userDatabase.getUser();
   }
 
-  Future<Result<UserProfile?, String>> getUserInfo() async {
-    if (await hasConnectivity) {
-      try {
-        final userProfile = await _userApi.getPersonalProfile();
-        return Result.ok(userProfile);
-      } on Exception {
-        return Result.err(DEFAULT_ERROR_MESSAGE);
-      }
-    } else {
-      return Result.err(DEFAULT_ERROR_MESSAGE);
-    }
+  Future<UserProfile> getUserInfo() async {
+    final userProfile = await _userApi.getPersonalProfile();
+    return userProfile;
   }
 
   @override

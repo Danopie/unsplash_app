@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:lightweight_result/lightweight_result.dart';
-import 'package:unsplash_app/core/base/repository.dart';
+import 'package:unsplash_app/core/repository/repository.dart';
 import 'package:unsplash_app/core/constants.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/model/photo_sort.dart';
@@ -16,23 +15,15 @@ class PhotoRepository extends Repository {
 
   PhotoRepository(this._photoApiProvider, this._photoDatabaseProvider);
 
-  Future<Result<List<Photo>, String>> getPhotos(int page,
+  Future<List<Photo>> getPhotos(int page,
       [PhotoSort? sort]) async {
     if (await hasConnectivity) {
-      try {
-        final photos = await _photoApiProvider.getPhotos(page, sort?.query);
-        await _photoDatabaseProvider.savePhotos(photos);
-        return Result.ok(photos);
-      } on Exception {
-        return Result.err(DEFAULT_ERROR_MESSAGE);
-      }
+      final photos = await _photoApiProvider.getPhotos(page, sort?.query);
+      await _photoDatabaseProvider.savePhotos(photos);
+      return photos;
     } else {
       final photos = await _photoDatabaseProvider.getPhotos();
-      if (photos != null) {
-        return Result.ok(photos);
-      } else {
-        return Result.err("Connect to the internet");
-      }
+      return photos;
     }
   }
 
@@ -48,16 +39,9 @@ class PhotoRepository extends Repository {
     } on Exception {}
   }
 
-  Future<Result<List<Photo>, String>> searchPhotos(String query) async {
-    if (await hasConnectivity) {
-      try {
-        final photos = await _photoApiProvider.searchPhotos(query);
-        return Result.ok(photos);
-      } on Exception {
-        return Result.err(DEFAULT_ERROR_MESSAGE);
-      }
-    }
-    return Result.err(DEFAULT_ERROR_MESSAGE);
+  Future<List<Photo>> searchPhotos(String query) async {
+    final photos = await _photoApiProvider.searchPhotos(query);
+    return photos ?? <Photo>[];
   }
 
   @override

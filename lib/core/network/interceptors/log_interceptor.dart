@@ -39,9 +39,17 @@ ${_printResponse(err.response)}
   String _printResponse(Response? response) {
     if (response != null) {
       return '''uri: ${response.request.uri}, statusCode: ${response.statusCode} body:
-${prettyJson(jsonDecode(response.data))}''';
+${_decodeJson(response)}''';
     }
-
     return '';
+  }
+
+  _decodeJson(Response response) {
+    final res= response.data;
+    if (res is String) {
+      return prettyJson(jsonDecode(res));
+    }else {
+      return response.data.toString();
+    }
   }
 }
