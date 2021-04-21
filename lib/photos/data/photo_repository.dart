@@ -15,8 +15,7 @@ class PhotoRepository extends Repository {
 
   PhotoRepository(this._photoApiProvider, this._photoDatabaseProvider);
 
-  Future<List<Photo>> getPhotos(int page,
-      [PhotoSort? sort]) async {
+  Future<List<Photo>> getPhotos(int page, [PhotoSort? sort]) async {
     if (await hasConnectivity) {
       final photos = await _photoApiProvider.getPhotos(page, sort?.query);
       await _photoDatabaseProvider.savePhotos(photos);
@@ -42,6 +41,11 @@ class PhotoRepository extends Repository {
   Future<List<Photo>> searchPhotos(String query) async {
     final photos = await _photoApiProvider.searchPhotos(query);
     return photos ?? <Photo>[];
+  }
+
+  Future<List<Photo>> getRelatedPhotos(Photo photo) async {
+    final photos = await _photoApiProvider.getRelatedPhotos(photo);
+    return photos;
   }
 
   @override

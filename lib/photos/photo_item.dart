@@ -14,6 +14,8 @@ import '../res/text.dart';
 import 'data/model/urls.dart';
 import 'domain/photos_controller.dart';
 
+enum PhotoItemLayoutStrategy { List, Detail }
+
 class PhotoItem extends StatelessWidget {
   static double height(BuildContext context) =>
       MediaQuery.of(context).size.width + 220;
@@ -22,10 +24,12 @@ class PhotoItem extends StatelessWidget {
     Key? key,
     this.photo,
     this.onTap,
+    this.layoutStrategy = PhotoItemLayoutStrategy.List,
   }) : super(key: key);
 
   final Photo? photo;
   final VoidCallback? onTap;
+  final PhotoItemLayoutStrategy layoutStrategy;
 
   @override
   Widget build(BuildContext context) {
@@ -37,15 +41,28 @@ class PhotoItem extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             _buildPhotoHeader(context),
-            Expanded(
-              child: _buildPhoto(),
-            ),
-            PhotoActions(
-              id: photo!.id,
-              liked: photo!.liked_by_user,
-              urls: photo!.urls,
-              photo: photo,
-            ),
+            if (layoutStrategy == PhotoItemLayoutStrategy.List) ...[
+              Expanded(
+                child: _buildPhoto(),
+              ),
+              PhotoActions(
+                id: photo!.id,
+                liked: photo!.liked_by_user,
+                urls: photo!.urls,
+                photo: photo,
+              ),
+            ] else ...[
+              PhotoActions(
+                id: photo!.id,
+                liked: photo!.liked_by_user,
+                urls: photo!.urls,
+                photo: photo,
+                padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
+              ),
+              Expanded(
+                child: _buildPhoto(),
+              ),
+            ],
             Container(
               height: 12,
             ),
@@ -103,6 +120,7 @@ class PhotoActions extends HookWidget {
   final bool? liked;
   final Urls? urls;
   final Photo? photo;
+  final EdgeInsets padding;
 
   const PhotoActions({
     Key? key,
@@ -110,12 +128,13 @@ class PhotoActions extends HookWidget {
     this.liked,
     this.urls,
     this.photo,
+    this.padding = const EdgeInsets.all(12),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: padding,
       child: Row(
         children: [
           LikeButton(

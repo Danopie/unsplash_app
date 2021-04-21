@@ -4,6 +4,7 @@ import 'package:unsplash_app/home/home_page.dart';
 import 'package:unsplash_app/photo_detail/photo_detail_screen.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PhotoList extends HookWidget {
   final List<Photo>? photos;
@@ -29,8 +30,10 @@ class PhotoList extends HookWidget {
             } else {
               return PhotoItem(
                 photo: photos![index],
-                onTap: () => PhotoDetailScreen.show(
-                    context: context, id: photos![index].id),
+                onTap: () {
+                  final photo = context.read(photoProvider(photos![index].id!));
+                  PhotoDetailScreen.show(context: context, photo: photo);
+                },
               );
             }
           },
@@ -40,7 +43,8 @@ class PhotoList extends HookWidget {
     );
   }
 
-  int _getListLength() => loading! ? _getPhotosLength() + 1 : _getPhotosLength();
+  int _getListLength() =>
+      loading! ? _getPhotosLength() + 1 : _getPhotosLength();
 
   int _getPhotosLength() => photos?.length ?? 0;
 }
