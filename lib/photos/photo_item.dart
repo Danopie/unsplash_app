@@ -74,7 +74,7 @@ class PhotoItem extends StatelessWidget {
 
   AspectRatio _buildPhoto() {
     return AspectRatio(
-      aspectRatio: 1.0,
+      aspectRatio: photo!.width! / photo!.height!,
       child: Container(
         color: ColorUtils.fromHex(photo!.color!),
         child: CachedNetworkImage(

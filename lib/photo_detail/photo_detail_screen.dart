@@ -196,7 +196,7 @@ class RelatedPhotoList extends HookWidget {
                   PhotoDetailScreen.show(context: context, photo: photo);
                 },
                 child: AspectRatio(
-                  aspectRatio: 1.0,
+                  aspectRatio: photo.width! / photo.height!,
                   child: Container(
                     color: ColorUtils.fromHex(photo.color!),
                     child: CachedNetworkImage(
