@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:unsplash_app/authentication/widgets/user_dependent_tap.dart';
 import 'package:unsplash_app/core/utils/color_utils.dart';
 import 'package:unsplash_app/core/widget/context_menu.dart';
+import 'package:unsplash_app/photo_detail/photo_detail_screen.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_download_delegate.dart';
 import 'package:unsplash_app/res/color.dart';
@@ -43,7 +44,7 @@ class PhotoItem extends StatelessWidget {
             _buildPhotoHeader(context),
             if (layoutStrategy == PhotoItemLayoutStrategy.List) ...[
               Expanded(
-                child: _buildPhoto(),
+                child: PhotoThumbnail(photo: photo!,),
               ),
               PhotoActions(
                 id: photo!.id,
@@ -60,27 +61,13 @@ class PhotoItem extends StatelessWidget {
                 padding: EdgeInsets.only(left: 12, right: 12, bottom: 12),
               ),
               Expanded(
-                child: _buildPhoto(),
+                child: PhotoThumbnail(photo: photo!,),
               ),
             ],
             Container(
               height: 12,
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  AspectRatio _buildPhoto() {
-    return AspectRatio(
-      aspectRatio: photo!.width! / photo!.height!,
-      child: Container(
-        color: ColorUtils.fromHex(photo!.color!),
-        child: CachedNetworkImage(
-          imageUrl: photo!.urls!.regular ?? "",
-          fit: BoxFit.cover,
-          fadeInDuration: Duration(milliseconds: 700),
         ),
       ),
     );

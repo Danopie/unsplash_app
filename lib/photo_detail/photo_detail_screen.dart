@@ -25,7 +25,8 @@ final photoProvider = Provider.family<Photo, String>(
 class PhotoDetailScreen extends StatefulHookWidget {
   PhotoDetailScreen({required this.photo});
 
-  static Future<dynamic> show({required BuildContext context, required Photo  photo}) {
+  static Future<dynamic> show(
+      {required BuildContext context, required Photo photo}) {
     return Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => PhotoDetailScreen(
@@ -192,19 +193,11 @@ class RelatedPhotoList extends HookWidget {
             (context, index) {
               final photo = relatedPhotos[index];
               return GestureDetector(
-                onTap: (){
+                onTap: () {
                   PhotoDetailScreen.show(context: context, photo: photo);
                 },
-                child: AspectRatio(
-                  aspectRatio: photo.width! / photo.height!,
-                  child: Container(
-                    color: ColorUtils.fromHex(photo.color!),
-                    child: CachedNetworkImage(
-                      imageUrl: photo.urls?.regular ?? "",
-                      fit: BoxFit.cover,
-                      fadeInDuration: Duration(milliseconds: 700),
-                    ),
-                  ),
+                child: PhotoThumbnail(
+                  photo: photo,
                 ),
               );
             },
@@ -213,5 +206,26 @@ class RelatedPhotoList extends HookWidget {
         ),
       );
     }
+  }
+}
+
+class PhotoThumbnail extends StatelessWidget {
+  final Photo photo;
+
+  const PhotoThumbnail({Key? key, required this.photo}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: photo.width!.toDouble(),
+      height: photo.height!.toDouble(),
+      color: ColorUtils.fromHex(photo.color!),
+      child: CachedNetworkImage(
+        imageUrl: photo.urls?.regular ?? "",
+        width: double.infinity,
+        fit: BoxFit.cover,
+        fadeInDuration: Duration(milliseconds: 700),
+      ),
+    );
   }
 }
