@@ -15,27 +15,39 @@ class PhotoDetailController extends StateNotifier<PhotoDetailState> {
   }
 
   Future<void> _loadData() async {
+    final photo = await repository.getPhoto(state.photo.id!);
     final relatedPhotos = await repository.getRelatedPhotos(state.photo);
-    state = state.copyWith(relatedPhotos: relatedPhotos);
+    state = state.copyWith(
+        relatedPhotos: relatedPhotos,
+        relatedCollections: photo.relatedCollections,
+        relatedTags: photo.tags);
   }
 }
 
 class PhotoDetailState {
   final Photo photo;
   final List<Photo>? relatedPhotos;
+  final RelatedCollections? relatedCollections;
+  final List<Tag>? relatedTags;
 
   const PhotoDetailState({
     required this.photo,
     this.relatedPhotos,
+    this.relatedCollections,
+    this.relatedTags,
   });
 
   PhotoDetailState copyWith({
     Photo? photo,
     List<Photo>? relatedPhotos,
+    RelatedCollections? relatedCollections,
+    List<Tag>? relatedTags,
   }) {
     return new PhotoDetailState(
       photo: photo ?? this.photo,
       relatedPhotos: relatedPhotos ?? this.relatedPhotos,
+      relatedCollections: relatedCollections ?? this.relatedCollections,
+      relatedTags: relatedTags ?? this.relatedTags,
     );
   }
 }

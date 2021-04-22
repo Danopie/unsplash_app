@@ -26,6 +26,11 @@ class PhotoRepository extends Repository {
     }
   }
 
+  Future<Photo> getPhoto(String id) async {
+    final photo = await _photoApiProvider.getPhoto(id);
+    return photo;
+  }
+
   Future<void> likePhoto(String? id) async {
     try {
       await _photoApiProvider.likePhoto(id);

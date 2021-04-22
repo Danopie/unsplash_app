@@ -26,6 +26,12 @@ class PhotoApi extends Api {
     return data;
   }
 
+  Future<Photo> getPhoto(String id) async {
+    final response = await get("${EndPoint.MAIN}${ApiPath.photo}/$id");
+    final data = Photo.fromJson(jsonDecode(response));
+    return data;
+  }
+
   Future<void> likePhoto(String? id) async {
     await post("${ApiPath.photo}/$id/like");
   }
