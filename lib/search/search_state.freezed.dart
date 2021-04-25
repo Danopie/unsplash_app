@@ -16,23 +16,36 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SearchStateTearOff {
   const _$SearchStateTearOff();
 
-  SearchingState searching({String? query}) {
+  SearchingState searching({required String query, required SearchType type}) {
     return SearchingState(
       query: query,
+      type: type,
     );
   }
 
-  SearchSuccessState success({List<Photo>? photos, String? query}) {
+  SearchSuccessState success(
+      {required String query,
+      required SearchType type,
+      List<Photo>? photos,
+      List<PhotoCollection>? collections,
+      List<UserProfile>? userProfiles}) {
     return SearchSuccessState(
-      photos: photos,
       query: query,
+      type: type,
+      photos: photos,
+      collections: collections,
+      userProfiles: userProfiles,
     );
   }
 
-  SearchErrorState error({String? message, String? query}) {
+  SearchErrorState error(
+      {required String message,
+      required String query,
+      required SearchType type}) {
     return SearchErrorState(
       message: message,
       query: query,
+      type: type,
     );
   }
 }
@@ -42,20 +55,34 @@ const $SearchState = _$SearchStateTearOff();
 
 /// @nodoc
 mixin _$SearchState {
-  String? get query => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  SearchType get type => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? query) searching,
-    required TResult Function(List<Photo>? photos, String? query) success,
-    required TResult Function(String? message, String? query) error,
+    required TResult Function(String query, SearchType type) searching,
+    required TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)
+        success,
+    required TResult Function(String message, String query, SearchType type)
+        error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? query)? searching,
-    TResult Function(List<Photo>? photos, String? query)? success,
-    TResult Function(String? message, String? query)? error,
+    TResult Function(String query, SearchType type)? searching,
+    TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)?
+        success,
+    TResult Function(String message, String query, SearchType type)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -85,7 +112,7 @@ abstract class $SearchStateCopyWith<$Res> {
   factory $SearchStateCopyWith(
           SearchState value, $Res Function(SearchState) then) =
       _$SearchStateCopyWithImpl<$Res>;
-  $Res call({String? query});
+  $Res call({String query, SearchType type});
 }
 
 /// @nodoc
@@ -99,12 +126,17 @@ class _$SearchStateCopyWithImpl<$Res> implements $SearchStateCopyWith<$Res> {
   @override
   $Res call({
     Object? query = freezed,
+    Object? type = freezed,
   }) {
     return _then(_value.copyWith(
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
     ));
   }
 }
@@ -116,7 +148,7 @@ abstract class $SearchingStateCopyWith<$Res>
           SearchingState value, $Res Function(SearchingState) then) =
       _$SearchingStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? query});
+  $Res call({String query, SearchType type});
 }
 
 /// @nodoc
@@ -132,26 +164,33 @@ class _$SearchingStateCopyWithImpl<$Res> extends _$SearchStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? query = freezed,
+    Object? type = freezed,
   }) {
     return _then(SearchingState(
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
     ));
   }
 }
 
 /// @nodoc
 class _$SearchingState implements SearchingState {
-  const _$SearchingState({this.query});
+  const _$SearchingState({required this.query, required this.type});
 
   @override
-  final String? query;
+  final String query;
+  @override
+  final SearchType type;
 
   @override
   String toString() {
-    return 'SearchState.searching(query: $query)';
+    return 'SearchState.searching(query: $query, type: $type)';
   }
 
   @override
@@ -159,12 +198,16 @@ class _$SearchingState implements SearchingState {
     return identical(this, other) ||
         (other is SearchingState &&
             (identical(other.query, query) ||
-                const DeepCollectionEquality().equals(other.query, query)));
+                const DeepCollectionEquality().equals(other.query, query)) &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(query);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(query) ^
+      const DeepCollectionEquality().hash(type);
 
   @JsonKey(ignore: true)
   @override
@@ -174,23 +217,36 @@ class _$SearchingState implements SearchingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? query) searching,
-    required TResult Function(List<Photo>? photos, String? query) success,
-    required TResult Function(String? message, String? query) error,
+    required TResult Function(String query, SearchType type) searching,
+    required TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)
+        success,
+    required TResult Function(String message, String query, SearchType type)
+        error,
   }) {
-    return searching(query);
+    return searching(query, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? query)? searching,
-    TResult Function(List<Photo>? photos, String? query)? success,
-    TResult Function(String? message, String? query)? error,
+    TResult Function(String query, SearchType type)? searching,
+    TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)?
+        success,
+    TResult Function(String message, String query, SearchType type)? error,
     required TResult orElse(),
   }) {
     if (searching != null) {
-      return searching(query);
+      return searching(query, type);
     }
     return orElse();
   }
@@ -221,10 +277,13 @@ class _$SearchingState implements SearchingState {
 }
 
 abstract class SearchingState implements SearchState {
-  const factory SearchingState({String? query}) = _$SearchingState;
+  const factory SearchingState(
+      {required String query, required SearchType type}) = _$SearchingState;
 
   @override
-  String? get query => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  @override
+  SearchType get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $SearchingStateCopyWith<SearchingState> get copyWith =>
@@ -238,7 +297,12 @@ abstract class $SearchSuccessStateCopyWith<$Res>
           SearchSuccessState value, $Res Function(SearchSuccessState) then) =
       _$SearchSuccessStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Photo>? photos, String? query});
+  $Res call(
+      {String query,
+      SearchType type,
+      List<Photo>? photos,
+      List<PhotoCollection>? collections,
+      List<UserProfile>? userProfiles});
 }
 
 /// @nodoc
@@ -254,51 +318,88 @@ class _$SearchSuccessStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? photos = freezed,
     Object? query = freezed,
+    Object? type = freezed,
+    Object? photos = freezed,
+    Object? collections = freezed,
+    Object? userProfiles = freezed,
   }) {
     return _then(SearchSuccessState(
+      query: query == freezed
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
       photos: photos == freezed
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
               as List<Photo>?,
-      query: query == freezed
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+      collections: collections == freezed
+          ? _value.collections
+          : collections // ignore: cast_nullable_to_non_nullable
+              as List<PhotoCollection>?,
+      userProfiles: userProfiles == freezed
+          ? _value.userProfiles
+          : userProfiles // ignore: cast_nullable_to_non_nullable
+              as List<UserProfile>?,
     ));
   }
 }
 
 /// @nodoc
 class _$SearchSuccessState implements SearchSuccessState {
-  const _$SearchSuccessState({this.photos, this.query});
+  const _$SearchSuccessState(
+      {required this.query,
+      required this.type,
+      this.photos,
+      this.collections,
+      this.userProfiles});
 
+  @override
+  final String query;
+  @override
+  final SearchType type;
   @override
   final List<Photo>? photos;
   @override
-  final String? query;
+  final List<PhotoCollection>? collections;
+  @override
+  final List<UserProfile>? userProfiles;
 
   @override
   String toString() {
-    return 'SearchState.success(photos: $photos, query: $query)';
+    return 'SearchState.success(query: $query, type: $type, photos: $photos, collections: $collections, userProfiles: $userProfiles)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is SearchSuccessState &&
+            (identical(other.query, query) ||
+                const DeepCollectionEquality().equals(other.query, query)) &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)) &&
             (identical(other.photos, photos) ||
                 const DeepCollectionEquality().equals(other.photos, photos)) &&
-            (identical(other.query, query) ||
-                const DeepCollectionEquality().equals(other.query, query)));
+            (identical(other.collections, collections) ||
+                const DeepCollectionEquality()
+                    .equals(other.collections, collections)) &&
+            (identical(other.userProfiles, userProfiles) ||
+                const DeepCollectionEquality()
+                    .equals(other.userProfiles, userProfiles)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(query) ^
+      const DeepCollectionEquality().hash(type) ^
       const DeepCollectionEquality().hash(photos) ^
-      const DeepCollectionEquality().hash(query);
+      const DeepCollectionEquality().hash(collections) ^
+      const DeepCollectionEquality().hash(userProfiles);
 
   @JsonKey(ignore: true)
   @override
@@ -308,23 +409,36 @@ class _$SearchSuccessState implements SearchSuccessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? query) searching,
-    required TResult Function(List<Photo>? photos, String? query) success,
-    required TResult Function(String? message, String? query) error,
+    required TResult Function(String query, SearchType type) searching,
+    required TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)
+        success,
+    required TResult Function(String message, String query, SearchType type)
+        error,
   }) {
-    return success(photos, query);
+    return success(query, type, photos, collections, userProfiles);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? query)? searching,
-    TResult Function(List<Photo>? photos, String? query)? success,
-    TResult Function(String? message, String? query)? error,
+    TResult Function(String query, SearchType type)? searching,
+    TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)?
+        success,
+    TResult Function(String message, String query, SearchType type)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(photos, query);
+      return success(query, type, photos, collections, userProfiles);
     }
     return orElse();
   }
@@ -355,12 +469,20 @@ class _$SearchSuccessState implements SearchSuccessState {
 }
 
 abstract class SearchSuccessState implements SearchState {
-  const factory SearchSuccessState({List<Photo>? photos, String? query}) =
-      _$SearchSuccessState;
+  const factory SearchSuccessState(
+      {required String query,
+      required SearchType type,
+      List<Photo>? photos,
+      List<PhotoCollection>? collections,
+      List<UserProfile>? userProfiles}) = _$SearchSuccessState;
 
-  List<Photo>? get photos => throw _privateConstructorUsedError;
   @override
-  String? get query => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  @override
+  SearchType get type => throw _privateConstructorUsedError;
+  List<Photo>? get photos => throw _privateConstructorUsedError;
+  List<PhotoCollection>? get collections => throw _privateConstructorUsedError;
+  List<UserProfile>? get userProfiles => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $SearchSuccessStateCopyWith<SearchSuccessState> get copyWith =>
@@ -374,7 +496,7 @@ abstract class $SearchErrorStateCopyWith<$Res>
           SearchErrorState value, $Res Function(SearchErrorState) then) =
       _$SearchErrorStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? message, String? query});
+  $Res call({String message, String query, SearchType type});
 }
 
 /// @nodoc
@@ -392,32 +514,40 @@ class _$SearchErrorStateCopyWithImpl<$Res>
   $Res call({
     Object? message = freezed,
     Object? query = freezed,
+    Object? type = freezed,
   }) {
     return _then(SearchErrorState(
       message: message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       query: query == freezed
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchType,
     ));
   }
 }
 
 /// @nodoc
 class _$SearchErrorState implements SearchErrorState {
-  const _$SearchErrorState({this.message, this.query});
+  const _$SearchErrorState(
+      {required this.message, required this.query, required this.type});
 
   @override
-  final String? message;
+  final String message;
   @override
-  final String? query;
+  final String query;
+  @override
+  final SearchType type;
 
   @override
   String toString() {
-    return 'SearchState.error(message: $message, query: $query)';
+    return 'SearchState.error(message: $message, query: $query, type: $type)';
   }
 
   @override
@@ -428,14 +558,17 @@ class _$SearchErrorState implements SearchErrorState {
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
             (identical(other.query, query) ||
-                const DeepCollectionEquality().equals(other.query, query)));
+                const DeepCollectionEquality().equals(other.query, query)) &&
+            (identical(other.type, type) ||
+                const DeepCollectionEquality().equals(other.type, type)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(query);
+      const DeepCollectionEquality().hash(query) ^
+      const DeepCollectionEquality().hash(type);
 
   @JsonKey(ignore: true)
   @override
@@ -445,23 +578,36 @@ class _$SearchErrorState implements SearchErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? query) searching,
-    required TResult Function(List<Photo>? photos, String? query) success,
-    required TResult Function(String? message, String? query) error,
+    required TResult Function(String query, SearchType type) searching,
+    required TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)
+        success,
+    required TResult Function(String message, String query, SearchType type)
+        error,
   }) {
-    return error(message, query);
+    return error(message, query, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? query)? searching,
-    TResult Function(List<Photo>? photos, String? query)? success,
-    TResult Function(String? message, String? query)? error,
+    TResult Function(String query, SearchType type)? searching,
+    TResult Function(
+            String query,
+            SearchType type,
+            List<Photo>? photos,
+            List<PhotoCollection>? collections,
+            List<UserProfile>? userProfiles)?
+        success,
+    TResult Function(String message, String query, SearchType type)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message, query);
+      return error(message, query, type);
     }
     return orElse();
   }
@@ -492,12 +638,16 @@ class _$SearchErrorState implements SearchErrorState {
 }
 
 abstract class SearchErrorState implements SearchState {
-  const factory SearchErrorState({String? message, String? query}) =
-      _$SearchErrorState;
+  const factory SearchErrorState(
+      {required String message,
+      required String query,
+      required SearchType type}) = _$SearchErrorState;
 
-  String? get message => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   @override
-  String? get query => throw _privateConstructorUsedError;
+  String get query => throw _privateConstructorUsedError;
+  @override
+  SearchType get type => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   $SearchErrorStateCopyWith<SearchErrorState> get copyWith =>

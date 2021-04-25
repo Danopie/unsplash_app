@@ -10,15 +10,15 @@ import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/domain/photos_state.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 import 'package:unsplash_app/photos/photo_list.dart';
-import 'package:unsplash_app/search/search_page.dart';
+import 'package:unsplash_app/search/search_screen.dart';
 
-class HomePage extends HookWidget {
+class HomeScreen extends HookWidget {
   static Future<dynamic> show({required BuildContext context}) {
     return Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => HomePage.newInstance()));
+        .push(MaterialPageRoute(builder: (context) => HomeScreen.newInstance()));
   }
 
-  static Widget newInstance() => HomePage();
+  static Widget newInstance() => HomeScreen();
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +39,14 @@ class HomePage extends HookWidget {
                   }
                   return false;
                 },
-                child: Scrollbar(
-                  controller: controller,
+                child: DefaultTabController(
+                  length: 3,
                   child: CustomScrollView(
                     controller: controller,
                     slivers: [
                       UnsplashAppBar(
                         onUserSearch: (text) {
-                          SearchPage.show(context: context, initialQuery: text);
+                          SearchScreen.show(context: context, initialQuery: text);
                         },
                         clearOnSearch: true,
                         initialSearchText: '',

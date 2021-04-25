@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:unsplash_app/home/home_page.dart';
+import 'package:unsplash_app/home/home_screen.dart';
 import 'package:unsplash_app/photo_detail/photo_detail_screen.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/photo_item.dart';

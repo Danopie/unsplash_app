@@ -22,13 +22,15 @@ class UnsplashAppBar extends StatefulHookWidget {
   final String initialSearchText;
   final Function(String) onUserSearch;
   final bool clearOnSearch;
+  final PreferredSizeWidget? bottom;
 
-  const UnsplashAppBar(
-      {Key? key,
-      required this.initialSearchText,
-      required this.onUserSearch,
-      this.clearOnSearch = false})
-      : super(key: key);
+  const UnsplashAppBar({
+    Key? key,
+    required this.initialSearchText,
+    required this.onUserSearch,
+    this.clearOnSearch = false,
+    this.bottom,
+  }) : super(key: key);
 
   @override
   _UnsplashAppBarState createState() => _UnsplashAppBarState();
@@ -45,6 +47,7 @@ class _UnsplashAppBarState extends State<UnsplashAppBar> {
           : BackButton(
               color: boulder,
             ),
+      bottom: widget.bottom,
       actions: [
         if (userState is LoggedInUserState)
           Builder(

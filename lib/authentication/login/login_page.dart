@@ -7,7 +7,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/authentication/login/login_controller.dart';
 import 'package:unsplash_app/authentication/login/login_state.dart';
-import 'package:unsplash_app/home/home_page.dart';
+import 'package:unsplash_app/home/home_screen.dart';
 import 'package:unsplash_app/res/color.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

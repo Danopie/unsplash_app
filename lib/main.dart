@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:unsplash_app/authentication/data/model/user_info.dart';
 import 'package:unsplash_app/authentication/data/user_adapter.dart';
 import 'package:unsplash_app/authentication/data/user_db.dart';
-import 'package:unsplash_app/home/home_page.dart';
+import 'package:unsplash_app/home/home_screen.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/data/photo_adapter.dart';
 import 'package:unsplash_app/photos/data/photo_db.dart';
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: HomePage(),
+      home: HomeScreen(),
     );
   }
 }

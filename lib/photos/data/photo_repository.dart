@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:unsplash_app/authentication/data/model/user_profile.dart';
 import 'package:unsplash_app/core/repository/repository.dart';
 import 'package:unsplash_app/core/constants.dart';
 import 'package:unsplash_app/photos/data/model/photo.dart';
@@ -46,6 +47,16 @@ class PhotoRepository extends Repository {
   Future<List<Photo>> searchPhotos(String query) async {
     final photos = await _photoApiProvider.searchPhotos(query);
     return photos ?? <Photo>[];
+  }
+
+  Future<List<PhotoCollection>> searchCollections(String query) async {
+    final result = await _photoApiProvider.searchCollections(query);
+    return result ?? <PhotoCollection>[];
+  }
+
+  Future<List<UserProfile>> searchUsers(String query) async {
+    final result = await _photoApiProvider.searchUsers(query);
+    return result ?? <UserProfile>[];
   }
 
   Future<List<Photo>> getRelatedPhotos(Photo photo) async {

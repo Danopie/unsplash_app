@@ -11,7 +11,6 @@ class MockPhotoRepository extends Mock implements PhotoRepository {}
 void main() {
   SearchController? sut;
   final photoRepository = MockPhotoRepository();
-  ;
 
   tearDown(() {
     sut?.dispose();

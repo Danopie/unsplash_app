@@ -11,7 +11,7 @@ import 'package:unsplash_app/photos/data/model/photo.dart';
 import 'package:unsplash_app/photos/domain/photos_controller.dart';
 import 'package:unsplash_app/photos/photo_item.dart';
 import 'package:unsplash_app/res/color.dart';
-import 'package:unsplash_app/search/search_page.dart';
+import 'package:unsplash_app/search/search_screen.dart';
 
 final photoProvider = Provider.family<Photo, String>(
   (ref, id) {
@@ -54,7 +54,7 @@ class _PhotoDetailScreenState extends State<PhotoDetailScreen> {
         slivers: [
           UnsplashAppBar(
             onUserSearch: (text) {
-              SearchPage.show(context: context, initialQuery: text);
+              SearchScreen.show(context: context, initialQuery: text);
             },
             clearOnSearch: true,
             initialSearchText: '',
